@@ -95,7 +95,7 @@ export default class SignUp extends Component {
                 if (data.msg) {
                     alert(data.msg);
                 } else if (data.role) {
-                    localStorage.setItem('logged', true);
+                    this.props.onSuccess();
                     alert("success");
                 }
             })
