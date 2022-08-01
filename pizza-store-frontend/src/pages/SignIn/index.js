@@ -28,7 +28,7 @@ export default class SignIn extends Component {
         .then(res =>res.json())
         .then(data => {
             if (data.token) {
-                localStorage.setItem('logged', true);
+                this.props.onSuccess();
                 alert('success');
             } else if (data.msg) {
                 alert(data.msg);
