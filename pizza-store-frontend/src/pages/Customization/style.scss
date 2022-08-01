@@ -1,0 +1,227 @@
+.customization-page {
+  .top-tabs {
+    background: #fff;
+    margin: 0 auto;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+
+    .tab-item {
+      width: 300px;
+      vertical-align: middle;
+      line-height: 60px;
+      text-align: center;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      svg {
+        margin-right: 10px;
+      }
+    }
+
+    .active-tab {
+      background-color: #FCA017;
+      color: #fff;
+
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+
+  .tab-content {
+    max-width: 100%;
+    .tab-1 {
+      width: 100%;
+    }
+    .tab-2 {
+      width: 100%;
+    }
+    .tab-3 {
+      width: 100%;
+    }
+    .tab-4 {
+      width: 100%;
+    }
+  }
+
+  .pizza-board {
+    background-color: #fff;
+    max-width: 100%;
+    padding: 1rem 2rem;
+    padding-bottom: 3rem;
+    text-align: center;
+
+    .title {
+      font-size: 30px;
+      color: #FCA017;
+    }
+
+    .configuration {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 3rem;
+
+      .criteria {
+        width: 320px;
+
+        .criteria-item {
+          margin: 0.5rem 0;
+          display: flex;
+          align-items: flex-start;
+
+          span {
+            display: inline-block;
+            max-width: 140px;
+            text-align: left;
+          }
+
+          svg {
+            fill: #FCA017;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+
+      .pizza-piece {
+        max-width: 100%;
+      }
+
+      .add-cart {
+        padding-left: 60px;
+
+        & > div {
+          max-width: 260px;
+
+          .quantity-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .price {
+              font-size: 30px;
+              color: #FCA017;
+            }
+          }
+          
+          .desc {
+            margin: 1rem 0;
+            font-size: 15px;
+          }
+
+          .cart-button {
+            button {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .sub-tabs {
+    width: fit-content;
+    margin: 3rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .sub-tab-item {
+      width: 170px;
+      border: 1px solid #FCA017;
+      line-height: 45px;
+
+      &:nth-child(even) {
+        width: 50px;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .active-sub-tab {
+      background-color: #FCA017;
+      color: #fff;
+    }
+  }
+
+  .ingredients {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .ingredient-item {
+      background: url("../../assets/img/small-bg.png");
+      background-size: 100% 100%;
+      width: 237px;
+      height: 200px;
+      margin: 1rem 0.5rem;
+      position: relative;
+      transition: all .5s ease-out;
+      &:hover {
+        cursor: pointer;
+      }
+      
+
+      .ingredient-detail {
+        padding: 15px 15px;
+        .ingredient-title {
+          float: left;
+          font-family: proxima-nova,sans-serif;
+          font-weight: 800;
+          color: #ee5a00;
+        }
+  
+        .ingredient-name {
+          float: left;
+          font-size: 15px;
+          color: #3C1C21;
+          font-weight: 800;
+          margin-top: 10px;
+          // position: absolute;
+          // bottom: 4rem;
+          // left: 2rem;
+        }
+  
+        .ingredient-cals {
+          font-size: 15px;
+          color: #3C1C21;
+          float: left;
+          font-weight: 800;
+          margin-top: 10px;
+          // position: absolute;
+          // bottom: 2rem;
+          // left: 2rem;
+        }
+      }
+
+      .ingredient-img {
+        width: 80%;
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+    .active {
+      width: 500px;
+      transition: all .5s ease-out;
+    }
+  }
+}
+
+@import '../../components/Product/product2.scss'

@@ -1,0 +1,83 @@
+.carousel {
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: inherit;
+
+    .title {
+      flex: 1;
+      text-align: left;
+
+      .title-indent {
+        padding: 30px 20px;
+      }
+
+      .header_1 {
+        font-size: $font-size-50;
+        color: #3c1c21;
+        font-weight: 500;
+        margin-bottom: 30px;
+
+        @media only screen and (max-width: $s-size) {
+          font-size: $font-size-35
+        }
+      }
+
+      span {
+        color: $text-color2;
+      }
+
+      .header_2 {
+        font-size: $font-size-30;
+        color: #3c1c21;
+        margin-bottom: 50px;
+        line-height: 40px;
+
+        @media only screen and (max-width: $s-size) {
+          font-size: $font-size-20
+        }
+      }
+
+      .header_3 {
+        font-size: $font-size-15;
+        color: $text-color1;
+      }
+
+      .price {
+        font-size: $font-size-50;
+        font-weight: 500;
+        color: #fca017;
+        border-bottom: 2px solid $text-color2;
+        text-align: right;
+      }
+
+      button {
+        color: $text-color3;
+        background-color: $text-color2;
+        border: none;
+        width: 172px;
+        height: 39px;
+        font-size: $font-size-20;
+        margin-top: 30px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      @media only screen and (max-width: $breakpoint-medium) {
+        width: 100%;
+      }
+    }
+
+    .image {
+      flex: 1;
+      @media only screen and (max-width: $breakpoint-medium) {
+        width: 100%;
+      }
+    }
+
+    @media only screen and (max-width: $breakpoint-medium) {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+.tabs {
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    padding-left: inherit;
+    margin-top: 70px;
+    
+    .initial-left {
+      border-radius: 10px 0 0 10px;
+    }
+
+    .initial-right {
+      border-radius: 0 10px 10px 0;
+      border: none;
+    }
+
+    .active {
+      background-color: $bg-color1;
+      color: $text-color3;
+      fill: $text-color3;
+    }
+    
+    .border-radius-left {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+    .border-radius-right {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    li {
+      width: 20%;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      color: $text-color1;
+      background-color: $bg-color3;
+      border-right: 1px solid #eee;
+
+      .cheese-icon {
+        margin-right: 20px;
+      }
+
+      .topping-icon {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .outlet {}
+}

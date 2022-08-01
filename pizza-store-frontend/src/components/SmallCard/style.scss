@@ -1,0 +1,26 @@
+.small-card {
+    width: 180px;
+    height: 270px;
+    background-image: url('../../assets/img/small-bg.png');
+    margin-left: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 5px 10px #aaaaaa;
+    text-align: left;
+    cursor: pointer;
+
+    .small-card-detail-list {
+        margin-left: 20px;
+
+        .small-card-select {
+            margin-top: 20px;
+        }
+
+        .small-card-kind {
+            margin-top: 10px;
+        }
+
+        .small-card-cals {
+            margin-top: 20px;
+        }
+    }
+}

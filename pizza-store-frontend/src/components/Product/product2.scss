@@ -1,0 +1,79 @@
+.product2 {
+  width: 357px;
+  height: 625px;
+  box-shadow: 3px 5px 10px 5px #d1d1d1;
+  border-radius: 20px;
+  border: none;
+  margin-bottom: 50px;
+
+  @media only screen and (max-width: $x-size) {
+    width: 100%;
+    height: auto;
+  }
+
+  .product-position {
+    @media only screen and (max-width: $x-size) {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+  }
+
+  img {
+    margin: 20px 0 35px 20px;
+    margin-top: 20px;
+    margin-bottom: 35px;
+    width: 255px;
+    height: 255px;
+
+    @media only screen and (max-width: $x-s-size) {
+      width: 40%;
+      height: 40%;
+    }
+  }
+
+  .title {
+    color: #3c1c21;
+    font-size: $font-size-30;
+    margin-bottom: 30px;
+    margin-top: 10px;
+
+    @media only screen and (max-width: $x-size) {
+      font-size: $font-size-25;
+      margin-right: 20px;
+      margin-top: 0;
+    }
+
+    @media only screen and (max-width: $x-s-size) {
+      font-size: $font-size-20;
+      margin-bottom: 10px;
+    }
+  }
+
+  .desc {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 21px;
+    color: $text-color1;
+    margin-bottom: 30px;
+
+    @media only screen and (max-width: $x-s-size) {
+      font-size: $font-size-15;
+      margin-bottom: 10px;
+    }
+  }
+
+  .price {
+    font-size: $font-size-20;
+    color: $text-color1;
+    margin-bottom: 30px;
+
+    @media only screen and (max-width: $x-s-size) {
+      margin-bottom: 10px;
+    }
+
+    @media only screen and (max-width: $s-size) {
+      font-size: $font-size-15;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import '../../assets/css/variable.scss';
+@import '../../assets/css/responsive.scss';
+
+.quantity-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    .quantity-input__modifier {
+        background-color: transparent;
+        border: none;
+        color: $text-color2;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .quantity-input__screen {
+        text-align: center;
+        width: 45px;
+        height: 45px;
+        border: none;
+        background-color: $bg-color1;
+        color: $text-color3;
+        border-radius: 5px;
+        font-size: 30px;
+    }
+}

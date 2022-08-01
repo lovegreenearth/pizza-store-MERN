@@ -1,0 +1,82 @@
+.customize-page {
+  .pizza-detail {
+    position: absolute;
+    top: 450px;
+    display: flex;
+    justify-content: space-between;
+
+    .left-content {
+      display: flex;
+      justify-content: space-around;
+      width: 600px;
+      height: 500px;
+      .add-cart {
+        flex: 3;
+        img {
+          width: 250px;
+          height: 250px;
+        }
+
+        .quantity-price {
+          display: flex;
+          width: 280px;
+          font-size: 40px;
+          justify-content: space-between;
+          align-items: center;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 30px;
+          margin-bottom: 30px;
+          color: $text-color2;
+
+          .quantity {
+          }
+
+          .price {
+          }
+
+        }
+
+        .desc {
+          width: 280px;
+          margin-left: auto;
+          text-align: left;
+          margin-right: auto;
+          margin-top: 20px;
+          color: $text-color1;
+        }
+
+        .cart-button {
+
+          margin-top: 50px;
+        }
+      }
+
+      .ingrediant {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        color: $text-color1;
+        flex: 2;
+
+        .label {
+          text-align: center;
+          text-indent: -70px;
+          font-size: 20px;
+        }
+
+        .ingrediant-element {
+          margin-top: 10px;
+
+          svg {
+            color: $text-color2;
+          }
+        }
+
+        span {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

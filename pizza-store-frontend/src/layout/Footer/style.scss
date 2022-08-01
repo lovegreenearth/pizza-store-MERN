@@ -1,0 +1,61 @@
+.footer {
+  background-color: $bg-color1;
+  color: $text-color1;
+
+  .content {
+    padding: 90px 0px;
+
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+
+      .logo {
+        width: 12%;
+      }
+
+      .footer-container {
+        width: 35%;
+        display: flex;
+        justify-content: space-around;
+
+        .footer-link {
+          text-align: left;
+          line-height: 40px;
+          width: 50%;
+  
+          .footer-link-title {
+            color: $text-color1;
+            text-decoration: none;
+            font-size: 30px;
+          }
+  
+          .footer-link-text {
+            color: $text-color1;
+            text-decoration: none;
+            font-size: 18px;
+          }
+        }
+
+        @media only screen and (max-width: $breakpoint-medium) {
+          width: 44%;
+        }
+
+        @media only screen and (max-width: $x-size) {
+          width: 80%;
+        }
+
+        @media only screen and (max-width: $x-s-size) {
+          display: block;
+        }
+      }
+
+      @media only screen and (max-width: $breakpoint-medium) {
+        .logo {
+          display: none;
+        }
+      }
+    }
+  }
+}
