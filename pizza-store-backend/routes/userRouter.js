@@ -70,7 +70,6 @@ router.post("/login", async (req, res) => {
       },
     });
   } catch (err) {
-    console.log('err----------------->', err)
     res.status(500).json({ error: err.message });
   }
 });
