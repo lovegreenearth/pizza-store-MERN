@@ -15,8 +15,11 @@ app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));
 
 // set up mongoose
 
+let url = "mongodb://localhost:27017/pizza_store_db";
+
 mongoose.connect(
-  process.env.MONGODB_CONNECTION_STRING,
+  // process.env.MONGODB_CONNECTION_STRING,
+  url,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
