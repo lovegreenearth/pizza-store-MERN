@@ -92,7 +92,6 @@ export default class SignUp extends Component {
             })
             .then(res =>res.json())
             .then(data => {
-                console.log('res------------------->',data.msg)
                 if (data.msg) {
                     alert(data.msg);
                 } else if (data.role) {
