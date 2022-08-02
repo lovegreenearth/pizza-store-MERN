@@ -184,7 +184,6 @@ export default class Customization extends Component {
                         </div>
                       </div>
                   }
-                    
                   </div>
                 )
               })
