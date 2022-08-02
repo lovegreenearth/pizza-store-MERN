@@ -80,5 +80,67 @@ export const CustomizeData = {
       src: images.wholegrainthin,
       cals: 160
     },
+  ],
+  BaseSauce: [
+    {
+      id: 1,
+      name: 'No Sauce',
+      src: images.regulardough,
+      cals: 0
+    },
+    {
+      id: 2,
+      name: 'Buffalo Base Sauce(Extra Charge)',
+      src: images.regularthin,
+      cals: 30
+    },
+    {
+      id: 3,
+      name: 'Butter Chicken Sauce',
+      src: images.regularthick,
+      cals: 60
+    },
+    {
+      id: 4,
+      name: 'Creamy Garlic Sauce(Extra Charge)',
+      src: images.wholegrain,
+      cals: 60
+    },
+    {
+      id: 5,
+      name: 'Donair Sauce',
+      src: images.wholegrainthin,
+      cals: 0
+    },
+    {
+      id: 6,
+      name: 'Home Style Italian Tomato Sauce',
+      src: images.wholegrainthin,
+      cals: 10
+    },
+    {
+      id: 7,
+      name: 'Hot Honey Sauce(Extra Sauce)',
+      src: images.regularthick,
+      cals: 20
+    },
+    {
+      id: 8,
+      name: 'Pesto Sauce(Extra Charge)',
+      src: images.wholegrain,
+      cals: 35
+    },
+    {
+      id: 9,
+      name: 'Sweet Chili Thai Sauce(Extra Charge)',
+      src: images.wholegrainthin,
+      cals: 25
+    },
+    {
+      id: 10,
+      name: 'Sweet Chili Thai Sauce(Extra Charge)',
+      src: images.wholegrainthin,
+      cals: 15
+    },
   ]
 }

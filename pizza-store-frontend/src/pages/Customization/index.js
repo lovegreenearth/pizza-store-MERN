@@ -14,7 +14,6 @@ export default class Customization extends Component {
 
     this.state = { ...CustomizeData }
   }
-
   _renderTabItem = (tab, activeTab) => {
     return <div className={"tab-item" + (activeTab == tab.id ? ' active-tab' : '')} onClick={() => this.setState({activeTab: tab.id})} key={tab.id}>
       {
@@ -104,16 +103,9 @@ export default class Customization extends Component {
   }
 
   _renderIngredients = (index) => {
-    let { DoughType, activeSubTab, activeIngredient } = this.state;
+    let { DoughType, BaseSauce, activeSubTab, activeIngredient } = this.state;
     
     const handleIngredient = (item) =>  {
-      // if(activeIngredient) {
-      //   document.getElementById(activeIngredient).classList.remove("active");
-      // }
-      // activeIngredient = e.target.id;
-      // document.getElementById(e.target.id).classList.add("active");
-      // console.log("hello world", e.target.id)
-      // console.log(activeIngredient)
       this.setState({activeIngredient: item})
       console.log(activeIngredient)
     };
@@ -124,19 +116,34 @@ export default class Customization extends Component {
             {
               DoughType.map(ing => {
                 return (
-                  <div className={"ingredient-item" + (activeIngredient === ing.id ? " active" : "")} 
-                    onClick={() => handleIngredient(ing.id)}
-                    id={ing.id} key={ing.id}>
-                    <div className="ingredient-detail">
-                      <div className="ingredient-title">Select</div> 
-                        <div style={{clear: "both"}}></div>
-                      <div className="ingredient-name">{ing.name}</div> 
-                        <div style={{clear: "both"}}></div>
-                      <div className="ingredient-cals">{ing.cals} Cals</div>
-                    </div>
-                    <div className="ingredient-img">
-                      <LazyLoadImage alt={ing.src.alt} src={ing.src.src} />
-                    </div>
+                  <div className={"ingredient-item" + (activeIngredient === ing.id ? " active" : "")}
+                      onClick={() => handleIngredient(ing.id)}
+                      id={ing.id} key={ing.id}>
+                  {
+                    activeIngredient === ing.id 
+                    ? <div>
+                        <div className="ingredient-img-selected">
+                          <LazyLoadImage alt={ing.src.alt} src={ing.src.src} />
+                        </div>
+                        <div className="ingredient-detail-selected">
+                          <div className="ingredient-title-selected">{ing.name}</div>
+                           <div className="ingredient-cals-selected">{ing.cals} Cals</div>
+                        </div>
+                      </div>
+                    : <div>
+                        <div className="ingredient-detail">
+                          <div className="ingredient-title">Select</div> 
+                            <div style={{clear: "both"}}></div>
+                          <div className="ingredient-name">{ing.name}</div> 
+                            <div style={{clear: "both"}}></div>
+                          <div className="ingredient-cals">{ing.cals} Cals</div>
+                        </div>
+                        <div className="ingredient-img">
+                          <LazyLoadImage alt={ing.src.alt} src={ing.src.src} />
+                        </div>
+                      </div>
+                  }
+                    
                   </div>
                 )
               })
@@ -145,7 +152,46 @@ export default class Customization extends Component {
         </div>
       }
       {
-        activeSubTab === 3 && <div className="sub-tab-2"></div>
+        activeSubTab === 3 && <div className="sub-tab-2">
+          <div className="ingredients">
+            {
+              BaseSauce.map(ing => {
+                return (
+                  <div className={"ingredient-item" + (activeIngredient === ing.id ? " active" : "")}
+                      onClick={() => handleIngredient(ing.id)}
+                      id={ing.id} key={ing.id}>
+                  {
+                    activeIngredient === ing.id 
+                    ? <div>
+                        <div className="ingredient-img-selected">
+                          <LazyLoadImage alt={ing.src.alt} src={ing.src.src} />
+                        </div>
+                        <div className="ingredient-detail-selected">
+                          <div className="ingredient-title-selected">{ing.name}</div>
+                           <div className="ingredient-cals-selected">{ing.cals} Cals</div>
+                        </div>
+                      </div>
+                    : <div>
+                        <div className="ingredient-detail">
+                          <div className="ingredient-title">Select</div> 
+                            <div style={{clear: "both"}}></div>
+                          <div className="ingredient-name">{ing.name}</div> 
+                            <div style={{clear: "both"}}></div>
+                          <div className="ingredient-cals">{ing.cals} Cals</div>
+                        </div>
+                        <div className="ingredient-img">
+                          <LazyLoadImage alt={ing.src.alt} src={ing.src.src} />
+                        </div>
+                      </div>
+                  }
+                    
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
+        
       }
       {
         activeSubTab === 5 && <div className="sub-tab-3"></div>

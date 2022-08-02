@@ -159,68 +159,96 @@
 
   .ingredients {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-
-    .ingredient-item {
-      background: url("../../assets/img/small-bg.png");
-      background-size: 100% 100%;
-      width: 237px;
-      height: 200px;
-      margin: 1rem 0.5rem;
-      position: relative;
-      transition: all .5s ease-out;
-      &:hover {
-        cursor: pointer;
-      }
-      
-
-      .ingredient-detail {
-        padding: 15px 15px;
-        .ingredient-title {
-          float: left;
-          font-family: proxima-nova,sans-serif;
-          font-weight: 800;
-          color: #ee5a00;
+      .ingredient-item {
+        background: url("../../assets/img/small-bg.png");
+        background-size: 100% 100%;
+        width: 237px;
+        height: 200px;
+        margin: 1rem 0.5rem;
+        position: relative;
+        transition: all .5s ease-out;
+        border-radius: 8px;
+        border: 1px solid #e1e7e9;
+        &:hover {
+          cursor: pointer;
+        }
+        .ingredient-detail {
+          padding: 15px 15px;
+          .ingredient-title {
+            float: left;
+            font-family: proxima-nova,sans-serif;
+            font-weight: 800;
+            color: #ee5a00;
+          }
+    
+          .ingredient-name {
+            float: left;
+            text-align: left;
+            font-size: 15px;
+            color: #3C1C21;
+            font-weight: 800;
+            margin-top: 10px;
+            // position: absolute;
+            // bottom: 4rem;
+            // left: 2rem;
+          }
+    
+          .ingredient-cals {
+            font-size: 15px;
+            color: #3C1C21;
+            float: left;
+            font-weight: 800;
+            margin-top: 10px;
+            // position: absolute;
+            // bottom: 2rem;
+            // left: 2rem;
+          }
         }
   
-        .ingredient-name {
-          float: left;
-          font-size: 15px;
-          color: #3C1C21;
-          font-weight: 800;
-          margin-top: 10px;
-          // position: absolute;
-          // bottom: 4rem;
-          // left: 2rem;
+        .ingredient-img {
+          width: 80%;
+          position: absolute;
+          bottom: 0px;
+          left: 0px;
+          img {
+            max-width: 100%;
+          }
         }
-  
-        .ingredient-cals {
-          font-size: 15px;
-          color: #3C1C21;
-          float: left;
-          font-weight: 800;
-          margin-top: 10px;
-          // position: absolute;
-          // bottom: 2rem;
-          // left: 2rem;
+        .ingredient-img-selected {
+          width: 50%;
+          position: absolute;
+          top: 80px;
+          transition: all .5s ease-out;
+        }
+        .ingredient-detail-selected {
+          margin-left: 300px;
+          margin-top: 30px;
+          margin-right: 20px;
+          text-align: left;
+          color: #4e7026;
+          transition: all .5s ease-out;
+          .ingredient-title-selected {
+            font-size: 18px;
+            font-weight: 800;
+            transition: all .5s ease-out;
+          }
+          .ingredient-cals-selected {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 800;
+            transition: all .5s ease-out;
+          }
         }
       }
-
-      .ingredient-img {
-        width: 80%;
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        img {
-          max-width: 100%;
-        }
+      .active {
+        width: 500px;
+        transition: all .5s ease-out;
+        border: 3px solid #4e7026;
+        border-radius: 10px;
       }
-    }
-    .active {
-      width: 500px;
-      transition: all .5s ease-out;
-    }
+    
+    
   }
 }
 
