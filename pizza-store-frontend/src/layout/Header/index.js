@@ -31,17 +31,32 @@ class Header extends Component {
       </label>
         <ul className="menu">
           <li>
-            <Link to="/#" className='fa-home react-icons'><div className='icon-margin'><FaHome size={30} /></div>Delivery In Toronto<br/>(416)977-1111</Link>
+            <Link to="/#" className='fa-home react-icons'>
+              <div className='icon-margin'>
+                <FaHome size={30} />
+              </div>
+              Delivery In Toronto<br/>(416)977-1111
+            </Link>
           </li>
           <li>
-            <Link to="/signup" className='md-account react-icons'><div className='icon-margin'><MdAccountCircle size={30} /></div>Create Account</Link>
+            <Link to="/signup" className='md-account react-icons'>
+              <div className='icon-margin'>
+                <MdAccountCircle size={30} />
+              </div>
+              Create Account
+            </Link>
           </li>
           <li>
-            <Link to="/signin" className='md-box-arrow react-icons'><div className='icon-margin'><BsBoxArrowInRight size={30} /></div>Login</Link>
+            <Link to="/signin" className='md-box-arrow react-icons'>
+              <div className='icon-margin'>
+                <BsBoxArrowInRight size={30} />
+              </div>
+              Login
+            </Link>
           </li>
         </ul>
       </section>
-    </div>;
+    </div>
   }
 }
 
