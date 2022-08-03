@@ -30,6 +30,7 @@ export default class SignIn extends Component {
             if (data.token) {
                 alert('success');
             } else if (data.msg) {
+                localStorage.setItem('logged', "true");
                 alert(data.msg);
             }
         })
