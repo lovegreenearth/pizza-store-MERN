@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
 import SeeAll from '../pages/SeeAll';
 import Customization from '../pages/Customization';
@@ -11,9 +11,9 @@ const Routing = () => (
         <Route path="/" element={<Home />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path="/see-all" element={<SeeAll />} />
+        <Route path="/" render={() => (localStorage.getItem('logged') ? <Navigate to="/see-all" /> : <SeeAll />)} />
         {/* <Route path='/customize' element={<Customize />} /> */}
-        <Route path='/customize' element={<Customization />} />
+        <Route path="/" render={() => (localStorage.getItem('logged') ? <Navigate to="/customize" /> : <Customization />)} />\
     </Routes>
 )
 
