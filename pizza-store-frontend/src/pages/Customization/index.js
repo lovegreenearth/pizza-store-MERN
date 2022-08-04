@@ -74,7 +74,10 @@ export default class Customization extends Component {
         quantity: qty
       })
     }
-    
+    const addCart = () => {
+      console.log(data.price)
+      
+    }
 
     return <div className="pizza-board">
       <div className="title">
@@ -126,7 +129,7 @@ export default class Customization extends Component {
                  + this.state.activeSpecialTopping }
             </div>
             <div className="cart-button">
-                <Button_1 value="ADD TO CART" />
+                <Button_1 value="ADD TO CART" onClick={addCart} />
             </div>
           </div>
         </div>
