@@ -97,11 +97,12 @@
       .pizza-piece {
         max-width: 100%;
         position: relative;
-        // .multi {
-        //   position: absolute;
-        //   top: 0px;
-        //   left: 0px;
-        // }
+        .multiTopping {
+          max-width: 100%;
+          position:absolute;
+          top: 0px;
+          left: 0px;
+        }
       }
 
       .add-cart {

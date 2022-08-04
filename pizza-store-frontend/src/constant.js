@@ -45,6 +45,20 @@ import sunDried from "./assets/img/Veggie/Sun-Dried.png"
 import ArgulaTopping from "./assets/img/VeggieTopping/Arugula.png"
 import BroccoliTopping from "./assets/img/VeggieTopping/Broccoli.png"
 import FireRoastedTopping from "./assets/img/VeggieTopping/Fire Roasted.png";
+import FreshTopping from "./assets/img/VeggieTopping/Fresh Mushrooms.png";
+import GreenOlivesTopping from "./assets/img/VeggieTopping/Green Olives.png";
+import GreenPeppersTopping from "./assets/img/VeggieTopping/Green Peppers.png";
+import HotBananaTopping from "./assets/img/VeggieTopping/Hot Banana Peppers.png";
+import JalapenoTopping from "./assets/img/VeggieTopping/Jalapeno Peppers.png";
+import KalamataTopping from "./assets/img/VeggieTopping/Kalamata Olives.png";
+import PineappleTopping from "./assets/img/VeggieTopping/Pineapple.png";
+import PlantChorizoTopping from "./assets/img/VeggieTopping/Plant-Based Chorizo.png";
+import PlangPepperoniTopping from "./assets/img/VeggieTopping/Plant-Based Pepperoni.png";
+import RedTopping from "./assets/img/VeggieTopping/Red Onions.png";
+import RoastedTopping from './assets/img/VeggieTopping/Roasted Garlic.png'
+import RomaTopping from "./assets/img/VeggieTopping/Roma  Tomatoes.png";
+import SpinachTopping from "./assets/img/VeggieTopping/Spinach.png";
+import SunDriedTopping from "./assets/img/VeggieTopping/Sun-Dried Tomatoes.png"
 
 import anchovies from "./assets/img/Meat/Anchovies.png";
 import baconCrumble from "./assets/img/Meat/Bacon Crumble.png";
@@ -92,6 +106,62 @@ const broccoliTopping = {
 }
 const fireroastedTopping = {
   src: FireRoastedTopping,
+  alt: 'logo'
+}
+const freshTopping = {
+  src: FreshTopping,
+  alt: 'logo'
+}
+const greenoliveTopping = {
+  src: GreenOlivesTopping,
+  alt: 'logo'
+}
+const greenpeppersTopping = {
+  src: GreenPeppersTopping,
+  alt: 'logo'
+}
+const hotbananaTopping = {
+  src: HotBananaTopping,
+  alt: 'logo'
+}
+const jalapenoTopping = {
+  src: JalapenoTopping,
+  alt: 'logo'
+}
+const kalamataTopping = {
+  src: KalamataTopping,
+  alt: 'logo'
+}
+const pineappleTopping = {
+  src: PineappleTopping,
+  alt: 'logo'
+}
+const plantchorizoTopping = {
+  src: PlantChorizoTopping,
+  alt: 'logo'
+}
+const plantpepperoniTopping = {
+  src: PlangPepperoniTopping,
+  alt: 'logo'
+}
+const redTopping = {
+  src: RedTopping,
+  alt: 'logo'
+}
+const roastedTopping = {
+  src: RoastedTopping,
+  alt: 'logo'
+}
+const romaTopping = {
+  src: RomaTopping,
+  alt: 'logo'
+}
+const spinachTopping = {
+  src: SpinachTopping,
+  alt: 'logo'
+}
+const sundriedTopping = {
+  src: SunDriedTopping,
   alt: 'logo'
 }
 const regularImg = {
@@ -461,6 +531,24 @@ export default {
   salamiImg,
   spicysausage,
   stylepepperoni,
+
+  argulaTopping,
+  broccoliTopping,
+  fireroastedTopping,
+  freshTopping,
+  greenoliveTopping,
+  greenpeppersTopping,
+  hotbananaTopping,
+  jalapenoTopping,
+  kalamataTopping,
+  pineappleTopping,
+  plantchorizoTopping,
+  plantpepperoniTopping,
+  redTopping,
+  roastedTopping,
+  romaTopping,
+  spinachTopping,
+  sundriedTopping,
 
   excheese,
   exdairycheese,

@@ -15,7 +15,20 @@ export default class Customization extends Component {
 
     this.state = { 
       ...CustomizeData,
-      quantity: 1
+      quantity: 1,
+      activeDough : "",
+      activeSauce: "",
+      activeCheese: "",
+      activeTopping: [],
+      activeToppingIng: "",
+      activeExtra: [],
+      activeExtraTopping: "",
+      activeSpecial: [],
+      activeSpecialTopping: "",
+      ToppingImg: [images.initialPizzaImg.src],
+      ToppingBase: [],
+      ToppingExtra: [],
+      
     }
   }
   _renderTabItem = (tab, activeTab) => {
@@ -54,7 +67,7 @@ export default class Customization extends Component {
 
     const data = {
       price: 9.99,
-      desc: "There are 2 more selections that are available in section TOPPINGS",
+      desc: "",
     };
 
     const setQty = (qty) => {
@@ -62,6 +75,7 @@ export default class Customization extends Component {
         quantity: qty
       })
     }
+    
 
     return <div className="pizza-board">
       <div className="title">
@@ -79,7 +93,25 @@ export default class Customization extends Component {
           }
         </div>
         <div className="pizza-piece">
-          <LazyLoadImage alt={images.initialPizzaImg.alt} src={images.initialPizzaImg.src} className="multi" />
+          <LazyLoadImage alt={images.initialPizzaImg.alt} src={this.state.ToppingImg} />
+          {
+            this.state.ToppingBase.map(base => {
+              return (
+                <div className="multiTopping">
+                  <LazyLoadImage alt={images.initialPizzaImg.alt} src={base} />
+                </div>
+              )
+            })
+          }
+          {
+            this.state.ToppingExtra.map(extra => {
+              return (
+                <div className="multiTopping">
+                  <LazyLoadImage alt={images.initialPizzaImg.alt} src={extra} />
+                </div>
+              )
+            })
+          }
         </div>
         <div className="add-cart">
           <div> 
@@ -87,7 +119,13 @@ export default class Customization extends Component {
                 <Quantity onChange={setQty}/>
                 <div className="price">{"$ " + data.price*this.state.quantity}</div>
             </div>
-            <div className="desc">{data.desc}</div>
+            <div className="desc">
+              { data.desc + this.state.activeDough
+                 + this.state.activeSauce + this.state.activeCheese 
+                 + this.state.activeToppingIng
+                 +  this.state.activeExtraTopping
+                 + this.state.activeSpecialTopping }
+            </div>
             <div className="cart-button">
                 <Button_1 value="ADD TO CART" />
             </div>
@@ -117,10 +155,20 @@ export default class Customization extends Component {
     </div>
   }
   _renderIngredients = () => {
-    let { DoughType, BaseSauce, BaseCheese, activeSubTab, activeIngredient } = this.state;
+    let { DoughType, BaseSauce, BaseCheese, 
+          activeSubTab, activeIngredient, activeDough, activeSauce, activeCheese } = this.state;
 
-    const handleIngredient = (item) =>  {
-      this.setState({activeIngredient: item})
+    const handleDough = (dough) =>  {
+      this.setState({activeIngredient: dough.id})
+      this.setState({activeDough: dough.name})
+    };
+    const handleSauce = (sauce) =>  {
+      this.setState({activeIngredient: sauce.id})
+      this.setState({activeSauce: ", " + sauce.name})
+    };
+    const handleCheese = (cheese) =>  {
+      this.setState({activeIngredient: cheese.id})
+      this.setState({activeCheese: ", " + cheese.name})
     };
     return <div className="sub-tab-content">
       {
@@ -130,7 +178,7 @@ export default class Customization extends Component {
               DoughType.map(ing => {
                 return (
                   <div className={"ingredient-item" + (activeIngredient === ing.id ? " active" : "")}
-                      onClick={() => handleIngredient(ing.id)}
+                      onClick={() => handleDough(ing)}
                       id={ing.id} key={ing.id}>
                   {
                     activeIngredient === ing.id 
@@ -171,7 +219,7 @@ export default class Customization extends Component {
               BaseSauce.map(sauce => {
                 return (
                   <div className={"baseSauce-item" + (activeIngredient === sauce.id ? " active" : "")}
-                      onClick={() => handleIngredient(sauce.id)}
+                      onClick={() => handleSauce(sauce)}
                       id={sauce.id} key={sauce.id}>
                   {
                     activeIngredient === sauce.id 
@@ -211,35 +259,35 @@ export default class Customization extends Component {
         activeSubTab === 5 && <div className="sub-tab-3">
           <div className="ingredients">
             {
-              BaseCheese.map(sauce => {
+              BaseCheese.map(cheese => {
                 return (
-                  <div className={"baseSauce-item" + (activeIngredient === sauce.id ? " active" : "")}
-                      onClick={() => handleIngredient(sauce.id)}
-                      id={sauce.id} key={sauce.id}>
+                  <div className={"baseSauce-item" + (activeIngredient === cheese.id ? " active" : "")}
+                      onClick={() => handleCheese(cheese)}
+                      id={cheese.id} key={cheese.id}>
                   {
-                    activeIngredient === sauce.id 
+                    activeIngredient === cheese.id 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected">
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={cheese.src.alt} src={cheese.src.src} />
                         </div>
                         <div className="baseSauce-detail-selected">
-                          <div className="baseSauce-title-selected">{sauce.name}</div>
+                          <div className="baseSauce-title-selected">{cheese.name}</div>
                           <BiDollarCircle className="icon" /> <br />
-                           <div className="baseSauce-cals-selected">{sauce.cals} Cals</div>
+                           <div className="baseSauce-cals-selected">{cheese.cals} Cals</div>
                         </div>
                       </div>
                     : <div className="img-wrap">
                         <div className="baseSauce-detail">
                           <div className="title">Select</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-name">{sauce.name}</div> 
+                          <div className="baseSauce-name">{cheese.name}</div> 
                             <div style={{clear: "both"}}></div>
                           <BiDollarCircle className="icon" />
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-cals">{sauce.cals} Cals</div>
+                          <div className="baseSauce-cals">{cheese.cals} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={cheese.src.alt} src={cheese.src.src} />
                         </div>
                       </div>
                   }
@@ -254,7 +302,6 @@ export default class Customization extends Component {
   }
   _renderToppingSubTab = () => {
     const { subToppingTabs, activeSubTab } = this.state;
-    console.log(activeSubTab)
     return <div className="sub-tabs">
       {
         subToppingTabs.map((tab, index) => {
@@ -265,10 +312,39 @@ export default class Customization extends Component {
     </div>
   }
   _renderToppingIngredients = () => {
-    let { Veggie, Meat, Cheese, activeSubTab, activeIngredient } = this.state;
+    let { ToppingSauce, activeSubTab, activeTopping, activeToppingIng, ToppingBase } = this.state;
 
-    const handleIngredient = (item) =>  {
-      this.setState({activeIngredient: item})
+    const handleTopping = (item) =>  {
+      let tempTopping = [...this.state.activeTopping];
+      
+      if (tempTopping.filter(top => top === item.id).length > 0) {
+        const index = tempTopping.indexOf(tempTopping.filter(top => top === item.id)[0]);
+        tempTopping.splice(index, 1);
+      } else {
+        tempTopping.push(item.id);
+      }
+      this.setState({
+        activeTopping: tempTopping
+      })
+
+      this.setState({activeToppingIng: " " + item.name});
+
+      let tempVeggie = [...this.state.activeToppingIng];
+      let tempBaseTopping = [...this.state.ToppingBase]
+
+      if (tempVeggie.filter(top => top === item.name).length > 0) {
+        const index = tempVeggie.indexOf(tempVeggie.filter(top => top === item.name)[0]);
+        tempVeggie.splice(index, 1);
+        tempBaseTopping.splice(index, 1);
+      } else {
+        tempVeggie.push(item.name);
+        tempBaseTopping.push(item.Toppingsrc.src)
+      }
+      this.setState({
+        activeToppingIng: tempVeggie,
+        ToppingBase: tempBaseTopping,
+      })
+      console.log(tempBaseTopping)
     };
 
     return <div className="sub-tab-content">
@@ -276,32 +352,32 @@ export default class Customization extends Component {
         activeSubTab === 1 && <div className="sub-tab-1">
           <div className="ingredients">
             {
-              Veggie.map(ing => {
+              ToppingSauce.Veggie.map(veggie => {
                 return (
-                  <div className={"baseSauce-item" + (activeIngredient === ing.id ? " active" : "")}
-                      onClick={() => handleIngredient(ing.id)}
-                      id={ing.id} key={ing.id}>
+                  <div className={"baseSauce-item" + (activeTopping.filter(top => top === veggie.id).length > 0 ? " active" : "")}
+                      onClick={() => handleTopping(veggie)}
+                      id={veggie.id} key={veggie.id}>
                   {
-                    activeIngredient === ing.id 
+                    activeTopping.filter(top => top === veggie.id).length > 0 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected">
-                          <LazyLoadImage alt={ing.src.alt} src={ing.src.src} />
+                          <LazyLoadImage alt={veggie.src.alt} src={veggie.src.src} />
                         </div>
                         <div className="baseSauce-detail-selected">
-                          <div className="baseSauce-title-selected">{ing.name}</div>
-                           <div className="baseSauce-cals-selected">{ing.cals} Cals</div>
+                          <div className="baseSauce-title-selected">{veggie.name}</div>
+                           <div className="baseSauce-cals-selected">{veggie.cals} Cals</div>
                         </div>
                       </div>
                     : <div className="img-wrap">
                         <div className="baseSauce-detail">
                           <div className="title">Select</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-name">{ing.name}</div> 
+                          <div className="baseSauce-name">{veggie.name}</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-cals">{ing.cals} Cals</div>
+                          <div className="baseSauce-cals">{veggie.cals} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage alt={ing.src.alt} src={ing.src.src} />
+                          <LazyLoadImage alt={veggie.src.alt} src={veggie.src.src} />
                         </div>
                       </div>
                   }
@@ -317,35 +393,35 @@ export default class Customization extends Component {
         activeSubTab === 3 && <div className="sub-tab-2">
           <div className="ingredients">
             {
-              Meat.map(sauce => {
+              ToppingSauce.Meat.map(meat => {
                 return (
-                  <div className={"baseSauce-item" + (activeIngredient === sauce.id ? " active" : "")}
-                      onClick={() => handleIngredient(sauce.id)}
-                      id={sauce.id} key={sauce.id}>
+                  <div className={"baseSauce-item" + (activeTopping.filter(top => top === meat.id).length > 0 ? " active" : "")}
+                      onClick={() => handleTopping(meat)}
+                      id={meat.id} key={meat.id}>
                   {
-                    activeIngredient === sauce.id 
+                    activeTopping.filter(top => top === meat.id).length > 0 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected">
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={meat.src.alt} src={meat.src.src} />
                         </div>
                         <div className="baseSauce-detail-selected">
-                          <div className="baseSauce-title-selected">{sauce.name}</div>
+                          <div className="baseSauce-title-selected">{meat.name}</div>
                           <BiDollarCircle className="icon" /> <br />
-                           <div className="baseSauce-cals-selected">{sauce.cals} Cals</div>
+                           <div className="baseSauce-cals-selected">{meat.cals} Cals</div>
                         </div>
                       </div>
                     : <div className="img-wrap">
                         <div className="baseSauce-detail">
                           <div className="title">Select</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-name">{sauce.name}</div> 
+                          <div className="baseSauce-name">{meat.name}</div> 
                             <div style={{clear: "both"}}></div>
                           <BiDollarCircle className="icon" />
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-cals">{sauce.cals} Cals</div>
+                          <div className="baseSauce-cals">{meat.cals} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={meat.src.alt} src={meat.src.src} />
                         </div>
                       </div>
                   }
@@ -360,35 +436,35 @@ export default class Customization extends Component {
         activeSubTab === 5 && <div className="sub-tab-3">
           <div className="ingredients">
             {
-              Cheese.map(sauce => {
+              ToppingSauce.Cheese.map(cheese => {
                 return (
-                  <div className={"baseSauce-item" + (activeIngredient === sauce.id ? " active" : "")}
-                      onClick={() => handleIngredient(sauce.id)}
-                      id={sauce.id} key={sauce.id}>
+                  <div className={"baseSauce-item" + (activeTopping.filter(top => top === cheese.id).length > 0 ? " active" : "")}
+                      onClick={() => handleTopping(cheese)}
+                      id={cheese.id} key={cheese.id}>
                   {
-                    activeIngredient === sauce.id 
+                    activeTopping.filter(top => top === cheese.id).length > 0 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected">
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={cheese.src.alt} src={cheese.src.src} />
                         </div>
                         <div className="baseSauce-detail-selected">
-                          <div className="baseSauce-title-selected">{sauce.name}</div>
+                          <div className="baseSauce-title-selected">{cheese.name}</div>
                           <BiDollarCircle className="icon" /> <br />
-                           <div className="baseSauce-cals-selected">{sauce.cals} Cals</div>
+                           <div className="baseSauce-cals-selected">{cheese.cals} Cals</div>
                         </div>
                       </div>
                     : <div className="img-wrap">
                         <div className="baseSauce-detail">
                           <div className="title">Select</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-name">{sauce.name}</div> 
+                          <div className="baseSauce-name">{cheese.name}</div> 
                             <div style={{clear: "both"}}></div>
                           <BiDollarCircle className="icon" />
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-cals">{sauce.cals} Cals</div>
+                          <div className="baseSauce-cals">{cheese.cals} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={cheese.src.alt} src={cheese.src.src} />
                         </div>
                       </div>
                   }
@@ -402,10 +478,28 @@ export default class Customization extends Component {
     </div>
   }
   _renderExtraIngredients = () => {
-    let { ExtraTopping, activeSubTab, activeIngredient } = this.state;
+    let { ExtraTopping, activeSubTab, activeExtra, activeExtraTopping, ToppingExtra } = this.state;
 
-    const handleIngredient = (item) =>  {
-      this.setState({activeIngredient: item})
+    const handleExtra = (item) =>  {
+      
+      let tempExtra = [...this.state.activeExtra];
+      let tempExtraTopping = [...this.state.ToppingExtra]
+
+      if (tempExtra.filter(top => top === item.id).length > 0) {
+        const index = tempExtra.indexOf(tempExtra.filter(top => top === item.id)[0]);
+        tempExtra.splice(index, 1);
+        tempExtraTopping.splice(index, 1);
+
+      } else {
+        tempExtra.push(item.id);
+        tempExtraTopping.push(item.Toppingsrc.src)
+      }
+      this.setState({
+        activeExtra: tempExtra,
+        activeExtraTopping: " " + item.name,
+        ToppingExtra: tempExtraTopping
+      })
+      console.log(this.state.ToppingExtra)
     };
 
     return <div className="sub-tab-content">
@@ -413,35 +507,35 @@ export default class Customization extends Component {
         activeSubTab === 1 && <div className="sub-tab-1">
           <div className="ingredients">
           {
-              ExtraTopping.map(sauce => {
+              ExtraTopping.map(extra => {
                 return (
-                  <div className={"baseSauce-item" + (activeIngredient === sauce.id ? " active" : "")}
-                      onClick={() => handleIngredient(sauce.id)}
-                      id={sauce.id} key={sauce.id}>
+                  <div className={"baseSauce-item" + (activeExtra.filter(top => top === extra.id).length > 0 ? " active" : "")}
+                      onClick={() => handleExtra(extra)}
+                      id={extra.id} key={extra.id}>
                   {
-                    activeIngredient === sauce.id 
+                    activeExtra.filter(top => top === extra.id).length > 0 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected">
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={extra.src.alt} src={extra.src.src} />
                         </div>
                         <div className="baseSauce-detail-selected">
-                          <div className="baseSauce-title-selected">{sauce.name}</div>
+                          <div className="baseSauce-title-selected">{extra.name}</div>
                           <BiDollarCircle className="icon" /> <br />
-                           <div className="baseSauce-cals-selected">{sauce.cals} Cals</div>
+                           <div className="baseSauce-cals-selected">{extra.cals} Cals</div>
                         </div>
                       </div>
                     : <div className="img-wrap">
                         <div className="baseSauce-detail">
                           <div className="title">Select</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-name">{sauce.name}</div> 
+                          <div className="baseSauce-name">{extra.name}</div> 
                             <div style={{clear: "both"}}></div>
                           <BiDollarCircle className="icon" />
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-cals">{sauce.cals} Cals</div>
+                          <div className="baseSauce-cals">{extra.cals} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={extra.src.alt} src={extra.src.src} />
                         </div>
                       </div>
                   }
@@ -457,46 +551,47 @@ export default class Customization extends Component {
     </div>
   }
   _renderSpecialIngredients = () => {
-    let { Special, activeSubTab, activeIngredient } = this.state;
+    let { Special, activeSubTab, activeSpecial, activeSpecialTopping } = this.state;
 
-    const handleIngredient = (item) =>  {
-      this.setState({activeIngredient: item})
-    };
+    const handleSpecial = (item) =>  {
+      this.setState({activeSpecial: item.id});
+      this.setState({activeSpecialTopping: item.name})
+    } 
 
     return <div className="sub-tab-content">
       {
         activeSubTab === 1 && <div className="sub-tab-1">
           <div className="ingredients">
           {
-              Special.map(sauce => {
+              Special.map(special => {
                 return (
-                  <div className={"baseSauce-item" + (activeIngredient === sauce.id ? " active" : "")}
-                      onClick={() => handleIngredient(sauce.id)}
-                      id={sauce.id} key={sauce.id}>
+                  <div className={"baseSauce-item" + (activeSpecial === special.id ? " active" : "")}
+                      onClick={() => handleSpecial(special)}
+                      id={special.id} key={special}>
                   {
-                    activeIngredient === sauce.id 
+                    activeSpecial === special.id 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected" >
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={special.src.alt} src={special.src.src} />
                         </div>
                         <div className="baseSauce-detail-selected">
-                          <div className="baseSauce-title-selected">{sauce.name}</div>
+                          <div className="baseSauce-title-selected">{special.name}</div>
                           <BiDollarCircle className="icon" /> <br />
-                           <div className="baseSauce-cals-selected">{sauce.cals} Cals</div>
+                           <div className="baseSauce-cals-selected">{special.cals} Cals</div>
                         </div>
                       </div>
                     : <div className="img-wrap">
                         <div className="baseSauce-detail">
                           <div className="title">Select</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-name">{sauce.name}</div> 
+                          <div className="baseSauce-name">{special.name}</div> 
                             <div style={{clear: "both"}}></div>
                           <BiDollarCircle className="icon" />
                             <div style={{clear: "both"}}></div>
-                          <div className="baseSauce-cals">{sauce.cals} Cals</div>
+                          <div className="baseSauce-cals">{special.cals} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage alt={sauce.src.alt} src={sauce.src.src} />
+                          <LazyLoadImage alt={special.src.alt} src={special.src.src} />
                         </div>
                       </div>
                   }

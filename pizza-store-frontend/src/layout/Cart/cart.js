@@ -25,7 +25,7 @@ class Cart extends Component {
     <div className='cart'>
       <div className='cart-header'>
         <div className='empty'>
-          <BsFillCartFill style={{fontSize: "25px", color: "#FCA017"}}/>
+          <BsFillCartFill style={{fontSize: "25px", color: "grey"}}/>
           <div className='cart-status'>Empty Cart</div>
         </div>
         <button className='toggle-button' onClick={() => handleUpCart()}>

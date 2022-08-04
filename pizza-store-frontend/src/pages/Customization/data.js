@@ -191,291 +191,315 @@ export const CustomizeData = {
       cals: 70
     },
   ],
-  Veggie: [
-    {
-      id: 1,
-      name: "Arugula",
-      src: images.argulaImg,
-      ingsrc: images.argulaTopping,
-      cals: 5
-    },
-    {
-      id: 2,
-      name: "Broccoli",
-      src: images.broccoliImg,
-      ingsrc: images.broccoliTopping,
-      cals: 5
-    },
-    {
-      id: 3,
-      name: "Brushchetta",
-      src: images.brushchetta,
-      ingsrc: images.argulaTopping,
-      cals: 5
-    },
-    {
-      id: 4,
-      name: "Fire Roasted Red Peppers",
-      src: images.fireroasted,
-      ingsrc: images.fireroastedTopping,
-      cals: 5
-    },
-    {
-      id: 5,
-      name: "Fresh Mushrooms",
-      src: images.buffaloImg,
-      cals: 5
-    },
-    {
-      id: 6,
-      name: "Green Olives",
-      src: images.greenolives,
-      cals: 10
-    },
-    {
-      id: 7,
-      name: "Green Peppers",
-      src: images.greenpeppers,
-      cals: 5
-    },
-    {
-      id: 8.,
-      name: "Hot Banana Peppers",
-      src: images.hotbanana,
-      cals: 5
-    },
-    {
-      id: 9,
-      name: "Jalapeno Peppers",
-      src: images.jalapenopeppers,
-      cals: 5
-    },
-    {
-      id: 10,
-      name: "Kalamata Olives",
-      src: images.kalamataolives,
-      cals: 0
-    },
-    {
-      id: 11,
-      name: "Pineapple",
-      src: images.pineappleImg,
-      cals: 5
-    },
-    {
-      id: 12,
-      name: "Plant-Based Chorizo Crumble",
-      src: images.plantbasedchorizo,
-      cals: 15
-    },
-    {
-      id: 13,
-      name: "Plant-Based Pepperoni",
-      src: images.plantbasedpepperoni,
-      cals: 20
-    },
-    {
-      id: 14,
-      name: "Red Onions",
-      src: images.redonions,
-      cals: 5
-    },
-    {
-      id: 15,
-      name: "Roasted Garlic",
-      src: images.roastedgarlic,
-      cals: 5
-    },
-    {
-      id: 16,
-      name: "Roma Tomatoes",
-      src: images.romatomatoes,
-      cals: 5
-    },
-    {
-      id: 17,
-      name: "Spinach",
-      src: images.spinachImg,
-      cals: 5
-    },
-    {
-      id: 18,
-      name: "Sun-Dried Tomatoes",
-      src: images.sundriedImg,
-      cals: 0
-    },
-  ],
-  Meat: [
-    {
-      id: 1,
-      name: "Anchovies",
-      src: images.anchoviesImg,
-      cals: 5
-    },
-    {
-      id: 2,
-      name: "Bacon Crumble",
-      src: images.baconcrumble,
-      cals: 20
-    },
-    {
-      id: 3,
-      name: "Bacon Strips",
-      src: images.baconstrips,
-      cals: 20
-    },
-    {
-      id: 4,
-      name: "Butter Chicken",
-      src: images.butterchickentmeat,
-      cals: 60
-    },
-    {
-      id: 5,
-      name: "Chicken Shawarma",
-      src: images.chickenshawarma,
-      cals: 15
-    },
-    {
-      id: 6,
-      name: "Donair",
-      src: images.donairmeat,
-      cals: 0
-    },
-    {
-      id: 7,
-      name: "Grilled Chicken",
-      src: images.grilledchicken,
-      cals: 15
-    },
-    {
-      id: 8,
-      name: "Ground Beef",
-      src: images.groundbeef,
-      cals: 25
-    },
-    {
-      id: 9,
-      name: "Italian Ham",
-      src: images.italianham,
-      cals: 5
-    },
-    {
-      id: 10,
-      name: "New York Style Pepperoni",
-      src: images.stylepepperoni,
-      cals: 30
-    },
-    {
-      id: 11,
-      name: "Pepperoni",
-      src: images.pepperoniImg,
-      cals: 25
-    },
-    {
-      id: 12,
-      name: "Proscuitto",
-      src: images.proscuittoImg,
-      cals: 15
-    },
-    {
-      id: 13,
-      name: "Salami",
-      src: images.salamiImg,
-      cals: 10
-    },
-    {
-      id: 14,
-      name: "Spicy Italian Sausage",
-      src: images.spicysausage,
-      cals: 5
-    }
-  ],
-  Cheese: [
-    {
-      id: 1,
-      name: "Extra Cheese",
-      src: images.excheese,
-      cals: 10
-    },
-    {
-      id: 2,
-      name: "Extra Dairy-Free Cheeze",
-      src: images.exdairycheese,
-      cals: 15
-    },
-    {
-      id: 3,
-      name: "Feta Cheese",
-      src: images.fetacheese,
-      cals: 15
-    },
-    {
-      id: 4,
-      name: "Six Cheese Blend Topping",
-      src: images.sixcheese,
-      cals: 120
-    },
-    {
-      id: 5,
-      name: "Goat Cheese",
-      src: images.goatcheese,
-      cals: 10
-    },
-    {
-      id: 6,
-      name: "Parmesan Cheese",
-      src: images.permesancheese,
-      cals: 15
-    }
-  ],
+  ToppingSauce: {
+    Veggie: [
+      {
+        id: 1,
+        name: "Arugula",
+        src: images.argulaImg,
+        Toppingsrc: images.argulaTopping,
+        cals: 5
+      },
+      {
+        id: 2,
+        name: "Broccoli",
+        src: images.broccoliImg,
+        Toppingsrc: images.broccoliTopping,
+        cals: 5
+      },
+      {
+        id: 3,
+        name: "Brushchetta",
+        src: images.brushchetta,
+        Toppingsrc: "",
+        cals: 5
+      },
+      {
+        id: 4,
+        name: "Fire Roasted Red Peppers",
+        src: images.fireroasted,
+        Toppingsrc: images.fireroastedTopping,
+        cals: 5
+      },
+      {
+        id: 5,
+        name: "Fresh Mushrooms",
+        src: images.buffaloImg,
+        Toppingsrc: images.freshTopping,
+        cals: 5
+      },
+      {
+        id: 6,
+        name: "Green Olives",
+        src: images.greenolives,
+        Toppingsrc: images.greenoliveTopping,
+        cals: 10
+      },
+      {
+        id: 7,
+        name: "Green Peppers",
+        src: images.greenpeppers,
+        Toppingsrc: images.greenpeppersTopping,
+        cals: 5
+      },
+      {
+        id: 8.,
+        name: "Hot Banana Peppers",
+        Toppingsrc: images.hotbananaTopping,
+        src: images.hotbanana,
+        cals: 5
+      },
+      {
+        id: 9,
+        name: "Jalapeno Peppers",
+        src: images.jalapenopeppers,
+        Toppingsrc: images.jalapenoTopping,
+        cals: 5
+      },
+      {
+        id: 10,
+        name: "Kalamata Olives",
+        src: images.kalamataolives,
+        Toppingsrc: images.kalamataTopping,
+        cals: 0
+      },
+      {
+        id: 11,
+        name: "Pineapple",
+        src: images.pineappleImg,
+        Toppingsrc: images.pineappleTopping,
+        cals: 5
+      },
+      {
+        id: 12,
+        name: "Plant-Based Chorizo Crumble",
+        src: images.plantbasedchorizo,
+        Toppingsrc: images.plantchorizoTopping,
+        cals: 15
+      },
+      {
+        id: 13,
+        name: "Plant-Based Pepperoni",
+        src: images.plantbasedpepperoni,
+        Toppingsrc: images.plantpepperoniTopping,
+        cals: 20
+      },
+      {
+        id: 14,
+        name: "Red Onions",
+        src: images.redonions,
+        Toppingsrc: images.redTopping,
+        cals: 5
+      },
+      {
+        id: 15,
+        name: "Roasted Garlic",
+        src: images.roastedgarlic,
+        Toppingsrc: images.roastedTopping,
+        cals: 5
+      },
+      {
+        id: 16,
+        name: "Roma Tomatoes",
+        src: images.romatomatoes,
+        Toppingsrc: images.romaTopping,
+        cals: 5
+      },
+      {
+        id: 17,
+        name: "Spinach",
+        src: images.spinachImg,
+        Toppingsrc: images.spinachTopping,
+        cals: 5
+      },
+      {
+        id: 18,
+        name: "Sun-Dried Tomatoes",
+        src: images.sundriedImg,
+        Toppingsrc: images.sundriedTopping,
+        cals: 0
+      },
+    ],
+    Meat: [
+      {
+        id: 18,
+        name: "Anchovies",
+        src: images.anchoviesImg,
+        cals: 5
+      },
+      {
+        id: 19,
+        name: "Bacon Crumble",
+        src: images.baconcrumble,
+        cals: 20
+      },
+      {
+        id: 20,
+        name: "Bacon Strips",
+        src: images.baconstrips,
+        cals: 20
+      },
+      {
+        id: 21,
+        name: "Butter Chicken",
+        src: images.butterchickentmeat,
+        cals: 60
+      },
+      {
+        id: 22,
+        name: "Chicken Shawarma",
+        src: images.chickenshawarma,
+        cals: 15
+      },
+      {
+        id: 23,
+        name: "Donair",
+        src: images.donairmeat,
+        cals: 0
+      },
+      {
+        id: 24,
+        name: "Grilled Chicken",
+        src: images.grilledchicken,
+        cals: 15
+      },
+      {
+        id: 25,
+        name: "Ground Beef",
+        src: images.groundbeef,
+        cals: 25
+      },
+      {
+        id: 26,
+        name: "Italian Ham",
+        src: images.italianham,
+        cals: 5
+      },
+      {
+        id: 27,
+        name: "New York Style Pepperoni",
+        src: images.stylepepperoni,
+        cals: 30
+      },
+      {
+        id: 28,
+        name: "Pepperoni",
+        src: images.pepperoniImg,
+        cals: 25
+      },
+      {
+        id: 29,
+        name: "Proscuitto",
+        src: images.proscuittoImg,
+        cals: 15
+      },
+      {
+        id: 30,
+        name: "Salami",
+        src: images.salamiImg,
+        cals: 10
+      },
+      {
+        id: 31,
+        name: "Spicy Italian Sausage",
+        src: images.spicysausage,
+        cals: 5
+      }
+    ],
+    Cheese: [
+      {
+        id: 32,
+        name: "Extra Cheese",
+        src: images.excheese,
+        cals: 10
+      },
+      {
+        id: 33,
+        name: "Extra Dairy-Free Cheeze",
+        src: images.exdairycheese,
+        cals: 15
+      },
+      {
+        id: 34,
+        name: "Feta Cheese",
+        src: images.fetacheese,
+        cals: 15
+      },
+      {
+        id: 35,
+        name: "Six Cheese Blend Topping",
+        src: images.sixcheese,
+        cals: 120
+      },
+      {
+        id: 36,
+        name: "Goat Cheese",
+        src: images.goatcheese,
+        cals: 10
+      },
+      {
+        id: 37,
+        name: "Parmesan Cheese",
+        src: images.permesancheese,
+        cals: 15
+      }
+    ],
+  },
   ExtraTopping: [
     {
       id: 1,
       name: "Creamy Garlic Sauce Drizzle",
       src: images.creamygarlic,
+      Toppingsrc: images.argulaTopping,
       cals: 60,
     },
     {
       id: 2,
       name: "Chili Peppers",
       src: images.chilipeppers,
+      Toppingsrc: images.broccoliTopping,
       cals: 0,
     },
     {
       id: 3,
       name: "Donair Drizzle",
       src: images.donairdrizzle,
+      Toppingsrc: images.argulaTopping,
       cals: 10,
     },
     {
       id: 4,
       name: "Hot Honey Drizzle (Extra Charge)",
       src: images.hothoneydrizzle,
+      Toppingsrc: images.argulaTopping,
       cals: 10,
     },
     {
       id: 5,
       name: "Hot Sauce Drizzle",
       src: images.hotsauce,
+      Toppingsrc: images.argulaTopping,
       cals: 10,
     },
     {
       id: 6,
       name: "Italiano Blend Seasoning",
       src: images.italianoImg,
+      Toppingsrc: images.argulaTopping,
       cals: 0,
     },
     {
       id: 7,
       name: "Olive Oil",
       src: images.oliveoil,
+      Toppingsrc: images.argulaTopping,
       cals: 10,
     },
     {
       id: 8,
       name: "Bbq Drizzle",
       src: images.bbqdrizzle,
+      Toppingsrc: images.argulaTopping,
       cals: 10
     },
   ],

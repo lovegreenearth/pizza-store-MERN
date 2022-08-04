@@ -2,9 +2,6 @@
   width: 25%;
   float: right;
   margin-right: 30px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border: 1px solid black;
   border-bottom: none;
   color: #4c3017;
   position: fixed;
@@ -16,11 +13,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // width: 75%;
-    // border-top-left-radius: 10px;
-    // border-top-right-radius: 10px;
-    // border-bottom: none;
-    // border: 1px solid black;
+    background-color: #ebf0f4;
+    width: 75%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid black;
+    border-bottom: none;
     .empty {
       display: flex;
       justify-content: center;
@@ -38,7 +36,9 @@
   .cart-content {
     width: 100%;
     padding: 10px 10px;
-    background-color: #FCA017;
+    background-color: #ebf0f4;
+    border: 1px solid black;
+    border-top-right-radius: 10px;
     .cart-title {
       text-align: left;
       font-size: 18px;
@@ -47,11 +47,15 @@
     .empty-cart {
       padding: 10px;
       font-size: 100px;
-      color: #ebf0f4;
+      color: grey;
     }
     button {
       margin: 0px 0px 10px 0px;
-      background-color: #ebf0f4;
+      background-color: grey;
+      &:hover {
+        color: black;
+        border: 1px solid black;
+      }
     }
   }
 }
