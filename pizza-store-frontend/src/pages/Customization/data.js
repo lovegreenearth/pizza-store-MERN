@@ -211,7 +211,7 @@ export const CustomizeData = {
         id: 3,
         name: "Brushchetta",
         src: images.brushchetta,
-        Toppingsrc: "",
+        Toppingsrc: images.argulaTopping,
         cals: 5
       },
       {
@@ -322,125 +322,138 @@ export const CustomizeData = {
     ],
     Meat: [
       {
-        id: 18,
+        id: 19,
         name: "Anchovies",
         src: images.anchoviesImg,
+        Toppingsrc: images.anchoviesTopping,
         cals: 5
       },
       {
-        id: 19,
+        id: 20,
         name: "Bacon Crumble",
         src: images.baconcrumble,
-        cals: 20
-      },
-      {
-        id: 20,
-        name: "Bacon Strips",
-        src: images.baconstrips,
+        Toppingsrc: images.baconcrumbleTopping,
         cals: 20
       },
       {
         id: 21,
-        name: "Butter Chicken",
-        src: images.butterchickentmeat,
-        cals: 60
+        name: "Bacon Strips",
+        src: images.baconstrips,
+        Toppingsrc: images.baconstripsTopping,
+        cals: 20
       },
       {
         id: 22,
-        name: "Chicken Shawarma",
-        src: images.chickenshawarma,
-        cals: 15
+        name: "Butter Chicken",
+        src: images.butterchickentmeat,
+        Toppingsrc: images.butterTopping,
+        cals: 60
       },
       {
         id: 23,
-        name: "Donair",
-        src: images.donairmeat,
-        cals: 0
+        name: "Chicken Shawarma",
+        src: images.chickenshawarma,
+        Toppingsrc: images.chickenTopping,
+        cals: 60
       },
       {
         id: 24,
-        name: "Grilled Chicken",
-        src: images.grilledchicken,
-        cals: 15
+        name: "Donair",
+        src: images.donairmeat,
+        Toppingsrc: images.donairTopping,
+        cals: 0
       },
       {
         id: 25,
-        name: "Ground Beef",
-        src: images.groundbeef,
-        cals: 25
-      },
-      {
-        id: 26,
-        name: "Italian Ham",
-        src: images.italianham,
-        cals: 5
-      },
-      {
-        id: 27,
-        name: "New York Style Pepperoni",
-        src: images.stylepepperoni,
-        cals: 30
-      },
-      {
-        id: 28,
-        name: "Pepperoni",
-        src: images.pepperoniImg,
-        cals: 25
-      },
-      {
-        id: 29,
-        name: "Proscuitto",
-        src: images.proscuittoImg,
+        name: "Grilled Chicken",
+        src: images.grilledchicken,
+        Toppingsrc: images.grilledTopping,
         cals: 15
       },
       {
-        id: 30,
+        id: 26,
+        name: "Ground Beef",
+        src: images.groundbeef,
+        Toppingsrc: images.groundTopping,
+        cals: 25
+      },
+      {
+        id: 27,
+        name: "Italian Ham",
+        src: images.italianham,
+        Toppingsrc: images.hamTopping,
+        cals: 5
+      },
+      {
+        id: 28,
+        name: "Proscuitto",
+        src: images.proscuittoImg,
+        Toppingsrc: images.proscuittoTopping,
+        cals: 15
+      },
+      {
+        id: 29,
         name: "Salami",
         src: images.salamiImg,
+        Toppingsrc: images.salamiTopping,
         cals: 10
       },
       {
-        id: 31,
+        id: 30,
         name: "Spicy Italian Sausage",
         src: images.spicysausage,
+        Toppingsrc: images.spicyTopping,
         cals: 5
-      }
+      },
+      {
+        id: 31,
+        name: "New York Style Pepperoni",
+        src: images.pepperoniImg,
+        Toppingsrc: images.newyorkTopping,
+        cals: 25
+      },
     ],
     Cheese: [
       {
         id: 32,
         name: "Extra Cheese",
         src: images.excheese,
+        Toppingsrc: images.extracheeseTopping,
         cals: 10
       },
       {
         id: 33,
         name: "Extra Dairy-Free Cheeze",
         src: images.exdairycheese,
+        Toppingsrc: images.extracheeseTopping,
         cals: 15
       },
       {
         id: 34,
         name: "Feta Cheese",
         src: images.fetacheese,
+        Toppingsrc: images.fetacheeseTopping,
         cals: 15
       },
       {
         id: 35,
         name: "Six Cheese Blend Topping",
         src: images.sixcheese,
+        Toppingsrc: images.goatcheeseTopping,
         cals: 120
       },
       {
         id: 36,
         name: "Goat Cheese",
         src: images.goatcheese,
+        Toppingsrc: images.newyorkTogoatcheeseToppingpping,
         cals: 10
       },
       {
         id: 37,
         name: "Parmesan Cheese",
         src: images.permesancheese,
+        Toppingsrc: images.pamesanTopping,
         cals: 15
       }
     ],
@@ -450,7 +463,7 @@ export const CustomizeData = {
       id: 1,
       name: "Creamy Garlic Sauce Drizzle",
       src: images.creamygarlic,
-      Toppingsrc: images.argulaTopping,
+      Toppingsrc: images.creamygarlic,
       cals: 60,
     },
     {
@@ -464,21 +477,21 @@ export const CustomizeData = {
       id: 3,
       name: "Donair Drizzle",
       src: images.donairdrizzle,
-      Toppingsrc: images.argulaTopping,
+      Toppingsrc: images.hothoneydrizzle,
       cals: 10,
     },
     {
       id: 4,
       name: "Hot Honey Drizzle (Extra Charge)",
       src: images.hothoneydrizzle,
-      Toppingsrc: images.argulaTopping,
+      Toppingsrc: images.hothoneydrizzle,
       cals: 10,
     },
     {
       id: 5,
       name: "Hot Sauce Drizzle",
       src: images.hotsauce,
-      Toppingsrc: images.argulaTopping,
+      Toppingsrc: images.hotsauce,
       cals: 10,
     },
     {
@@ -499,7 +512,7 @@ export const CustomizeData = {
       id: 8,
       name: "Bbq Drizzle",
       src: images.bbqdrizzle,
-      Toppingsrc: images.argulaTopping,
+      Toppingsrc: images.bbqdrizzle,
       cals: 10
     },
   ],
