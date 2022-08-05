@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button_1 from "../../components/Button/button1";
+import Button1 from "../../components/Button/button1";
 import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
 
@@ -13,8 +13,27 @@ export default class SignIn extends Component {
         }
     }
 
-    onSignIn() {
-        console.log("sign in button")
+    onSignIn = () => {
+        const sendData = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        fetch(`http://localhost:5000/users/login`, {
+            method: 'POST',
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body:JSON.stringify(sendData)
+        })
+        .then(res =>res.json())
+        .then(data => {
+            if (data.token) {
+                this.props.onSuccess();
+                alert('success');
+            } else if (data.msg) {
+                alert(data.msg);
+            }
+        })
     }
 
     render() {
@@ -56,13 +75,13 @@ export default class SignIn extends Component {
 
                             <div className="signin-register-container">
                                 <div className="signin-button-container">
-                                    <Button_1 value="SIGN IN" onClick={this.onSignIn} />
+                                    <Button1 value="SIGN IN" onClick={this.onSignIn} />
                                 </div>
                                 <div className="register-comment">
                                     Don't have an account?
                                 </div>
                                 <div className="goto-register">
-                                    <a href="#">Creat one here.</a>
+                                    <a href="/signup">Creat one here.</a>
                                 </div>
                                 <div className="signin-avatar"><CgFacebook size={30} /></div>
                                 <div className="signin-avatar"><FcGoogle size={30} /></div>
