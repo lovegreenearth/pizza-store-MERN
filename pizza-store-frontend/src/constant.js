@@ -58,6 +58,7 @@ import RedTopping from "./assets/img/VeggieTopping/Red Onions.png";
 import RoastedTopping from './assets/img/VeggieTopping/Roasted Garlic.png'
 import RomaTopping from "./assets/img/VeggieTopping/Roma  Tomatoes.png";
 import SpinachTopping from "./assets/img/VeggieTopping/Spinach.png";
+import SpicyTopping from "./assets/img/MeatTopping/Spicy.png";
 import SunDriedTopping from "./assets/img/VeggieTopping/Sun-Dried Tomatoes.png"
 
 import anchovies from "./assets/img/Meat/Anchovies.png";
@@ -75,12 +76,30 @@ import salami from "./assets/img/Meat/Salami.png";
 import spicySausage from "./assets/img/Meat/Sausage.png"
 import stylePepperoni from "./assets/img/Meat/Style Pepperoni.png";
 
+import AnchoviesTopping from "./assets/img/MeatTopping/Anchovies.png";
+import BaconCrumbleTopping from "./assets/img/MeatTopping/Bacon Crumble.png";
+import BaconStripsTopping from "./assets/img/MeatTopping/Bacon Strips.png";
+import ButterTopping from "./assets/img/MeatTopping/Butter Chicken.png";
+import ChickenTopping from "./assets/img/MeatTopping/Chicken Shawarma.png";
+import DonairTopping from "./assets/img/MeatTopping/Donair.png";
+import GrilliedTopping from "./assets/img/MeatTopping/Grilled Chicken.png";
+import GroundTopping from "./assets/img/MeatTopping/Ground Beef.png";
+import HamTopping from "./assets/img/MeatTopping/Italian Ham.png";
+import NewYorkTopping from "./assets/img/MeatTopping/New York.png";
+import ProscuittoTopping from "./assets/img/MeatTopping/Proscuitto.png";
+import SalamiTopping from "./assets/img/MeatTopping/Salami.png";
+
 import exCheese from "./assets/img/Cheese/Extra Cheese.png";
 import exDairyCheese from "./assets/img/Cheese/Extra Dairy-free Cheese.png";
 import fetaCheese from "./assets/img/Cheese/Feta Cheese.png";
 import sixCheese from "./assets/img/Cheese/Six Cheese Blend Topping.png";
 import goatCheese from "./assets/img/Cheese/Goat Cheese.png";
 import permesanCheese from "./assets/img/Cheese/Parmesan cheese.png";
+
+import ExtraCheeseTopping from "./assets/img/CheeseTopping/Extra Cheese.png";
+import FetaCheeseTopping from "./assets/img/CheeseTopping/Feta Cheese.png";
+import GoatCheeseTopping from "./assets/img/CheeseTopping/Goat Cheese.png";
+import PamesanCheeseTopping from "./assets/img/CheeseTopping/ParmesanCheese.png";
 
 import creamyGarlic from "./assets/img/Extra Topping/Creamy Garlic.png";
 import chiliPeppers from "./assets/img/Extra Topping/Chili peppers.png";
@@ -95,7 +114,74 @@ import regular from "./assets/img/Special/Regular.png";
 import light from "./assets/img/Special/Light.png";
 import well from "./assets/img/Special/Well done.png";
 
-
+const extracheeseTopping = {
+  src: ExtraCheeseTopping,
+  alt: 'logo'
+}
+const fetacheeseTopping = {
+  src: FetaCheeseTopping,
+  alt: 'logo'
+}
+const goatcheeseTopping = {
+  src: GoatCheeseTopping,
+  alt: 'logo'
+}
+const pamesanTopping = {
+  src: PamesanCheeseTopping,
+  alt: 'logo'
+}
+const anchoviesTopping = {
+  src: AnchoviesTopping,
+  alt: 'logo'
+}
+const spicyTopping = {
+  src: SpicyTopping,
+  alt: 'logo'
+}
+const baconcrumbleTopping = {
+  src: BaconCrumbleTopping,
+  alt: 'logo'
+}
+const baconstripsTopping = {
+  src: BaconStripsTopping,
+  alt: 'logo'
+}
+const butterTopping = {
+  src: ButterTopping,
+  alt: 'logo'
+}
+const chickenTopping = {
+  src: ChickenTopping,
+  alt: 'logo'
+}
+const donairTopping = {
+  src: DonairTopping,
+  alt: 'logo'
+}
+const grilledTopping = {
+  src: GrilliedTopping,
+  alt: 'logo'
+}
+const groundTopping = {
+  src: GroundTopping,
+  alt: 'logo'
+}
+const hamTopping = {
+  src: HamTopping,
+  alt: 'logo'
+}
+const newyorkTopping = {
+  src: NewYorkTopping,
+  alt: 'logo'
+}
+const proscuittoTopping = {
+  src: ProscuittoTopping,
+  alt: 'logo'
+}
+const salamiTopping = {
+  src: SalamiTopping,
+  alt: 'logo'
+}
 const argulaTopping = {
   src: ArgulaTopping,
   alt: 'logo'
@@ -573,4 +659,24 @@ export default {
   fireroastedTopping,
   argulaTopping,
   broccoliTopping,
+
+  anchoviesTopping,
+  baconcrumbleTopping,
+  baconstripsTopping,
+  butterTopping,
+  chickenTopping,
+  donairTopping,
+  grilledTopping,
+  groundTopping,
+  hamTopping,
+  newyorkTopping,
+  proscuittoTopping,
+  salamiTopping,
+  spicyTopping,
+  
+  extracheeseTopping,
+  fetacheeseTopping,
+  goatcheeseTopping,
+  pamesanTopping,
+
 };
