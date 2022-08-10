@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
 import SeeAll from '../pages/SeeAll';
-import Customization from "../pages/Customization/index";
+import Customization from "../../src/redux/container/appContainers";
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 

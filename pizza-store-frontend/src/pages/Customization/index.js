@@ -8,8 +8,9 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import Quantity from "../../components/Button/qty";
 import Button_1 from "../../components/Button/button1";
 import { CustomizeData } from "./data";
+import { connect } from 'react-redux';
 
-export default class Customization extends Component {
+class Customization extends Component {
   constructor(props) {
     super(props);
 
@@ -74,10 +75,21 @@ export default class Customization extends Component {
         quantity: qty
       })
     }
-    const addCart = () => {
-      console.log(data.price)
-      
+
+    const addPizza = () => {
+      const newPizza = {
+        name: "My Pizza",
+        quantity: this.state.quantity,
+        desc: total_desc,
+        price: data.price
+      }
+      this.props.addToCart(newPizza)
     }
+    const total_desc = data.desc + this.state.activeDough
+          + this.state.activeSauce + this.state.activeCheese 
+          + this.state.activeToppingIng
+          + this.state.activeExtraTopping
+          + this.state.activeSpecialTopping;
 
     return <div className="pizza-board">
       <div className="title">
@@ -122,14 +134,11 @@ export default class Customization extends Component {
                 <div className="price">{"$ " + data.price*this.state.quantity}</div>
             </div>
             <div className="desc">
-              { data.desc + this.state.activeDough
-                 + this.state.activeSauce + this.state.activeCheese 
-                 + this.state.activeToppingIng
-                 +  this.state.activeExtraTopping
-                 + this.state.activeSpecialTopping }
+              { total_desc }
             </div>
             <div className="cart-button">
-                <Button_1 value="ADD TO CART" onClick={addCart} />
+                <Button_1 value="ADD TO CART" 
+                  onClick={() => addPizza()} />
             </div>
           </div>
         </div>
@@ -680,3 +689,18 @@ export default class Customization extends Component {
     );
   }
 }
+
+// const mapStateToProps = state => {
+//   return {
+//     count: state.count,
+//     items: state.items
+//   }
+// }
+
+// const mapStateToDispatch = dispatch => {
+//   return {
+//     dispatch
+//   }
+// }
+
+export default Customization
