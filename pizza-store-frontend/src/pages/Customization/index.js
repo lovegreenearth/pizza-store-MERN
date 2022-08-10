@@ -690,17 +690,4 @@ class Customization extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     count: state.count,
-//     items: state.items
-//   }
-// }
-
-// const mapStateToDispatch = dispatch => {
-//   return {
-//     dispatch
-//   }
-// }
-
 export default Customization

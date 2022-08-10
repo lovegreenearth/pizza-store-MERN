@@ -1,0 +1,26 @@
+.product-container {
+  margin: auto;
+  .product-header {
+    background-color: #525d70;
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    .header-title {
+      .title {
+        color: white;
+      }
+    }
+    .header-img {
+      width: 30%;
+      position: absolute;
+      top: 50%;
+      margin: auto;
+      display: block;
+    }
+  }
+  .product-content {
+    margin-top: 30px;
+  }
+}

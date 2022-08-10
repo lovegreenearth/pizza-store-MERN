@@ -114,6 +114,54 @@ import regular from "./assets/img/Special/Regular.png";
 import light from "./assets/img/Special/Light.png";
 import well from "./assets/img/Special/Well done.png";
 
+// Home Page ---> Product images 
+import AlternativeProduct from "./assets/img/HomeProduct/alternative_crusts.png";
+import ChickenProduct from "./assets/img/HomeProduct/Chicken.png";
+import CreatOwnProduct from "./assets/img/HomeProduct/create_your_own.png";
+import GourmetProduct from "./assets/img/HomeProduct/gourmet thins.png";
+import MeatProduct from "./assets/img/HomeProduct/meat_favourites.png";
+import PickupProduct from "./assets/img/HomeProduct/pickup_specials.png";
+import SaladProduct from "./assets/img/HomeProduct/Salad.png";
+import SpecialProduct from "./assets/img/HomeProduct/special.png";
+import VeggieProduct from "./assets/img/HomeProduct/veggie_favourites.png";
+
+const pickupProduct = {
+  src: PickupProduct,
+  alt: 'logo'
+}
+const saladProduct = {
+  src: SaladProduct,
+  alt: 'logo'
+}
+const specialProduct = {
+  src: SpecialProduct,
+  alt: 'logo'
+}
+const veggieProduct = {
+  src: VeggieProduct,
+  alt: 'logo'
+}
+
+const alternativeProduct = {
+  src: AlternativeProduct,
+  alt: 'logo'
+}
+const chickenProduct = {
+  src: ChickenProduct,
+  alt: 'logo'
+}
+const createownProduct = {
+  src: CreatOwnProduct,
+  alt: 'logo'
+}
+const gourmetProduct = {
+  src: GourmetProduct,
+  alt: 'logo'
+}
+const meatProduct = {
+  src: MeatProduct,
+  alt: 'logo'
+}
 const extracheeseTopping = {
   src: ExtraCheeseTopping,
   alt: 'logo'
@@ -679,4 +727,13 @@ export default {
   goatcheeseTopping,
   pamesanTopping,
 
+  alternativeProduct,
+  chickenProduct,
+  createownProduct,
+  gourmetProduct,
+  meatProduct,
+  pickupProduct,
+  saladProduct,
+  specialProduct,
+  veggieProduct,
 };

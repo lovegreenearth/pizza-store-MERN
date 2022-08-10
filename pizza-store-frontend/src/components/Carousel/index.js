@@ -6,7 +6,7 @@ import Carousel_Element from './element';
 class DemoCarousel extends Component {
     render() {
         return (
-            <Carousel showArrows={false} showThumbs={false} showStatus={false}>
+            <Carousel showArrows={true} showThumbs={false} showStatus={false}>
                 <Carousel_Element />
                 <Carousel_Element />
                 <Carousel_Element />
