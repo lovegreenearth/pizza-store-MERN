@@ -125,12 +125,30 @@ import SaladProduct from "./assets/img/HomeProduct/Salad.png";
 import SpecialProduct from "./assets/img/HomeProduct/special.png";
 import VeggieProduct from "./assets/img/HomeProduct/veggie_favourites.png";
 
+// Meat Product page ---> Meat Pizza images
+import SinglePizza from "./assets/img/MeatPizza/single pizza.png";
+import TwinPizza from "./assets/img/MeatPizza/Twin Pizzas.png";
+import PartyPizza from "./assets/img/MeatPizza/party pizzas.png";
+
+
 const pickupProduct = {
   src: PickupProduct,
   alt: 'logo'
 }
 const saladProduct = {
   src: SaladProduct,
+  alt: 'logo'
+}
+const singlePizza = {
+  src: SinglePizza,
+  alt: 'logo'
+}
+const twinPizza = {
+  src: TwinPizza,
+  alt: 'logo'
+}
+const partyPizza = {
+  src: PartyPizza,
   alt: 'logo'
 }
 const specialProduct = {
@@ -736,4 +754,8 @@ export default {
   saladProduct,
   specialProduct,
   veggieProduct,
+  
+  singlePizza,
+  twinPizza,
+  partyPizza,
 };

@@ -22,7 +22,7 @@ const Routing = () => {
             <Route path='/signup' element={<SignUp onSuccess={changeLogged} />} />
             <Route path="/see-all" element={logged ? <SeeAll /> : <Navigate to="/signin" />} />
             <Route path="/customize" element={logged ? <Customization /> : <Navigate to="/signin" />} />
-            <Route path="/Product" element={<Product />} />
+            <Route path='Product/:id' element={<Product />} />
         </Routes>
     )
     

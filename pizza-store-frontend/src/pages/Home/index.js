@@ -38,7 +38,7 @@ const Home = () => {
                   className='product1'
                   title={item.title} 
                   button_value={item.button_value}
-                  onClick={() => navigate('/Product')}
+                  onClick={() => navigate(`Product/${item.id}`)}
                   />
               </div>
             )
