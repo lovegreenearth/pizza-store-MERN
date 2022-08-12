@@ -16,44 +16,38 @@ export const HomeData = {
     {
       id: 3,
       src: images.veggieProduct,
-      title: "2 Medidum Pizza, Drinks + DIPS",
+      title: "VEGGIE FAVORITES",
       button_value: "ORDER NOW"
     },
     {
       id: 4,
       src: images.gourmetProduct,
-      title: "2 Medidum Pizza, Drinks + DIPS",
+      title: "GOURMET THINS",
       button_value: "ORDER NOW"
     },
     {
       id: 5,
       src: images.alternativeProduct,
-      title: "2 Medidum Pizza, Drinks + DIPS",
+      title: "ALTERNATIVE CRUSTS",
       button_value: "ORDER NOW"
     },
     {
       id: 6,
       src: images.specialProduct,
-      title: "2 Medidum Pizza, Drinks + DIPS",
+      title: "SPECIALS",
       button_value: "ORDER NOW"
     },
     {
       id: 7,
       src: images.saladProduct,
-      title: "2 Medidum Pizza, Drinks + DIPS",
+      title: "SALAD",
       button_value: "ORDER NOW"
     },
     {
       id: 8,
       src: images.pickupProduct,
-      title: "2 Medidum Pizza, Drinks + DIPS",
+      title: "PICKUP SPECIALS",
       button_value: "ORDER NOW"
     },
-    {
-      id: 9,
-      src: images.chickenProduct,
-      title: "2 Medidum Pizza, Drinks + DIPS",
-      button_value: "ORDER NOW"
-    }
   ]
 }
