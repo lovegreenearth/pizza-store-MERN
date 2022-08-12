@@ -4,6 +4,7 @@ import { AiOutlineDown } from "react-icons/ai"
 import { BsFillCartFill } from "react-icons/bs"
 import "./cart.scss"
 import Button_1 from "../../components/Button/button1"
+import { connect } from 'react-redux';
 
 class Cart extends Component {
   constructor(props) {
@@ -16,7 +17,6 @@ class Cart extends Component {
 
   render() {
     const handleUpCart = () => {
-      console.log(this.state.activeCart)
       this.setState(prevState => ({
         activeCart: !prevState.activeCart
       }));
@@ -25,9 +25,11 @@ class Cart extends Component {
     <div className='cart'>
       <div className='cart-header'>
         <div className='empty'>
+          
           <BsFillCartFill style={{fontSize: "25px", color: "grey"}}/>
           <div className='cart-status'>Empty Cart</div>
         </div>
+        {/* <button onClick={() => this.props.dispatch({type: 'CLEAR_CART'})}>Clear</button> */}
         <button className='toggle-button' onClick={() => handleUpCart()}>
           {
             this.state.activeCart ? <AiOutlineDown /> : <AiOutlineUp />
@@ -39,6 +41,19 @@ class Cart extends Component {
         ?
           <div className='cart-content'>
             <div className='cart-title'>Your Cart</div>
+            {
+              this.props.items.map(c => {
+                return (
+                  <div key={c.name}>
+                    {c.name}
+                    {c.desc}
+                    {c.price}
+                    {c.quantity}
+                  </div>
+                )
+              })
+              
+            }
             <BsFillCartFill className='empty-cart' />
             <Button_1 value ={"CheckOut"} />
           </div>
@@ -48,4 +63,16 @@ class Cart extends Component {
   }
 }
 
-export default Cart;
+const mapStateToProps = state => {
+  return {
+    items: state.items
+  }
+}
+
+const mapStateToDispatch = dispatch => {
+  return {
+    dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapStateToDispatch)(Cart);

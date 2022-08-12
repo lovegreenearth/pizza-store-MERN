@@ -1,0 +1,77 @@
+.product-container {
+  margin: auto;
+  .product-header {
+    background-color: #525d70;
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    .header-title {
+      padding: 20px 30px;
+      display: flex;
+      .title {
+        color: white;
+        font-size: 25px;
+        font-weight: 800;
+      }
+    }
+    .header-img {
+      width: 30%;
+      position: absolute;
+      top: 50%;
+      margin: auto;
+      display: block;
+    }
+  }
+  .product-content {
+    margin-top: 30px;
+    .product-box {
+      column-gap: 30px;
+      .individual-pizza {
+        display: flex;
+        margin-top: 30px;
+        
+        .pizza-img {
+          width: 30%;
+          background-color: #e3ebee;
+          border-radius: 10px;
+          .img {
+            width: 80%;
+          }
+        }
+        
+        .pizza-content {
+          width: 70%;
+          background-color: #edf2f5;
+          padding: 30px 50px;
+          text-align: left;
+          color: #4c3017;
+          border-radius: 10px;
+          .title {
+            font-weight: 800;
+            font-size: 30px;
+          }
+          .content-desc {
+            margin-top: 20px;
+          }
+          .content-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            .cals {
+              font-weight: 800;
+              font-size: 20px;
+            }
+            .button{
+              width: 40%;
+              @media only screen and (max-width: 750px) {
+                width: 60%;
+            }
+            }
+          }
+        }
+      }
+    }
+  }
+}

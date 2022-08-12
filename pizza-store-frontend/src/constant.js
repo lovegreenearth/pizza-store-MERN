@@ -114,6 +114,168 @@ import regular from "./assets/img/Special/Regular.png";
 import light from "./assets/img/Special/Light.png";
 import well from "./assets/img/Special/Well done.png";
 
+// Home Page ---> Product images 
+import AlternativeProduct from "./assets/img/HomeProduct/alternative_crusts.png";
+import ChickenProduct from "./assets/img/HomeProduct/Chicken.png";
+import CreatOwnProduct from "./assets/img/HomeProduct/create_your_own.png";
+import GourmetProduct from "./assets/img/HomeProduct/gourmet thins.png";
+import MeatProduct from "./assets/img/HomeProduct/meat_favourites.png";
+import PickupProduct from "./assets/img/HomeProduct/pickup_specials.png";
+import SaladProduct from "./assets/img/HomeProduct/Salad.png";
+import SpecialProduct from "./assets/img/HomeProduct/special.png";
+import VeggieProduct from "./assets/img/HomeProduct/veggie_favourites.png";
+
+// Create your own page ---> Create your own images
+import SinglePizza from "./assets/img/CreateOWN/single pizza.png";
+import TwinPizza from "./assets/img/CreateOWN/single pizza.png";
+import PartyPizza from "./assets/img/CreateOWN/party pizzas.png";
+
+// Meat product page ----> Meat product images
+import UltimateMeat from "./assets/img/MeatProduct/Ultimate Pepperoni.png";
+import PepperoniMeat from "./assets/img/MeatProduct/Pepperoni.png"
+import CharcuterieMeat from "./assets/img/MeatProduct/Charcuterie.png";
+import HotHoneyMeat from "./assets/img/MeatProduct/hothoney.png";
+import BuffaloMeat from "./assets/img/MeatProduct/buffalochicken.png";
+import ButterMeatProduct from "./assets/img/MeatProduct/butterchicken.png";
+import DonairMeat from "./assets/img/MeatProduct/donair.png";
+import ChickenShawarmaMeat from "./assets/img/MeatProduct/chickenshawarma.png";
+import ProsciuttoMeat from "./assets/img/MeatProduct/prosciutto.png";
+import TropicalMeat from "./assets/img/MeatProduct/tropicalhawailan.png";
+import MeatMeat from "./assets/img/MeatProduct/meat-supreme.png";
+import CanadianMeat from "./assets/img/MeatProduct/canadian.png";
+import ClassicMeat from "./assets/img/MeatProduct/canadian.png";
+import SpicyMeat from "./assets/img/MeatProduct/bbqchicken.png";
+import ChickenBruMeat from "./assets/img/MeatProduct/chickenbruschetta.png";
+import BaconMeat from "./assets/img/MeatProduct/bacondblchburg.png";
+import SausageMeat from "./assets/img/MeatProduct/SausageMelt.png";
+import SweetMeat from "./assets/img/MeatProduct/sweetchili.png";
+import HotMeat from "./assets/img/MeatProduct/Hot Spicy.png";
+
+const hotMeat = {
+  src: HotMeat,
+  alt: 'logo'
+}
+const sweetMeat = {
+  src: SweetMeat,
+  alt: 'logo'
+}
+const sausageMeat = {
+  src: SausageMeat,
+  alt: 'logo'
+}
+const baconMeat = {
+  src: BaconMeat,
+  alt: 'logo'
+}
+const chickenBruMeat = {
+  src: ChickenBruMeat,
+  alt: 'logo'
+}
+const spicyMeat = {
+  src: SpicyMeat,
+  alt: 'logo'
+}
+const classicMeat = {
+  src: ClassicMeat,
+  alt: 'logo'
+}
+const canadianMeat = {
+  src: CanadianMeat,
+  alt: 'logo'
+}
+const meatMeat = {
+  src: MeatMeat,
+  alt: 'logo'
+}
+const tropicalMeat = {
+  src: TropicalMeat,
+  alt: 'logo'
+}
+const prosciuttoMeat = {
+  src: ProsciuttoMeat,
+  alt: 'logo'
+}
+const chickenshawarmaMeat = {
+  src: ChickenShawarmaMeat,
+  alt: 'logo'
+}
+const donairMeatProduct = {
+  src: DonairMeat,
+  alt: 'logo'
+}
+const butterMeat = {
+  src: ButterMeatProduct,
+  alt: 'logo'
+}
+const buffaloMeat = {
+  src: BuffaloMeat,
+  alt: 'logo'
+}
+const hotHoneyMeat = {
+  src: HotHoneyMeat,
+  alt: 'logo'
+}
+const charcuterieMeat = {
+  src: CharcuterieMeat,
+  alt: 'logo'
+}
+const pepperoniMeat = {
+  src: PepperoniMeat,
+  alt: 'logo'
+}
+const ultimateMeat = {
+  src: UltimateMeat,
+  alt: 'logo'
+}
+const pickupProduct = {
+  src: PickupProduct,
+  alt: 'logo'
+}
+const saladProduct = {
+  src: SaladProduct,
+  alt: 'logo'
+}
+const singlePizza = {
+  src: SinglePizza,
+  alt: 'logo'
+}
+const twinPizza = {
+  src: TwinPizza,
+  alt: 'logo'
+}
+const partyPizza = {
+  src: PartyPizza,
+  alt: 'logo'
+}
+const specialProduct = {
+  src: SpecialProduct,
+  alt: 'logo'
+}
+const veggieProduct = {
+  src: VeggieProduct,
+  alt: 'logo'
+}
+
+const alternativeProduct = {
+  src: AlternativeProduct,
+  alt: 'logo'
+}
+const chickenProduct = {
+  src: ChickenProduct,
+  alt: 'logo'
+}
+const createownProduct = {
+  src: CreatOwnProduct,
+  alt: 'logo'
+}
+const gourmetProduct = {
+  src: GourmetProduct,
+  alt: 'logo'
+}
+const meatProduct = {
+  src: MeatProduct,
+  alt: 'logo'
+}
 const extracheeseTopping = {
   src: ExtraCheeseTopping,
   alt: 'logo'
@@ -679,4 +841,37 @@ export default {
   goatcheeseTopping,
   pamesanTopping,
 
+  alternativeProduct,
+  chickenProduct,
+  createownProduct,
+  gourmetProduct,
+  meatProduct,
+  pickupProduct,
+  saladProduct,
+  specialProduct,
+  veggieProduct,
+  
+  singlePizza,
+  twinPizza,
+  partyPizza,
+
+  ultimateMeat,
+  pepperoniMeat,
+  charcuterieMeat,
+  hotHoneyMeat,
+  buffaloMeat,
+  butterMeat,
+  donairMeatProduct,
+  chickenshawarmaMeat,
+  prosciuttoMeat,
+  tropicalMeat,
+  meatMeat,
+  canadianMeat,
+  classicMeat,
+  spicyMeat,
+  chickenBruMeat,
+  baconMeat,
+  sausageMeat,
+  sweetMeat,
+  hotMeat,
 };
