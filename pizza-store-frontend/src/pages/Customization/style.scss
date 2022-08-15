@@ -174,9 +174,16 @@
       color: #ee5a00;
     }
     .icon {
-      color: #ee5a00;
-      font-size: 25px;
-      float: left;
+      display: flex;
+      column-gap: 15px;
+      button {
+        border: none;
+        color: #4e7026;
+      }
+      .flip {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+      }
     }
     .ingredient-item {
       background: url("../../assets/img/small-bg.png");

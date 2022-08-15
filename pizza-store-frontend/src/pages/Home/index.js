@@ -7,7 +7,6 @@ import { HomeData } from "./HomeData";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  console.log(HomeData.products)
   let navigate = useNavigate();
   return (
     <div className="home-page">

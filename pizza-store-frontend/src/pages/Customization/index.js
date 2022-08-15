@@ -2,13 +2,14 @@ import React, { Component, useState } from "react";
 import Cheese from '../../components/svg/cheese';
 import Topping from "../../components/svg/topping";
 import { BsCheckCircleFill } from "react-icons/bs";
+import { BsCircleHalf } from "react-icons/bs"
+import { BsCircleFill } from "react-icons/bs"
 import { BiDollarCircle } from "react-icons/bi"
 import images from '../../constant';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Quantity from "../../components/Button/qty";
 import Button_1 from "../../components/Button/button1";
 import { CustomizeData } from "./data";
-import { connect } from 'react-redux';
 
 class Customization extends Component {
   constructor(props) {
@@ -334,6 +335,7 @@ class Customization extends Component {
       } else {
         tempTopping.push(item.id);
       }
+      
       this.setState({
         activeTopping: tempTopping
       })
@@ -487,17 +489,6 @@ class Customization extends Component {
       }
     </div>
   }
-  _renderExtraSubTab = () => {
-    const { subToppingTabs, activeSubTab } = this.state;
-    return <div className="sub-tabs">
-      {
-        subToppingTabs.map((tab, index) => {
-          return this._renderSubTabItems(tab, activeSubTab, index);
-        })
-      }
-      
-    </div>
-  }
   _renderExtraIngredients = () => {
     let { ExtraTopping, activeExtra, activeExtraTopping, ToppingExtra } = this.state;
 
@@ -519,7 +510,6 @@ class Customization extends Component {
         activeExtraTopping: " " + item.name,
         ToppingExtra: tempExtraTopping
       })
-      console.log(this.state.ToppingExtra)
     };
 
     return <div className="sub-tab-content">
@@ -540,7 +530,12 @@ class Customization extends Component {
                       </div>
                       <div className="baseSauce-detail-selected">
                         <div className="baseSauce-title-selected">{extra.name}</div>
-                        <BiDollarCircle className="icon" /> <br />
+                        {/* <BiDollarCircle className="icon" /> <br /> */}
+                        <div className="icon">
+                          <button onClick={() => {console.log("dddddd")}}><BsCircleHalf /></button>
+                          <button onClick={() => {console.log("cccccccc")}}><BsCircleFill /></button>
+                          <button className="flip" onClick={() => {console.log("ssss")}}><BsCircleHalf /></button>
+                        </div>
                           <div className="baseSauce-cals-selected">{extra.cals} Cals</div>
                       </div>
                     </div>
@@ -550,7 +545,6 @@ class Customization extends Component {
                           <div style={{clear: "both"}}></div>
                         <div className="baseSauce-name">{extra.name}</div> 
                           <div style={{clear: "both"}}></div>
-                        <BiDollarCircle className="icon" />
                           <div style={{clear: "both"}}></div>
                         <div className="baseSauce-cals">{extra.cals} Cals</div>
                       </div>
@@ -565,9 +559,6 @@ class Customization extends Component {
             }
           </div>
         </div>
-      
-      
-      
     </div>
   }
   _renderSpecialIngredients = () => {
