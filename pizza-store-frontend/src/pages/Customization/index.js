@@ -33,7 +33,17 @@ class Customization extends Component {
       ToppingExtra: [],
       Type: "wholeSrc",
       selection: {},
+      priceSauce: 0,
     }
+    this.state.ToppingSauce.Veggie.forEach(object => {
+      object.count = 1;
+    });
+    this.state.ToppingSauce.Meat.forEach(object => {
+      object.count = 1;
+    });
+    this.state.ToppingSauce.Cheese.forEach(object => {
+      object.count = 1;
+    });
   }
   _renderTabItem = (tab, activeTab) => {
     return <div className={"tab-item" + (activeTab === tab.id ? ' active-tab' : '')} 
@@ -77,6 +87,8 @@ class Customization extends Component {
           + this.state.activeExtraTopping
           + this.state.activeSpecialTopping;
 
+    const total_price = data.price + this.state.priceSauce
+
     return <div className="pizza-board">
       <div className="title">
         My Pizza
@@ -117,14 +129,13 @@ class Customization extends Component {
           <div> 
             <div className="quantity-price">
                 <Quantity onChange={setQty}/>
-                <div className="price">{"$ " + data.price*this.state.quantity}</div>
+                <div className="price">{"$ " + total_price * this.state.quantity}</div>
             </div>
             <div className="desc">
               { total_desc }
             </div>
             <div className="cart-button">
-                <Button_1 value="ADD TO CART" 
-                  onClick={() => addPizza()} />
+                <Button_1 value="ADD TO CART" onClick={() => addPizza()} />
             </div>
           </div>
         </div>
@@ -312,38 +323,46 @@ class Customization extends Component {
     </div>
   }
   _renderToppingIngredients = () => {
-    let { ToppingSauce, activeSubTab, activeTopping, activeToppingIng, ToppingBase } = this.state;
-
-    // ToppingSauce.Veggie.forEach(object => {
-    //   object.count = 1;
-    // });
+    let { ToppingSauce, 
+          activeSubTab, 
+          activeTopping, 
+          activeToppingIng, 
+          ToppingBase } = this.state;
 
     let tempTopping = [...this.state.activeTopping];
     let tempVeggie = [...this.state.activeToppingIng];
-    let tempBaseTopping = [...this.state.ToppingBase]
+    let tempBaseTopping = [...this.state.ToppingBase];
     
     const handleTopping = (item) =>  {
-      
       if (tempTopping.filter(top => top === item.id).length > 0) {
         const index = tempTopping.indexOf(tempTopping.filter(top => top === item.id)[0]);
         const indexName = tempVeggie.indexOf(tempVeggie.filter(top => top === item.name)[0]);
-
+        
         tempTopping.splice(index, 1);
         tempVeggie.splice(indexName, 1);
         tempBaseTopping.splice(indexName, 1);
+
+        this.state.ToppingSauce.Veggie.forEach(object => {
+          object.count = 1;
+        });
+        this.state.ToppingSauce.Meat.forEach(object => {
+          object.count = 1;
+        });
+        this.state.ToppingSauce.Cheese.forEach(object => {
+          object.count = 1;
+        });
 
       } else {
         tempTopping.push(item.id);
         tempVeggie.push(item.name);
         tempBaseTopping.push(item.toppingSrc.wholeSrc)
       }
-      
+     
       this.setState({
         activeTopping: tempTopping,
         activeToppingIng: tempVeggie,
         ToppingBase: tempBaseTopping,
       })
-
       this.state.selection["topping"] = tempVeggie;
     };
     const addLeftImage = (e, veggie) => {
@@ -392,15 +411,58 @@ class Customization extends Component {
         ToppingBase: tempToppingBase
       })
     }
-    const plusQuantity = (e, veggie) => {
+    const plusQuantity = (e, item) => {
       e.stopPropagation()
+      let temp = {...this.state.ToppingSauce}
+      temp.Veggie.forEach(ing => {
+        if(ing.name === item.name) {
+          item.count = item.count + 1;
+        }
+      })
+      temp.Meat.forEach(ing => {
+        if(ing.name === item.name) {
+          item.count = item.count + 1;
+        }
+      })
+      temp.Cheese.forEach(ing => {
+        if(ing.name === item.name) {
+          item.count = item.count + 1;
+        }
+      })
+      this.setState({
+        ToppingSauce: temp,
+      })
       
     }
-    const minusQuantity = (e, veggie) => {
+    const minusQuantity = (e, item) => {
       e.stopPropagation();
-      
+      let temp = {...this.state.ToppingSauce}
+      temp.Veggie.forEach(ing => {
+        if(ing.name === item.name) {
+          if(item.count >= 2) {
+            item.count = item.count - 1;
+          }
+        }
+      })
+      temp.Meat.forEach(ing => {
+        if(ing.name === item.name) {
+          if(item.count >= 2) {
+            item.count = item.count - 1;
+          }
+        }
+      })
+      temp.Cheese.forEach(ing => {
+        if(ing.name === item.name) {
+          if(item.count >= 2) {
+            item.count = item.count - 1;
+          }
+        }
+      })
+      this.setState({
+        ToppingSauce: temp,
+      })
     }
-
+    
     return <div className="sub-tab-content">
       {
         activeSubTab === 1 && <div className="sub-tab-1">
@@ -410,7 +472,7 @@ class Customization extends Component {
                 return (
                   <div className={"baseSauce-item" + (activeTopping.filter(top => top === veggie.id).length > 0 ? " active" : "")}
                       onClick={() => handleTopping(veggie)}
-                      id={veggie.id} key={veggie.id}>
+                      id={veggie.id} key={veggie.name}>
                   {
                     activeTopping.filter(top => top === veggie.id).length > 0 
                     ? <div className="selected">
@@ -424,6 +486,11 @@ class Customization extends Component {
                             <button onClick={(e) => addWholeImage(e, veggie)}><BsCircleFill /></button>
                             <button className="flip" onClick={(e) => addRightImage(e, veggie)}><BsCircleHalf /></button>
                           </div>
+                          <div className="price">
+                            <BiDollarCircle className="icon" /> 
+                            <span>{veggie.price}</span>
+                          </div>
+                          
                           <div className="baseSauce-cals-selected">{veggie.cals} Cals</div>
                         </div>
                         <div className="quantity">
@@ -462,7 +529,7 @@ class Customization extends Component {
                 return (
                   <div className={"baseSauce-item" + (activeTopping.filter(top => top === meat.id).length > 0 ? " active" : "")}
                       onClick={() => handleTopping(meat)}
-                      id={meat.id} key={meat.id}>
+                      key={meat.name}>
                   {
                     activeTopping.filter(top => top === meat.id).length > 0 
                     ? <div className="selected">
@@ -471,8 +538,21 @@ class Customization extends Component {
                         </div>
                         <div className="baseSauce-detail-selected">
                           <div className="baseSauce-title-selected">{meat.name}</div>
-                          <BiDollarCircle className="icon" /> <br />
+                          <div className="icon-half">
+                            <button onClick={(e) => addLeftImage(e, meat)}><BsCircleHalf /></button>
+                            <button onClick={(e) => addWholeImage(e, meat)}><BsCircleFill /></button>
+                            <button className="flip" onClick={(e) => addRightImage(e, meat)}><BsCircleHalf /></button>
+                          </div>
+                          <div className="price">
+                            <BiDollarCircle className="icon" /> 
+                            <span>{meat.price}</span>
+                          </div>
                            <div className="baseSauce-cals-selected">{meat.cals} Cals</div>
+                        </div>
+                        <div className="quantity">
+                          <button onClick={(e) => minusQuantity(e, meat)}> <AiFillMinusCircle /> </button>
+                          <span className="quan-detail">{meat.count}</span>
+                          <button onClick={(e) => plusQuantity(e, meat)}> <AiFillPlusCircle /> </button>
                         </div>
                       </div>
                     : <div className="img-wrap">
@@ -481,7 +561,7 @@ class Customization extends Component {
                             <div style={{clear: "both"}}></div>
                           <div className="baseSauce-name">{meat.name}</div> 
                             <div style={{clear: "both"}}></div>
-                          <BiDollarCircle className="icon" />
+                            <BiDollarCircle className="icon" />
                             <div style={{clear: "both"}}></div>
                           <div className="baseSauce-cals">{meat.cals} Cals</div>
                         </div>
@@ -505,7 +585,7 @@ class Customization extends Component {
                 return (
                   <div className={"baseSauce-item" + (activeTopping.filter(top => top === cheese.id).length > 0 ? " active" : "")}
                       onClick={() => handleTopping(cheese)}
-                      id={cheese.id} key={cheese.id}>
+                      key={cheese.name}>
                   {
                     activeTopping.filter(top => top === cheese.id).length > 0 
                     ? <div className="selected">
@@ -514,8 +594,16 @@ class Customization extends Component {
                         </div>
                         <div className="baseSauce-detail-selected">
                           <div className="baseSauce-title-selected">{cheese.name}</div>
-                          <BiDollarCircle className="icon" /> <br />
-                           <div className="baseSauce-cals-selected">{cheese.cals} Cals</div>
+                          <div className="price">
+                            <BiDollarCircle className="icon" /> 
+                            <span>{cheese.price}</span>
+                          </div>
+                          <div className="baseSauce-cals-selected">{cheese.cals} Cals</div>
+                          <div className="quantity">
+                            <button onClick={(e) => minusQuantity(e, cheese)}> <AiFillMinusCircle /> </button>
+                            <span className="quan-detail">{cheese.count}</span>
+                          <button onClick={(e) => plusQuantity(e, cheese)}> <AiFillPlusCircle /> </button>
+                        </div>
                         </div>
                       </div>
                     : <div className="img-wrap">

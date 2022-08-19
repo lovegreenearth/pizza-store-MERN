@@ -79,7 +79,7 @@
         .criteria-item {
           margin: 0.5rem 0;
           display: flex;
-          align-items: flex-start;
+          align-items: center;
 
           span {
             display: inline-block;
@@ -183,6 +183,16 @@
       .flip {
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
+      }
+    }
+    .price {
+      display: flex;
+      align-items: center;
+      color: #ee5a00;
+      column-gap: 30px;
+      span {
+        font-size: 20px;
+        font-weight: 600;
       }
     }
     .ingredient-item {
