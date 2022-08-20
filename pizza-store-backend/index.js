@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`The server has started on port: ${PORT}`));
 
-// set up mongoose
+// set up mongoose dev
 
 let url = "mongodb://localhost:27017/pizza_store_db";
 
