@@ -151,6 +151,28 @@ import SausageMeat from "./assets/img/MeatProduct/SausageMelt.png";
 import SweetMeat from "./assets/img/MeatProduct/sweetchili.png";
 import HotMeat from "./assets/img/MeatProduct/Hot Spicy.png";
 
+// Left part 
+import ArugulaLeft from "./assets/img/left-half/Arugula-left.png";
+import BroccoliLeft from "./assets/img/left-half/Broccoli-left.png";
+import FireRoastedLeft from "./assets/img/left-half/FireRoasted-left.png";
+import FreshMushroomLeft from "./assets/img/left-half/FreshMushroom-left.png";
+import GreenOliveLeft from "./assets/img/left-half/GreenOlive-left.png";
+import GreenPeppersLeft from "./assets/img/left-half/GreenPeppers-left.png";
+import HotPeppersLeft from "./assets/img/left-half/HotPeppers-left.png";
+import JalapenoPeppersLeft from "./assets/img/left-half/JalapenoPeppers-left.png";
+import KalamataOliveLeft from "./assets/img/left-half/KalamataOlive-left.png";
+
+// Right part
+import ArgualaRight from "./assets/img/right-half/Arugular-right.png";
+import BroccoliRight from "./assets/img/right-half/Broccoli-right.png";
+import FireRoastedRight from "./assets/img/right-half/FireRoasted-right.png";
+import FreshMushroomRight from "./assets/img/right-half/FreshMushroom-right.png";
+import GreenOliveRight from "./assets/img/right-half/GreenOlive-right.png";
+import GreenPeppersRight from "./assets/img/right-half/GreenPeppers-right.png";
+import HotPeppersRight from "./assets/img/right-half/HotPeppers-right.png";
+import JalpenoPeppersRight from "./assets/img/right-half/JalapenoPeppers-right.png";
+import KalamataOliveRight from "./assets/img/right-half/KalamataOlive-right.png";
+
 const hotMeat = {
   src: HotMeat,
   alt: 'logo'
@@ -345,39 +367,57 @@ const salamiTopping = {
   alt: 'logo'
 }
 const argulaTopping = {
-  src: ArgulaTopping,
+  wholeSrc: ArgulaTopping,
+  leftSrc: ArugulaLeft,
+  rightSrc: ArgualaRight,
   alt: 'logo'
 }
 const broccoliTopping = {
-  src: BroccoliTopping,
+  wholeSrc: BroccoliTopping,
+  leftSrc: BroccoliLeft,
+  rightSrc: BroccoliRight,
   alt: 'logo'
 }
 const fireroastedTopping = {
-  src: FireRoastedTopping,
+  wholeSrc: FireRoastedTopping,
+  leftSrc: FireRoastedLeft,
+  rightSrc: FireRoastedRight,
   alt: 'logo'
 }
 const freshTopping = {
-  src: FreshTopping,
+  wholeSrc: FreshTopping,
+  leftSrc: FreshMushroomLeft,
+  rightSrc: FreshMushroomRight,
   alt: 'logo'
 }
 const greenoliveTopping = {
-  src: GreenOlivesTopping,
+  wholeSrc: GreenOlivesTopping,
+  leftSrc: GreenOliveLeft,
+  rightSrc: GreenOliveRight,
   alt: 'logo'
 }
 const greenpeppersTopping = {
-  src: GreenPeppersTopping,
+  wholeSrc: GreenPeppersTopping,
+  leftSrc: GreenPeppersLeft,
+  rightSrc: GreenPeppersRight,
   alt: 'logo'
 }
 const hotbananaTopping = {
-  src: HotBananaTopping,
+  wholeSrc: HotBananaTopping,
+  leftSrc: HotPeppersLeft,
+  rightSrc: HotPeppersRight,
   alt: 'logo'
 }
 const jalapenoTopping = {
-  src: JalapenoTopping,
+  wholeSrc: JalapenoTopping,
+  leftSrc: JalapenoPeppersLeft,
+  rightSrc: JalpenoPeppersRight,
   alt: 'logo'
 }
 const kalamataTopping = {
-  src: KalamataTopping,
+  wholeSrc: KalamataTopping,
+  leftSrc: KalamataOliveLeft,
+  rightSrc: KalamataOliveRight,
   alt: 'logo'
 }
 const pineappleTopping = {

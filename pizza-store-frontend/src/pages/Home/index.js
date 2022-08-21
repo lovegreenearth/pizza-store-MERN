@@ -1,14 +1,31 @@
-import React from "react"
+import { React, useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
 import Product1 from "../../components/Product/product1";
 import DemoCarousel from "../../components/Carousel";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { HomeData } from "./HomeData";
 import { useNavigate } from "react-router-dom";
+import Static from "../../assets/img/HomeProduct/create_your_own.png"
 
 const Home = () => {
-  console.log(HomeData.products)
   let navigate = useNavigate();
+  const [data, setData] = useState([])
+  useEffect(
+    () => {
+        fetch(`http://10.10.12.78:5000/menus`, {
+            method: 'GET',
+            headers: {
+              "Content-Type": "application/json"
+            }
+        })
+        .then(res =>res.json())
+        .then(data => {
+            console.log(data)
+            setData(data)
+        })
+    }
+    , []
+  )
   return (
     <div className="home-page">
     <div className="carousel-container">
@@ -30,19 +47,19 @@ const Home = () => {
       <div className="underline"></div>
       <div className="product-list">
         {
-          HomeData.products.map((item, key) => {
+          data.map((item, key) => {
             return(
               <div key={key}>
-                <Product1 
-                  source={item.src.src} 
-                  className='product1'
-                  title={item.title} 
-                  button_value={item.button_value}
-                  onClick={() => navigate(`Product/${item.id}`)}
-                  />
+                <Product1
+                source={Static}
+                className='product1'
+                title={item.name}
+                button_value = "ORDER NOW"
+                onClick={() => navigate(`Product/${item._id}`)} />
               </div>
             )
           })
+          
         }
       </div>
     </div>

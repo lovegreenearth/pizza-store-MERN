@@ -79,11 +79,10 @@
         .criteria-item {
           margin: 0.5rem 0;
           display: flex;
-          align-items: flex-start;
+          align-items: center;
 
           span {
             display: inline-block;
-            max-width: 140px;
             text-align: left;
           }
 
@@ -173,10 +172,28 @@
       font-weight: 800;
       color: #ee5a00;
     }
-    .icon {
+    .icon-half {
+      display: flex;
+      column-gap: 15px;
+      button {
+        border: none;
+        color: #4e7026;
+        background: none;
+      }
+      .flip {
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+      }
+    }
+    .price {
+      display: flex;
+      align-items: center;
       color: #ee5a00;
-      font-size: 25px;
-      float: left;
+      column-gap: 30px;
+      span {
+        font-size: 20px;
+        font-weight: 600;
+      }
     }
     .ingredient-item {
       background: url("../../assets/img/small-bg.png");
@@ -283,7 +300,13 @@
             font-weight: 800;
             margin-top: 5px;
           }
+          .icon {
+            font-size: 25px;
+            color: #ee5a00;
+            float: left;
+          }
           .baseSauce-cals {
+            clear: both;
             font-size: 15px;
             color: #3C1C21;
             float: left;
@@ -302,6 +325,7 @@
       }
       .selected {
         display: flex;
+        position: relative;
         .baseSauce-img-selected {
           width: 40%;
         }
@@ -315,8 +339,29 @@
           .baseSauce-title-selected {
             
           }
+          .icon {
+            font-size: 25px;
+            color: #ee5a00;
+          }
           .baseSauce-cals-selected {
            
+          }
+        }
+        .quantity {
+          position: absolute;
+          bottom: 30px;
+          right: 30px;
+          display: flex;
+          align-items: center;
+          button {
+            border: none;
+            background: none;
+            color: #4e7026;
+            font-size: 25px;
+          }
+          .quan-detail {
+            color: #4e7026;
+            font-size: 25px;
           }
         }
       }
