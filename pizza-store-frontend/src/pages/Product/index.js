@@ -17,7 +17,7 @@ const Product = () => {
   const [pizzaData, setPizzaData] = useState([])
   useEffect(
     () => {
-        fetch(`http://10.10.12.78:5000/menus`, {
+        fetch(`http://localhost:5000/menus`, {
             method: 'GET',
             headers: {
               "Content-Type": "application/json"
@@ -27,7 +27,7 @@ const Product = () => {
         .then(data => {
             setTitle(data.filter(top => top._id === params.id)[0].name)
         })
-        fetch(`http://10.10.12.78:5000/pizzas/byMenu`, {
+        fetch(`http://localhost:5000/pizzas/byMenu`, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json"
