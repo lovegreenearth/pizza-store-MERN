@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const Menu = require("../models/menuModel");
 
-router.post("/addMenu", async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
-    let { name } = req.body;
+    let { name } = req.body.data;
 
     // validate
 
@@ -26,7 +26,7 @@ router.post("/addMenu", async (req, res) => {
   }
 });
 
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   Menu.find({}, function (err, menus) {
     if(err){
         res.send(err);
