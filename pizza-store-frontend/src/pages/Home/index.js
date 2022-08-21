@@ -12,7 +12,7 @@ const Home = () => {
   const [data, setData] = useState([])
   useEffect(
     () => {
-        fetch(`http://10.10.12.78:5000/menus`, {
+        fetch(`http://localhost:5000/menus`, {
             method: 'GET',
             headers: {
               "Content-Type": "application/json"
