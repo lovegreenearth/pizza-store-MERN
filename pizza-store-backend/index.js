@@ -35,3 +35,4 @@ mongoose.connect(
 
 app.use("/users", require("./routes/userRouter"));
 app.use("/menus", require("./routes/menuRouter"));
+app.use("/pizzas", require("./routes/pizzaRouter"));
