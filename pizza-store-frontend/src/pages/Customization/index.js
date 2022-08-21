@@ -33,7 +33,8 @@ class Customization extends Component {
       ToppingExtra: [],
       Type: "wholeSrc",
       selection: {},
-      priceSauce: 0,
+      nameSelect: [],
+      pirceVeggie: 0,
     }
     this.state.ToppingSauce.Veggie.forEach(object => {
       object.count = 1;
@@ -87,7 +88,7 @@ class Customization extends Component {
           + this.state.activeExtraTopping
           + this.state.activeSpecialTopping;
 
-    const total_price = data.price + this.state.priceSauce
+    const total_price = data.price + this.state.pirceVeggie
 
     return <div className="pizza-board">
       <div className="title">
@@ -323,11 +324,7 @@ class Customization extends Component {
     </div>
   }
   _renderToppingIngredients = () => {
-    let { ToppingSauce, 
-          activeSubTab, 
-          activeTopping, 
-          activeToppingIng, 
-          ToppingBase } = this.state;
+    let { ToppingSauce, activeSubTab, activeTopping, activeToppingIng, ToppingBase } = this.state;
 
     let tempTopping = [...this.state.activeTopping];
     let tempVeggie = [...this.state.activeToppingIng];
@@ -342,20 +339,47 @@ class Customization extends Component {
         tempVeggie.splice(indexName, 1);
         tempBaseTopping.splice(indexName, 1);
 
-        this.state.ToppingSauce.Veggie.forEach(object => {
-          object.count = 1;
-        });
-        this.state.ToppingSauce.Meat.forEach(object => {
-          object.count = 1;
-        });
-        this.state.ToppingSauce.Cheese.forEach(object => {
-          object.count = 1;
-        });
+        let temp = {...this.state.ToppingSauce}
+        temp.Veggie.forEach(ing => {
+          if(ing.name === item.name) {
+            item.count = 1;
+            item.price = 0.5;
+          }
+        })
+        temp.Meat.forEach(ing => {
+          if(ing.name === item.name) {
+            item.count = 1;
+            item.price = 0.5;
+          }
+        })
+        temp.Cheese.forEach(ing => {
+          if(ing.name === item.name) {
+            item.count = 1;
+            item.price = 0.5;
+          }
+        })
+
+        this.setState({
+          ToppingSauce: temp,
+        }) 
+        let newArray = this.state.nameSelect.filter(
+          (value) => {
+            return value !== item.name
+          }
+        )
+        this.setState({nameSelect: newArray})
+
+        calculatePricePlus(newArray)
 
       } else {
         tempTopping.push(item.id);
         tempVeggie.push(item.name);
         tempBaseTopping.push(item.toppingSrc.wholeSrc)
+        this.state.nameSelect.push(item.name)
+        // if(this.state.nameSelect.length > 4) {
+        //   this.state.pirceVeggie = this.state.pirceVeggie + item.price
+        // }
+        calculatePricePlus(this.state.nameSelect)
       }
      
       this.setState({
@@ -411,14 +435,28 @@ class Customization extends Component {
         ToppingBase: tempToppingBase
       })
     }
+    const calculatePricePlus = (nameSelect) => {
+      let price = 0;
+      if(nameSelect.length > 4) {
+        for (var i = 4; i < nameSelect.length; i++) {
+          price += ToppingSauce.Veggie.filter(top => top.name === nameSelect[i])[0].price
+        }
+      }
+      this.setState({
+        pirceVeggie: price,
+      })
+    }
+    
     const plusQuantity = (e, item) => {
       e.stopPropagation()
       let temp = {...this.state.ToppingSauce}
-      temp.Veggie.forEach(ing => {
+      temp.Veggie.forEach((ing) => {
         if(ing.name === item.name) {
           item.count = item.count + 1;
+          this.state.nameSelect.push(item.name)
         }
       })
+      calculatePricePlus(this.state.nameSelect)
       temp.Meat.forEach(ing => {
         if(ing.name === item.name) {
           item.count = item.count + 1;
@@ -432,8 +470,8 @@ class Customization extends Component {
       this.setState({
         ToppingSauce: temp,
       })
-      
-    }
+    } 
+    
     const minusQuantity = (e, item) => {
       e.stopPropagation();
       let temp = {...this.state.ToppingSauce}
@@ -441,9 +479,18 @@ class Customization extends Component {
         if(ing.name === item.name) {
           if(item.count >= 2) {
             item.count = item.count - 1;
+            let index = 0;
+            this.state.nameSelect.forEach((name, i) =>{
+              if(name === item.name) {
+                index = i;
+              }
+            })
+            this.state.nameSelect.splice(index, 1);
           }
         }
       })
+      
+      calculatePricePlus(this.state.nameSelect)
       temp.Meat.forEach(ing => {
         if(ing.name === item.name) {
           if(item.count >= 2) {
