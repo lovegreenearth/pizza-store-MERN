@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import Cheese from '../../components/svg/cheese';
 import Topping from "../../components/svg/topping";
 import { BsCheckCircleFill } from "react-icons/bs";
@@ -9,15 +9,17 @@ import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import images from '../../constant';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Quantity from "../../components/Button/qty";
-import Button_1 from "../../components/Button/button1";
-import { CustomizeData } from "./data";
+import Button from "../../components/Button/button1";
+import { customizeData } from "./data";
+
+import StaticDough from "../../assets/img/Dough/Regular Dough.png"
 
 class Customization extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = { 
-      ...CustomizeData,
+      ...customizeData,
       quantity: 1,
       activeDough : "",
       activeSauce: "",
@@ -28,36 +30,49 @@ class Customization extends Component {
       activeExtraTopping: "",
       activeSpecial: [],
       activeSpecialTopping: "",
-      ToppingImg: [images.initialPizzaImg.src],
-      ToppingBase: [],
-      ToppingExtra: [],
-      Type: "wholeSrc",
+      toppingImg: [images.initialPizzaImg.src],
+      toppingBase: [],
+      toppingExtra: [],
+      type: "wholeSrc",
       selection: {},
       nameSelect: [],
-      pirceVeggie: 0,
+      priceVeggie: 0,
+      doughData: [],
     }
-    this.state.ToppingSauce.Veggie.forEach(object => {
+    this.state.toppingSauce.veggie.forEach(object => {
       object.count = 1;
     });
-    this.state.ToppingSauce.Meat.forEach(object => {
+    this.state.toppingSauce.meat.forEach(object => {
       object.count = 1;
     });
-    this.state.ToppingSauce.Cheese.forEach(object => {
+    this.state.toppingSauce.cheese.forEach(object => {
       object.count = 1;
     });
+    fetch(`http://localhost:5000/doughs`, {
+      method: 'GET',
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+    .then(res =>res.json())
+    .then(data => {
+        this.setState({doughData: data})
+    })
+    
   }
   _renderTabItem = (tab, activeTab) => {
-    return <div className={"tab-item" + (activeTab === tab.id ? ' active-tab' : '')} 
-                onClick={() => this.setState({activeTab: tab.id})} 
-                key={tab.id}>
-      {
-        tab.id === 1 && <Cheese className="cheese-icon" />
-      }
-      {
-        tab.id === 2 && <Topping className="cheese-icon" />
-      }
-      {tab.name}
-    </div>;
+    return (
+      <div className={"tab-item" + (activeTab === tab.id ? ' active-tab' : '')} 
+          onClick={() => this.setState({activeTab: tab.id})} key={tab.id}>
+        {
+          tab.id === 1 && <Cheese className="cheese-icon" />
+        }
+        {
+          tab.id === 2 && <Topping className="cheese-icon" />
+        }
+        {tab.name}
+      </div>
+    )
   }
 
   _renderPizzaBoard = () => {
@@ -88,7 +103,7 @@ class Customization extends Component {
           + this.state.activeExtraTopping
           + this.state.activeSpecialTopping;
 
-    const total_price = data.price + this.state.pirceVeggie
+    const total_price = data.price + this.state.priceVeggie
 
     return <div className="pizza-board">
       <div className="title">
@@ -106,9 +121,9 @@ class Customization extends Component {
           }
         </div>
         <div className="pizza-piece">
-          <LazyLoadImage alt={images.initialPizzaImg.alt} src={this.state.ToppingImg} />
+          <LazyLoadImage alt={images.initialPizzaImg.alt} src={this.state.toppingImg} />
           {
-            this.state.ToppingBase.map((base) => {
+            this.state.toppingBase.map((base) => {
               return (
                 <div className="multiTopping">
                   <LazyLoadImage alt={images.initialPizzaImg.alt} src={base} />
@@ -117,7 +132,7 @@ class Customization extends Component {
             })
           }
           {
-            this.state.ToppingExtra.map((extra) => {
+            this.state.toppingExtra.map((extra) => {
               return (
                 <div className="multiTopping">
                   <LazyLoadImage alt={images.initialPizzaImg.alt} src={extra} />
@@ -136,7 +151,7 @@ class Customization extends Component {
               { total_desc }
             </div>
             <div className="cart-button">
-                <Button_1 value="ADD TO CART" onClick={() => addPizza()} />
+                <Button value="ADD TO CART" onClick={() => addPizza()} />
             </div>
           </div>
         </div>
@@ -164,43 +179,54 @@ class Customization extends Component {
     </div>
   }
   _renderIngredients = () => {
-    let { DoughType, BaseSauce, BaseCheese, 
-          activeSubTab, activeIngredient, activeDough, activeSauce, activeCheese } = this.state;
+    let { baseSauce, baseCheese, activeSubTab, activeIngredient } = this.state;
     
     const handleDough = (dough) =>  {
-      this.setState({activeIngredient: dough.id})
+      this.setState({activeIngredient: dough._id})
       this.setState({activeDough: dough.name})
-      this.state.selection["dough"] = dough.name;
+      this.setState(prevState => {
+        let selection = Object.assign({}, prevState.selection); 
+        selection.dough = dough.name;
+        return { selection };
+      })
     }
     const handleSauce = (sauce) =>  {
       this.setState({activeIngredient: sauce.id})
       this.setState({activeSauce: ", " + sauce.name})
-      this.state.selection["sauce"] = sauce.name;
+      this.setState(prevState => {
+        let selection = Object.assign({}, prevState.selection); 
+        selection.sauce = sauce.name;
+        return { selection };
+      })
     };
     const handleCheese = (cheese) =>  {
       this.setState({activeIngredient: cheese.id})
       this.setState({activeCheese: ", " + cheese.name})
-      this.state.selection["cheese"] = cheese.name;
+      this.setState(prevState => {
+        let selection = Object.assign({}, prevState.selection); 
+        selection.cheese = cheese.name;
+        return { selection };
+      })
     };
     return <div className="sub-tab-content">
       {
         activeSubTab === 1 && <div className="sub-tab-1">
           <div className="ingredients">
             {
-              DoughType.map(ing => {
+              this.state.doughData.map((ing, index) => {
                 return (
-                  <div className={"ingredient-item" + (activeIngredient === ing.id ? " active" : "")}
+                  <div className={"ingredient-item" + (activeIngredient === ing._id ? " active" : "")}
                       onClick={() => handleDough(ing)}
-                      id={ing.id} key={ing.id}>
+                      id={ing._id} key={index}>
                   {
-                    activeIngredient === ing.id 
+                    activeIngredient === ing._id 
                     ? <div>
                         <div className="ingredient-img-selected">
-                          <LazyLoadImage alt={ing.src.alt} src={ing.src.src} />
+                          <LazyLoadImage src={StaticDough} />
                         </div>
                         <div className="ingredient-detail-selected">
                           <div className="ingredient-title-selected">{ing.name}</div>
-                           <div className="ingredient-cals-selected">{ing.cals} Cals</div>
+                           <div className="ingredient-cals-selected">{ing.cal} Cals</div>
                         </div>
                       </div>
                     : <div>
@@ -209,14 +235,13 @@ class Customization extends Component {
                             <div style={{clear: "both"}}></div>
                           <div className="ingredient-name">{ing.name}</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="ingredient-cals">{ing.cals} Cals</div>
+                          <div className="ingredient-cals">{ing.cal} Cals</div>
                         </div>
                         <div className="ingredient-img">
-                          <LazyLoadImage alt={ing.src.alt} src={ing.src.src} />
+                          <LazyLoadImage src={StaticDough} />
                         </div>
                       </div>
                   }
-                    
                   </div>
                 )
               })
@@ -228,11 +253,11 @@ class Customization extends Component {
         activeSubTab === 3 && <div className="sub-tab-2">
           <div className="ingredients">
             {
-              BaseSauce.map(sauce => {
+              baseSauce.map((sauce, index) => {
                 return (
                   <div className={"baseSauce-item" + (activeIngredient === sauce.id ? " active" : "")}
                       onClick={() => handleSauce(sauce)}
-                      id={sauce.id} key={sauce.id}>
+                      id={sauce.id} key={index}>
                   {
                     activeIngredient === sauce.id 
                     ? <div className="selected">
@@ -271,11 +296,11 @@ class Customization extends Component {
         activeSubTab === 5 && <div className="sub-tab-3">
           <div className="ingredients">
             {
-              BaseCheese.map(cheese => {
+              baseCheese.map((cheese, index) => {
                 return (
                   <div className={"baseSauce-item" + (activeIngredient === cheese.id ? " active" : "")}
                       onClick={() => handleCheese(cheese)}
-                      id={cheese.id} key={cheese.id}>
+                      id={cheese.id} key={index}>
                   {
                     activeIngredient === cheese.id 
                     ? <div className="selected">
@@ -324,11 +349,11 @@ class Customization extends Component {
     </div>
   }
   _renderToppingIngredients = () => {
-    let { ToppingSauce, activeSubTab, activeTopping, activeToppingIng, ToppingBase } = this.state;
+    let { toppingSauce, activeSubTab, activeTopping, activeToppingIng, toppingBase } = this.state;
 
     let tempTopping = [...this.state.activeTopping];
-    let tempVeggie = [...this.state.activeToppingIng];
-    let tempBaseTopping = [...this.state.ToppingBase];
+    let tempVeggie = [...activeToppingIng];
+    let tempBaseTopping = [...toppingBase];
     
     const handleTopping = (item) =>  {
       if (tempTopping.filter(top => top === item.id).length > 0) {
@@ -339,20 +364,19 @@ class Customization extends Component {
         tempVeggie.splice(indexName, 1);
         tempBaseTopping.splice(indexName, 1);
 
-        let temp = {...this.state.ToppingSauce}
-        temp.Veggie.forEach(ing => {
+        let temp = {...this.state.toppingSauce}
+        temp.veggie.forEach(ing => {
+          if(ing.name === item.name) {
+            item.count = 1;
+          }
+        })
+        temp.meat.forEach(ing => {
           if(ing.name === item.name) {
             item.count = 1;
             item.price = 0.5;
           }
         })
-        temp.Meat.forEach(ing => {
-          if(ing.name === item.name) {
-            item.count = 1;
-            item.price = 0.5;
-          }
-        })
-        temp.Cheese.forEach(ing => {
+        temp.cheese.forEach(ing => {
           if(ing.name === item.name) {
             item.count = 1;
             item.price = 0.5;
@@ -360,7 +384,7 @@ class Customization extends Component {
         })
 
         this.setState({
-          ToppingSauce: temp,
+          toppingSauce: temp,
         }) 
         let newArray = this.state.nameSelect.filter(
           (value) => {
@@ -369,25 +393,26 @@ class Customization extends Component {
         )
         this.setState({nameSelect: newArray})
 
-        calculatePricePlus(newArray)
+        calculatePrice(newArray)
 
       } else {
         tempTopping.push(item.id);
         tempVeggie.push(item.name);
         tempBaseTopping.push(item.toppingSrc.wholeSrc)
         this.state.nameSelect.push(item.name)
-        // if(this.state.nameSelect.length > 4) {
-        //   this.state.pirceVeggie = this.state.pirceVeggie + item.price
-        // }
-        calculatePricePlus(this.state.nameSelect)
+        calculatePrice(this.state.nameSelect)
       }
      
       this.setState({
         activeTopping: tempTopping,
         activeToppingIng: tempVeggie,
-        ToppingBase: tempBaseTopping,
+        toppingBase: tempBaseTopping,
       })
-      this.state.selection["topping"] = tempVeggie;
+      this.setState(prevState => {
+        let selection = Object.assign({}, prevState.selection); 
+        selection.topping = tempVeggie;
+        return { selection };
+      })
     };
     const addLeftImage = (e, veggie) => {
       e.stopPropagation();
@@ -398,11 +423,11 @@ class Customization extends Component {
           index = i;
         }
       })
-      let tempToppingBase = [...this.state.ToppingBase];
+      let tempToppingBase = [...this.state.toppingBase];
       tempToppingBase[index] = veggie.toppingSrc.leftSrc;
 
       this.setState({
-        ToppingBase: tempToppingBase
+        toppingBase: tempToppingBase
       })
     }
     const addWholeImage = (e, veggie) => {
@@ -414,10 +439,10 @@ class Customization extends Component {
           index = i;
         }
       })
-      let tempToppingBase = [...this.state.ToppingBase];
+      let tempToppingBase = [...this.state.toppingBase];
       tempToppingBase[index] = veggie.toppingSrc.wholeSrc;
       this.setState({
-        ToppingBase: tempToppingBase
+        toppingBase: tempToppingBase
       })
     }
     const addRightImage = (e, veggie) => {
@@ -429,53 +454,57 @@ class Customization extends Component {
           index = i;
         }
       })
-      let tempToppingBase = [...this.state.ToppingBase];
+      let tempToppingBase = [...this.state.toppingBase];
       tempToppingBase[index] = veggie.toppingSrc.rightSrc;
       this.setState({
-        ToppingBase: tempToppingBase
+        toppingBase: tempToppingBase
       })
     }
-    const calculatePricePlus = (nameSelect) => {
+    const calculatePrice = (nameSelect) => {
       let price = 0;
       if(nameSelect.length > 4) {
-        for (var i = 4; i < nameSelect.length; i++) {
-          price += ToppingSauce.Veggie.filter(top => top.name === nameSelect[i])[0].price
+        for (let i = 4; i < nameSelect.length; i++) {
+          price += toppingSauce.veggie.filter(top => top.name === nameSelect[i])[0].price;
         }
+      } else {
+        price = 0;
       }
       this.setState({
-        pirceVeggie: price,
+        priceVeggie: price,
       })
     }
     
     const plusQuantity = (e, item) => {
       e.stopPropagation()
-      let temp = {...this.state.ToppingSauce}
-      temp.Veggie.forEach((ing) => {
+      let temp = {...this.state.toppingSauce}
+      temp.veggie.forEach((ing) => {
         if(ing.name === item.name) {
           item.count = item.count + 1;
           this.state.nameSelect.push(item.name)
         }
       })
-      calculatePricePlus(this.state.nameSelect)
-      temp.Meat.forEach(ing => {
+      calculatePrice(this.state.nameSelect)
+      temp.meat.forEach(ing => {
         if(ing.name === item.name) {
           item.count = item.count + 1;
+          this.state.nameSelect.push(item.name)
         }
       })
-      temp.Cheese.forEach(ing => {
+      temp.cheese.forEach(ing => {
         if(ing.name === item.name) {
           item.count = item.count + 1;
+          this.state.nameSelect.push(item.name)
         }
       })
       this.setState({
-        ToppingSauce: temp,
+        toppingSauce: temp,
       })
     } 
     
     const minusQuantity = (e, item) => {
       e.stopPropagation();
-      let temp = {...this.state.ToppingSauce}
-      temp.Veggie.forEach(ing => {
+      let temp = {...this.state.toppingSauce}
+      temp.veggie.forEach(ing => {
         if(ing.name === item.name) {
           if(item.count >= 2) {
             item.count = item.count - 1;
@@ -490,15 +519,15 @@ class Customization extends Component {
         }
       })
       
-      calculatePricePlus(this.state.nameSelect)
-      temp.Meat.forEach(ing => {
+      calculatePrice(this.state.nameSelect)
+      temp.meat.forEach(ing => {
         if(ing.name === item.name) {
           if(item.count >= 2) {
             item.count = item.count - 1;
           }
         }
       })
-      temp.Cheese.forEach(ing => {
+      temp.cheese.forEach(ing => {
         if(ing.name === item.name) {
           if(item.count >= 2) {
             item.count = item.count - 1;
@@ -506,7 +535,7 @@ class Customization extends Component {
         }
       })
       this.setState({
-        ToppingSauce: temp,
+        toppingSauce: temp,
       })
     }
     
@@ -515,11 +544,11 @@ class Customization extends Component {
         activeSubTab === 1 && <div className="sub-tab-1">
           <div className="ingredients">
             {
-              ToppingSauce.Veggie.map(veggie => {
+              toppingSauce.veggie.map((veggie, index) => {
                 return (
                   <div className={"baseSauce-item" + (activeTopping.filter(top => top === veggie.id).length > 0 ? " active" : "")}
                       onClick={() => handleTopping(veggie)}
-                      id={veggie.id} key={veggie.name}>
+                      id={veggie.id} key={index}>
                   {
                     activeTopping.filter(top => top === veggie.id).length > 0 
                     ? <div className="selected">
@@ -572,11 +601,11 @@ class Customization extends Component {
         activeSubTab === 3 && <div className="sub-tab-2">
           <div className="ingredients">
             {
-              ToppingSauce.Meat.map(meat => {
+              toppingSauce.meat.map((meat, index) => {
                 return (
                   <div className={"baseSauce-item" + (activeTopping.filter(top => top === meat.id).length > 0 ? " active" : "")}
                       onClick={() => handleTopping(meat)}
-                      key={meat.name}>
+                      key={index}>
                   {
                     activeTopping.filter(top => top === meat.id).length > 0 
                     ? <div className="selected">
@@ -628,11 +657,11 @@ class Customization extends Component {
         activeSubTab === 5 && <div className="sub-tab-3">
           <div className="ingredients">
             {
-              ToppingSauce.Cheese.map(cheese => {
+              toppingSauce.cheese.map((cheese, index) => {
                 return (
                   <div className={"baseSauce-item" + (activeTopping.filter(top => top === cheese.id).length > 0 ? " active" : "")}
                       onClick={() => handleTopping(cheese)}
-                      key={cheese.name}>
+                      key={index}>
                   {
                     activeTopping.filter(top => top === cheese.id).length > 0 
                     ? <div className="selected">
@@ -678,12 +707,12 @@ class Customization extends Component {
     </div>
   }
   _renderExtraIngredients = () => {
-    let { ExtraTopping, activeExtra, activeExtraTopping, ToppingExtra } = this.state;
+    let { extraTopping, activeExtra, activeExtraTopping, toppingExtra } = this.state;
 
     const handleExtra = (item) =>  {
       let tempExtra = [...this.state.activeExtra];
-      let tempExtraTopping = [...this.state.ToppingExtra];
-      let tempName = [...this.state.activeExtraTopping];
+      let tempExtraTopping = [...toppingExtra];
+      let tempName = [...activeExtraTopping];
 
       if (tempExtra.filter(top => top === item.id).length > 0) {
         const index = tempExtra.indexOf(tempExtra.filter(top => top === item.id)[0]);
@@ -692,27 +721,31 @@ class Customization extends Component {
         tempName.splice(index, 1)
       } else {
         tempExtra.push(item.id);
-        tempExtraTopping.push(item.toppingSrc[this.state.Type])
+        tempExtraTopping.push(item.toppingSrc[this.state.type])
         tempName.push(item.name)
       }
       this.setState({
         activeExtra: tempExtra,
         activeExtraTopping: tempName,
-        ToppingExtra: tempExtraTopping
+        toppingExtra: tempExtraTopping
       })
-      this.state.selection["extra"] = tempName;
+      this.setState(prevState => {
+        let selection = Object.assign({}, prevState.selection); 
+        selection.extra = tempName;
+        return { selection };
+      })
     };
     const addLeftImage = (e) => {
       e.stopPropagation();
-      this.setState({Type: "leftSrc"})
+      this.setState({type: "leftSrc"})
     }
     const addWholeImage = (e) => {
       e.stopPropagation();
-      this.setState({Type: "wholeSrc"})
+      this.setState({type: "wholeSrc"})
     }
     const addRightImage = (e) => {
       e.stopPropagation();
-      this.setState({Type: "rightSrc"})
+      this.setState({type: "rightSrc"})
     }
 
     return <div className="sub-tab-content">
@@ -720,11 +753,11 @@ class Customization extends Component {
         <div className="sub-tab-1">
           <div className="ingredients">
           {
-            ExtraTopping.map(extra => {
+            extraTopping.map((extra, index) => {
               return (
                 <div className={"baseSauce-item" + (activeExtra.filter(top => top === extra.id).length > 0 ? " active" : "")}
                     onClick={() => handleExtra(extra)}
-                    id={extra.id} key={extra.id}>
+                    id={extra.id} key={index}>
                 {
                   activeExtra.filter(top => top === extra.id).length > 0 
                   ? <div className="selected">
@@ -766,12 +799,16 @@ class Customization extends Component {
     </div>
   }
   _renderSpecialIngredients = () => {
-    let { Special, activeSubTab, activeSpecial, activeSpecialTopping } = this.state;
+    let { special, activeSpecial } = this.state;
 
     const handleSpecial = (item) =>  {
       this.setState({activeSpecial: item.id});
       this.setState({activeSpecialTopping: item.name})
-      this.state.selection["special"] = item.name;
+      this.setState(prevState => {
+        let selection = Object.assign({}, prevState.selection); 
+        selection.special = item.name;
+        return { selection };
+      })
     } 
 
     return <div className="sub-tab-content">
@@ -779,11 +816,11 @@ class Customization extends Component {
          <div className="sub-tab-1">
           <div className="ingredients">
           {
-            Special.map(special => {
+            special.map((special, index) => {
               return (
                 <div className={"baseSauce-item" + (activeSpecial === special.id ? " active" : "")}
                     onClick={() => handleSpecial(special)}
-                    id={special.id} key={special.id}>
+                    id={special.id} key={index}>
                 {
                   activeSpecial === special.id 
                   ? <div className="selected">

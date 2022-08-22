@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import Product1 from "../../components/Product/product1";
 import DemoCarousel from "../../components/Carousel";
 import { AiFillPlayCircle } from "react-icons/ai";
-import { HomeData } from "./HomeData";
 import { useNavigate } from "react-router-dom";
 import Static from "../../assets/img/HomeProduct/create_your_own.png"
 

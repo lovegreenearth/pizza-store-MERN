@@ -286,7 +286,7 @@ const chickenProduct = {
   src: ChickenProduct,
   alt: 'logo'
 }
-const createownProduct = {
+const createOwnProduct = {
   src: CreatOwnProduct,
   alt: 'logo'
 }
@@ -883,7 +883,7 @@ export default {
 
   alternativeProduct,
   chickenProduct,
-  createownProduct,
+  createOwnProduct,
   gourmetProduct,
   meatProduct,
   pickupProduct,
