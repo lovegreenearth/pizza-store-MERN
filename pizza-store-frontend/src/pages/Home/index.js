@@ -19,7 +19,6 @@ const Home = () => {
         })
         .then(res =>res.json())
         .then(data => {
-            console.log(data)
             setData(data)
         })
     }
@@ -50,11 +49,11 @@ const Home = () => {
             return(
               <div key={key}>
                 <Product1
-                source={Static}
-                className='product1'
-                title={item.name}
-                button_value = "ORDER NOW"
-                onClick={() => navigate(`Product/${item._id}`)} />
+                  source={Static}
+                  className='product1'
+                  title={item.name}
+                  button_value = "ORDER NOW"
+                  onClick={() => navigate(`Product/${item._id}`)} />
               </div>
             )
           })

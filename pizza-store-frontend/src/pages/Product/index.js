@@ -35,6 +35,12 @@ const Product = () => {
       setPizzaData(pizzaData)
     })
   }, [])
+
+  const toCustomize = (pizza) => {
+    localStorage.setItem('pizza', JSON.stringify(pizza));
+    navigate("/customize")
+  }
+
   return (
       <div className='product-container col-lg-10'>
         <div className='product-header'>
@@ -46,16 +52,16 @@ const Product = () => {
         <div className='product-content'>
           <div className='product-box'>
             {
-              pizzaData.map(meat => {
+              pizzaData.map((item, index) => {
                 return (
-                  <div className='individual-pizza'>
+                  <div className='individual-pizza' key={index}>
                     <div className='pizza-img'><img src={Static} className="img" alt='meat.src.alt' /></div> 
                     <div className='pizza-content'>
-                      <div className='title'>{meat.name}</div>
-                      <div className='content-desc'>{meat.bonus}</div>
+                      <div className='title'>{item.name}</div>
+                      <div className='content-desc'>{item.bonus}</div>
                       <div className='content-footer'>
-                        <div className='cals'>Staring from $ {meat.price}</div>
-                        <Button value="Customize" onClick={() => navigate("/customize")}/>
+                        <div className='cals'>Staring from $ {item.price}</div>
+                        <Button value="Customize" onClick={() => toCustomize(item)}/>
                       </div>
                     </div>
                   </div>
