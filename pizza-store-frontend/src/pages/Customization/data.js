@@ -1,5 +1,5 @@
 import images from '../../constant';
-export const CustomizeData = {
+export const customizeData = {
   activeTab: 1,
   activeSubTab: 1,
   tabs: [
@@ -46,7 +46,7 @@ export const CustomizeData = {
   subToppingTabs: [
     {
       id: 1,
-      name: 'Veggie'
+      name: 'veggie'
     },
     {
       id: 2,
@@ -54,7 +54,7 @@ export const CustomizeData = {
     },
     {
       id: 3,
-      name: 'Meat'
+      name: 'meat'
     },
     {
       id: 4,
@@ -62,10 +62,10 @@ export const CustomizeData = {
     },
     {
       id: 5,
-      name: 'Cheese'
+      name: 'cheese'
     }
   ],
-  DoughType: [
+  doughType: [
     {
       id: 1,
       name: 'Regular Dough',
@@ -103,7 +103,7 @@ export const CustomizeData = {
       cals: 160
     },
   ],
-  BaseSauce: [
+  baseSauce: [
     {
       id: 1,
       name: 'No Sauce',
@@ -165,34 +165,34 @@ export const CustomizeData = {
       cals: 15
     },
   ],
-  BaseCheese: [
+  baseCheese: [
     {
       id: 1,
-      name: 'No Cheese',
+      name: 'No cheese',
       src: images.homestyle,
       cals: -70
     },
     {
       id: 2,
-      name: 'Diary-Free Cheese',
+      name: 'Diary-Free cheese',
       src: images.hothoney,
       cals: 60
     },
     {
       id: 3,
-      name: 'Six Cheese Base',
+      name: 'Six cheese Base',
       src: images.pestosauce,
       cals: 70
     },
     {
       id: 4,
-      name: 'Mozzarella Cheese',
+      name: 'Mozzarella cheese',
       src: images.sweetchili,
       cals: 70
     },
   ],
-  ToppingSauce: {
-    Veggie: [
+  toppingSauce: {
+    veggie: [
       {
         id: 1,
         name: "Arugula",
@@ -238,7 +238,8 @@ export const CustomizeData = {
         name: "Green Olives",
         src: images.greenolives,
         toppingSrc: images.greenoliveTopping,
-        cals: 10
+        cals: 10,
+        price: 0.5
       },
       {
         id: 7,
@@ -337,7 +338,7 @@ export const CustomizeData = {
         price: 0.5
       },
     ],
-    Meat: [
+    meat: [
       {
         id: 19,
         name: "Anchovies",
@@ -443,10 +444,10 @@ export const CustomizeData = {
         price: 0.5,
       },
     ],
-    Cheese: [
+    cheese: [
       {
         id: 32,
-        name: "Extra Cheese",
+        name: "Extra cheese",
         src: images.excheese,
         toppingSrc: images.extracheeseTopping,
         cals: 10
@@ -460,35 +461,35 @@ export const CustomizeData = {
       },
       {
         id: 34,
-        name: "Feta Cheese",
+        name: "Feta cheese",
         src: images.fetacheese,
         toppingSrc: images.fetacheeseTopping,
         cals: 15
       },
       {
         id: 35,
-        name: "Six Cheese Blend Topping",
+        name: "Six cheese Blend Topping",
         src: images.sixcheese,
         toppingSrc: images.goatcheeseTopping,
         cals: 120
       },
       {
         id: 36,
-        name: "Goat Cheese",
+        name: "Goat cheese",
         src: images.goatcheese,
         toppingSrc: images.newyorkTogoatcheeseToppingpping,
         cals: 10
       },
       {
         id: 37,
-        name: "Parmesan Cheese",
+        name: "Parmesan cheese",
         src: images.permesancheese,
         toppingSrc: images.pamesanTopping,
         cals: 15
       }
     ],
   },
-  ExtraTopping: [
+  extraTopping: [
     {
       id: 1,
       name: "Creamy Garlic Sauce Drizzle",
@@ -546,7 +547,7 @@ export const CustomizeData = {
       cals: 10
     },
   ],
-  Special: [
+  special: [
     {
       id: 1,
       name: "Regular",

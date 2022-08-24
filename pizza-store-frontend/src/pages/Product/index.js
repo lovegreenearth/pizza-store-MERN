@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import "./style.scss"
 import MeatPizza from "../../assets/img/HomeProduct/meat_favourites.png"
-import {ProductData} from "./ProductData";
 import { useParams } from "react-router-dom";
-import Button_1 from '../../components/Button/button1';
-import Customization from '../Customization';
+import Button from '../../components/Button/button1';
 import { useNavigate } from "react-router-dom";
 import Static from "../../assets/img/MeatProduct/bacondblchburg.png"
 
@@ -12,35 +10,37 @@ const Product = () => {
 
   let params = useParams()
   let navigate = useNavigate();
-  const [data, setData] = useState([]);
   const [title, setTitle] = useState("");
   const [pizzaData, setPizzaData] = useState([])
-  useEffect(
-    () => {
-        fetch(`http://localhost:5000/menus`, {
-            method: 'GET',
-            headers: {
-              "Content-Type": "application/json"
-            }
-        })
-        .then(res =>res.json())
-        .then(data => {
-            setTitle(data.filter(top => top._id === params.id)[0].name)
-        })
-        fetch(`http://localhost:5000/pizzas/byMenu`, {
-            method: 'POST',
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body:JSON.stringify({data: {id:params.id}})
-        })
-        .then(res =>res.json())
-        .then(pizzaData => {
-          setPizzaData(pizzaData)
-        })
-    }
-    , []
-  )
+  useEffect(() => {
+    fetch(`http://localhost:5000/menus`, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json"
+        }
+    })
+    .then(res =>res.json())
+    .then(data => {
+        setTitle(data.filter(top => top._id === params.id)[0].name)
+    })
+    fetch(`http://localhost:5000/pizzas/byMenu`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body:JSON.stringify({data: {id:params.id}})
+    })
+    .then(res =>res.json())
+    .then(pizzaData => {
+      setPizzaData(pizzaData)
+    })
+  }, [])
+
+  const toCustomize = (pizza) => {
+    localStorage.setItem('pizza', JSON.stringify(pizza));
+    navigate("/customize")
+  }
+
   return (
       <div className='product-container col-lg-10'>
         <div className='product-header'>
@@ -52,18 +52,16 @@ const Product = () => {
         <div className='product-content'>
           <div className='product-box'>
             {
-              pizzaData.map(meat => {
+              pizzaData.map((item, index) => {
                 return (
-                  <div className='individual-pizza'>
+                  <div className='individual-pizza' key={index}>
                     <div className='pizza-img'><img src={Static} className="img" alt='meat.src.alt' /></div> 
                     <div className='pizza-content'>
-                      <div className='title'>{meat.name}</div>
-                      <div className='content-desc'>{meat.bonus}</div>
+                      <div className='title'>{item.name}</div>
+                      <div className='content-desc'>{item.bonus}</div>
                       <div className='content-footer'>
-                        <div className='cals'>Staring from $ {meat.price}</div>
-                        <Button_1 
-                            value="Customize"
-                            onClick={() => navigate("/customize")}/>
+                        <div className='cals'>Staring from $ {item.price}</div>
+                        <Button value="Customize" onClick={() => toCustomize(item)}/>
                       </div>
                     </div>
                   </div>

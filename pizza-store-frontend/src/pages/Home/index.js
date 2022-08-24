@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import Product1 from "../../components/Product/product1";
 import DemoCarousel from "../../components/Carousel";
 import { AiFillPlayCircle } from "react-icons/ai";
-import { HomeData } from "./HomeData";
 import { useNavigate } from "react-router-dom";
 import Static from "../../assets/img/HomeProduct/create_your_own.png"
 
@@ -20,7 +19,6 @@ const Home = () => {
         })
         .then(res =>res.json())
         .then(data => {
-            console.log(data)
             setData(data)
         })
     }
@@ -51,11 +49,11 @@ const Home = () => {
             return(
               <div key={key}>
                 <Product1
-                source={Static}
-                className='product1'
-                title={item.name}
-                button_value = "ORDER NOW"
-                onClick={() => navigate(`Product/${item._id}`)} />
+                  source={Static}
+                  className='product1'
+                  title={item.name}
+                  button_value = "ORDER NOW"
+                  onClick={() => navigate(`Product/${item._id}`)} />
               </div>
             )
           })
