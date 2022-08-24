@@ -1,11 +1,11 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import Cheese from '../../components/svg/cheese';
 import Topping from "../../components/svg/topping";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { BsCircleHalf } from "react-icons/bs"
 import { BsCircleFill } from "react-icons/bs"
 import { BiDollarCircle } from "react-icons/bi"
-import { AiFillPlusCircle, AiFillMinusCircle, AiOutlineConsoleSql } from "react-icons/ai";
+import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import images from '../../constant';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Quantity from "../../components/Button/qty";
