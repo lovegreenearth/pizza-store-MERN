@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import Cart from './Cart/cart';
 
 class Layout extends Component {
   constructor(props) {
@@ -17,7 +18,9 @@ class Layout extends Component {
       <div className='content'>
         {this.props.children}
       </div>
+      <Cart />
       <Footer />
+
     </div>;
   }
 }
