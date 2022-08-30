@@ -18,10 +18,10 @@ const Routing = () => {
     return(
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path='/signin' element={<SignIn onSuccess={changeLogged} />} />
+            <Route path='/signIn' element={<SignIn onSuccess={changeLogged} />} />
             <Route path='/signup' element={<SignUp onSuccess={changeLogged} />} />
-            <Route path="/see-all" element={logged ? <SeeAll /> : <Navigate to="/signin" />} />
-            <Route path="/customize" element={logged ? <Customization /> : <Navigate to="/signin" />} />
+            <Route path="/see-all" element={logged ? <SeeAll /> : <Navigate to="/signIn" />} />
+            <Route path="/customize" element={logged ? <Customization /> : <Navigate to="/signIn" />} />
             <Route path='Product/:id' element={<Product />} />
         </Routes>
     )

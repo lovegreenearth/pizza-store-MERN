@@ -47,7 +47,7 @@ class Header extends Component {
             </Link>
           </li>
           <li>
-            <Link to="/signin" className='md-box-arrow react-icons'>
+            <Link to="/signIn" className='md-box-arrow react-icons'>
               <div className='icon-margin'>
                 <BsBoxArrowInRight size={30} />
               </div>

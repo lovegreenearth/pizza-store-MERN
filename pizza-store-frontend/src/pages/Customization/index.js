@@ -168,7 +168,7 @@ class Customization extends Component {
           {
             Object.entries(this.state.selection).map(([key, val]) => 
               <div className="criteria-item" key={key}>
-                <BsCheckCircleFill />
+                <div><BsCheckCircleFill /></div>
                 <span>{" " + val}</span>
               </div>
             )
@@ -201,9 +201,7 @@ class Customization extends Component {
                 <Quantity onChange={setQty}/>
                 <div className="price">{"$ " + price * this.state.quantity}</div>
             </div>
-            <div className="desc">
-              { total_desc }
-            </div>
+            {/* <div className="desc">{ total_desc }</div> */}
             <div className="cart-button">
                 <Button value="ADD TO CART" onClick={() => addPizza()} />
             </div>
@@ -261,34 +259,37 @@ class Customization extends Component {
     };
     return <div className="sub-tab-content">
       {
-        activeSubTab === 1 && <div className="sub-tab-1">
+        activeSubTab === 1 && <div className="sub-tab-2">
           <div className="ingredients">
             {
-              this.state.doughData.map((ing, index) => {
+              this.state.doughData.map((dough, index) => {
                 return (
-                  <div className={"ingredient-item" + (activeBaseDough === ing._id ? " active" : "")}
-                      onClick={() => handleDough(ing)}
+                  <div className={"baseSauce-item" + (activeBaseDough === dough._id ? " active" : "")}
+                      onClick={() => handleDough(dough)}
                       key={index}>
                   {
-                    activeBaseDough === ing._id 
-                    ? <div>
-                        <div className="ingredient-img-selected">
+                    activeBaseDough === dough._id 
+                    ? <div className="selected">
+                        <div className="baseSauce-img-selected">
                           <LazyLoadImage src={StaticDough} />
                         </div>
-                        <div className="ingredient-detail-selected">
-                          <div className="ingredient-title-selected">{ing.name}</div>
-                           <div className="ingredient-cals-selected">{ing.cal} Cals</div>
+                        <div className="baseSauce-detail-selected">
+                          <div className="baseSauce-title-selected">{dough.name}</div>
+                          <BiDollarCircle className="icon" /> <br />
+                          <div className="baseSauce-cals-selected">{dough.cal} Cals</div>
                         </div>
                       </div>
-                    : <div>
-                        <div className="ingredient-detail">
+                    : <div className="img-wrap">
+                        <div className="baseSauce-detail">
                           <div className="title">Select</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="ingredient-name">{ing.name}</div> 
+                          <div className="baseSauce-name">{dough.name}</div> 
                             <div style={{clear: "both"}}></div>
-                          <div className="ingredient-cals">{ing.cal} Cals</div>
+                          <BiDollarCircle className="icon" />
+                            <div style={{clear: "both"}}></div>
+                          <div className="baseSauce-cals">{dough.cal} Cals</div>
                         </div>
-                        <div className="ingredient-img">
+                        <div className="baseSauce-img">
                           <LazyLoadImage src={StaticDough} />
                         </div>
                       </div>
@@ -301,7 +302,7 @@ class Customization extends Component {
         </div>
       }
       {
-        activeSubTab === 3 && <div className="sub-tab-2">
+        activeSubTab === 2 && <div className="sub-tab-2">
           <div className="ingredients">
             {
               this.state.sauceData.map((sauce, index) => {
@@ -344,7 +345,7 @@ class Customization extends Component {
         </div>
       }
       {
-        activeSubTab === 5 && <div className="sub-tab-3">
+        activeSubTab === 3 && <div className="sub-tab-3">
           <div className="ingredients">
             {
               this.state.cheeseData.map((cheese, index) => {
@@ -636,13 +637,12 @@ class Customization extends Component {
                             <BiDollarCircle className="icon" /> 
                             <span>{veggie.price}</span>
                           </div>
-                          
                           <div className="baseSauce-cals-selected">{veggie.cal} Cals</div>
-                        </div>
-                        <div className="quantity">
-                          <button onClick={(e) => minusQuantity(e, veggie)}> <AiFillMinusCircle /> </button>
-                          <span className="quan-detail">{veggie.count}</span>
-                          <button onClick={(e) => plusQuantity(e, veggie)}> <AiFillPlusCircle /> </button>
+                          <div className="quantity">
+                            <button onClick={(e) => minusQuantity(e, veggie)}> <AiFillMinusCircle /> </button>
+                            <span className="quan-detail">{veggie.count}</span>
+                            <button onClick={(e) => plusQuantity(e, veggie)}> <AiFillPlusCircle /> </button>
+                          </div>
                         </div>
                       </div>
                     : <div className="img-wrap">
@@ -668,7 +668,7 @@ class Customization extends Component {
         </div>
       }
       {
-        activeSubTab === 3 && <div className="sub-tab-2">
+        activeSubTab === 2 && <div className="sub-tab-2">
           <div className="ingredients">
             {
               this.state.toppingMeatData.map((meat, index) => {
@@ -693,12 +693,12 @@ class Customization extends Component {
                             <BiDollarCircle className="icon" /> 
                             <span>{meat.price}</span>
                           </div>
-                           <div className="baseSauce-cals-selected">{meat.cal} Cals</div>
-                        </div>
-                        <div className="quantity">
-                          <button onClick={(e) => minusQuantity(e, meat)}> <AiFillMinusCircle /> </button>
-                          <span className="quan-detail">{meat.count}</span>
-                          <button onClick={(e) => plusQuantity(e, meat)}> <AiFillPlusCircle /> </button>
+                          <div className="baseSauce-cals-selected">{meat.cal} Cals</div>
+                          <div className="quantity">
+                            <button onClick={(e) => minusQuantity(e, meat)}> <AiFillMinusCircle /> </button>
+                            <span className="quan-detail">{meat.count}</span>
+                            <button onClick={(e) => plusQuantity(e, meat)}> <AiFillPlusCircle /> </button>
+                          </div>
                         </div>
                       </div>
                     : <div className="img-wrap">
@@ -724,7 +724,7 @@ class Customization extends Component {
         </div>
       }
       {
-        activeSubTab === 5 && <div className="sub-tab-3">
+        activeSubTab === 3 && <div className="sub-tab-3">
           <div className="ingredients">
             {
               this.state.toppingCheeseData.map((cheese, index) => {
@@ -740,6 +740,11 @@ class Customization extends Component {
                         </div>
                         <div className="baseSauce-detail-selected">
                           <div className="baseSauce-title-selected">{cheese.name}</div>
+                          <div className="icon-half">
+                            <button onClick={(e) => addLeftImage(e, cheese)}><BsCircleHalf /></button>
+                            <button onClick={(e) => addWholeImage(e, cheese)}><BsCircleFill /></button>
+                            <button className="flip" onClick={(e) => addRightImage(e, cheese)}><BsCircleHalf /></button>
+                          </div>
                           <div className="price">
                             <BiDollarCircle className="icon" /> 
                             <span>{cheese.price}</span>

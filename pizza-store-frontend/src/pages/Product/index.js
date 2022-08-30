@@ -55,7 +55,7 @@ const Product = () => {
               pizzaData.map((item, index) => {
                 return (
                   <div className='individual-pizza' key={index}>
-                    <div className='pizza-img'><img src={Static} className="img" alt='meat.src.alt' /></div> 
+                    <div className='pizza-img'><img src={Static} alt='meat.src.alt' /></div> 
                     <div className='pizza-content'>
                       <div className='title'>{item.name}</div>
                       <div className='content-desc'>{item.bonus}</div>
