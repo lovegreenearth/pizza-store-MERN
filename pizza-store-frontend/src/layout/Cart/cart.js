@@ -3,7 +3,7 @@ import { AiOutlineUp } from "react-icons/ai"
 import { AiOutlineDown } from "react-icons/ai"
 import { BsFillCartFill } from "react-icons/bs"
 import "./cart.scss"
-import Button_1 from "../../components/Button/button1"
+import Button from "../../components/Button/button1"
 import { connect } from 'react-redux';
 
 class Cart extends Component {
@@ -55,7 +55,7 @@ class Cart extends Component {
               
             }
             <BsFillCartFill className='empty-cart' />
-            <Button_1 value ={"CheckOut"} />
+            <Button value ={"CheckOut"} />
           </div>
         : ""
       }

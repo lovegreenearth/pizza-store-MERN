@@ -160,15 +160,13 @@ class Customization extends Component {
     const price= (this.state.priceBase + this.state.priceTopping).toFixed(2)
 
     return <div className="pizza-board">
-      <div className="title">
-        {this.state.baseData.name}
-      </div>
+      <div className="title">{this.state.baseData.name}</div>
       <div className="configuration">
         <div className="criteria">
           {
             Object.entries(this.state.selection).map(([key, val]) => 
               <div className="criteria-item" key={key}>
-                <div><BsCheckCircleFill /></div>
+                <BsCheckCircleFill />
                 <span>{" " + val}</span>
               </div>
             )
@@ -201,9 +199,11 @@ class Customization extends Component {
                 <Quantity onChange={setQty}/>
                 <div className="price">{"$ " + price * this.state.quantity}</div>
             </div>
-            {/* <div className="desc">{ total_desc }</div> */}
+            <div className="desc">
+              { total_desc }
+            </div>
             <div className="cart-button">
-                <Button value="ADD TO CART" onClick={() => addPizza()} />
+              <Button value="ADD TO CART" onClick={() => addPizza()} />
             </div>
           </div>
         </div>
@@ -450,7 +450,6 @@ class Customization extends Component {
         tempBaseTopping.push(StaticWhole)
         this.state.nameSelect.push(item.name)
         calculatePrice(this.state.nameSelect)
-        console.log("this.state.nameSelect", this.state.nameSelect)
       }
      
       this.setState({
@@ -479,7 +478,6 @@ class Customization extends Component {
       this.setState({
         toppingBase: tempToppingBase
       })
-      console.log(this.state.activeToppingIng)
     }
     const addWholeImage = (e, veggie) => {
       e.stopPropagation();
@@ -513,7 +511,6 @@ class Customization extends Component {
     }
     const calculatePrice = (nameSelect) => {
       let price = 0;
-      console.log(this.state.nameSelect)
       if(nameSelect.length > 4) {
         for (let i = 4; i < nameSelect.length; i++) {
           let veggie= this.state.toppingVeggieData.filter(top => top.name === nameSelect[i]);
