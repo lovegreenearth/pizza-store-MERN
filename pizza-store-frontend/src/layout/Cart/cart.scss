@@ -1,5 +1,4 @@
 .cart {
-  width: 25%;
   float: right;
   margin-right: 30px;
   border-bottom: none;
@@ -14,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: #ebf0f4;
-    width: 75%;
+    width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 1px solid black;
@@ -34,7 +33,7 @@
     }
   }
   .cart-content {
-    width: 100%;
+    width: 125%;
     padding: 10px 10px;
     background-color: #ebf0f4;
     border: 1px solid black;

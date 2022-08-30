@@ -28,18 +28,10 @@ export const customizeData = {
     },
     {
       id: 2,
-      name: ''
-    },
-    {
-      id: 3,
       name: 'Base Sauce'
     },
     {
-      id: 4,
-      name: ''
-    },
-    {
-      id: 5,
+      id: 3,
       name: 'Base Cheese'
     }
   ],
@@ -50,18 +42,10 @@ export const customizeData = {
     },
     {
       id: 2,
-      name: ''
-    },
-    {
-      id: 3,
       name: 'meat'
     },
     {
-      id: 4,
-      name: ''
-    },
-    {
-      id: 5,
+      id: 3,
       name: 'cheese'
     }
   ],

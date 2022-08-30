@@ -36,8 +36,10 @@
           width: 30%;
           background-color: #e3ebee;
           border-radius: 10px;
-          .img {
+          display: flex;
+          img {
             width: 80%;
+            margin: auto;
           }
         }
         
@@ -66,8 +68,23 @@
             .button{
               width: 40%;
               @media only screen and (max-width: 750px) {
-                width: 60%;
+                width: 50%;
+              }
             }
+          }
+        }
+        @media only screen and (max-width: 750px) {
+          .pizza-content {
+            padding: 20px 20px;
+            .title {
+              font-size: 20px;
+              font-weight: 600;
+            }
+            .content-footer {
+              .cals {
+                font-size: 15px;
+                font-weight: 600;
+              }
             }
           }
         }
