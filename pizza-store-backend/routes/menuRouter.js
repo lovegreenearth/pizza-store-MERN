@@ -26,7 +26,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   Menu.find({}, function (err, menus) {
     if(err){
         res.send(err);

@@ -24,7 +24,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   Topping.find({}, function (err, topping) {
     if(err){
         res.send(err);

@@ -56,7 +56,7 @@ class Customization extends Component {
 
     
     fetch(`http://localhost:5000/doughs`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         "Content-type": "application/json"
       }
@@ -67,7 +67,7 @@ class Customization extends Component {
     })
 
     fetch(`http://localhost:5000/sauce`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         "Content-type": "application/json"
       }
@@ -78,7 +78,7 @@ class Customization extends Component {
     })
 
     fetch(`http://localhost:5000/cheese`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         "Content-type": "application/json"
       }
@@ -89,7 +89,7 @@ class Customization extends Component {
     })
 
     fetch(`http://localhost:5000/topping`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         "Content-type": "application/json"
       }
@@ -166,7 +166,7 @@ class Customization extends Component {
           {
             Object.entries(this.state.selection).map(([key, val]) => 
               <div className="criteria-item" key={key}>
-                <BsCheckCircleFill />
+                <div><BsCheckCircleFill /></div>
                 <span>{" " + val}</span>
               </div>
             )
@@ -199,9 +199,7 @@ class Customization extends Component {
                 <Quantity onChange={setQty}/>
                 <div className="price">{"$ " + price * this.state.quantity}</div>
             </div>
-            <div className="desc">
-              { total_desc }
-            </div>
+            {/* <div className="desc">{ total_desc }</div> */}
             <div className="cart-button">
               <Button value="ADD TO CART" onClick={() => addPizza()} />
             </div>

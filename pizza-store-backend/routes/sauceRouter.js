@@ -22,7 +22,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   Sauce.find({}, function (err, sauce) {
     if(err){
         res.send(err);
