@@ -22,7 +22,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   Cheese.find({}, function (err, cheese) {
     if(err){
         res.send(err);

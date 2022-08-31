@@ -14,7 +14,7 @@ const Product = () => {
   const [pizzaData, setPizzaData] = useState([])
   useEffect(() => {
     fetch(`http://localhost:5000/menus`, {
-        method: 'GET',
+        method: 'POST',
         headers: {
           "Content-Type": "application/json"
         }

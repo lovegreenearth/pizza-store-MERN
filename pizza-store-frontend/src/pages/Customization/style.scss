@@ -18,9 +18,7 @@
       align-items: center;
       justify-content: center;
       border-radius: 10px;
-      @media (max-width: 700px) {
-        width: 200px;
-      }
+      
 
       &:hover {
         cursor: pointer;
@@ -55,7 +53,6 @@
       width: 100%;
     }
   }
-
   .pizza-board {
     background-color: #fff;
     max-width: 100%;
@@ -66,21 +63,37 @@
     .title {
       font-size: 30px;
       color: #FCA017;
+      @media only screen and (max-width: 500px) {
+        font-size: 25px;
+      }
     }
 
     .configuration {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: space-between;
       margin-top: 3rem;
-
+      @media only screen and (max-width: 860px) {
+        display: block;
+        margin-top: 20px;
+        .criteria {
+          margin: 0px auto;
+        }
+        .pizza-piece {
+          width: 30%;
+          margin: auto;
+        }
+        @media only screen and (max-width: 500px) {
+          .pizza-piece {
+            width: 50%;
+          }
+        }
+      }
       .criteria {
-        width: 320px;
-
+        width: 300px;
+        margin-bottom: 30px;
         .criteria-item {
           margin: 0.5rem 0;
           display: flex;
-          align-items: center;
 
           span {
             display: inline-block;
@@ -106,67 +119,77 @@
       }
 
       .add-cart {
-        padding-left: 60px;
+        width: 300px;
+        margin: auto 0px;
+        @media only screen and (max-width: 860px) {
+          margin: 30px auto;
+        }
+        .quantity-price {
+          display: flex;
+          justify-content: center;
+          column-gap: 30px;
+          align-items: center;
 
-        & > div {
-          max-width: 260px;
-
-          .quantity-price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .price {
-              font-size: 30px;
-              color: #FCA017;
-            }
+          .price {
+            font-size: 30px;
+            color: #FCA017;
           }
+        }
           
-          .desc {
-            margin: 1rem 0;
-            font-size: 15px;
-          }
+        .desc {
+          margin: 1rem 0;
+          font-size: 15px;
+        }
 
-          .cart-button {
-            button {
-              width: 100%;
-            }
+        .cart-button {
+          margin-top: 30px;
+          button {
+            width: 80%;
+            margin-bottom: 0px;
+            margin-right: 0px;
           }
         }
       }
     }
   }
 
+
   .sub-tabs {
     width: fit-content;
-    margin: 3rem auto;
+    margin: 40px auto;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    background: #fff;
+    column-gap: 20px;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    @media only screen and (max-width: 860px) {
+      margin: 20px auto;
+    }
     .sub-tab-item {
       width: 170px;
-      border: 1px solid #FCA017;
       line-height: 45px;
-
-      &:nth-child(even) {
-        width: 50px;
-      }
-
-      &:hover {
-        cursor: pointer;
-      }
     }
 
     .active-sub-tab {
       background-color: #FCA017;
       color: #fff;
+      border-radius: 10px;
     }
   }
 
   .ingredients {
     display: flex;
     flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 10px;
+    margin-top: 70px;
+    margin-bottom: 100px;
+    @media only screen and (max-width: 860px) {
+      margin-top: 40px;
+      margin-bottom: 60px;
+    }
     .title {
       float: left;
       font-family: proxima-nova,sans-serif;
@@ -207,9 +230,7 @@
       transition: all .5s ease-out;
       border-radius: 8px;
       border: 1px solid #e1e7e9;
-      &:hover {
-        cursor: pointer;
-      }
+      
       .ingredient-detail {
         padding: 15px 15px;
         .title {
@@ -277,7 +298,6 @@
       background-size: 100% 100%;
       width: 237px;
       height: 200px;
-      margin: 1rem 0.5rem;
       position: relative;
       transition: all .5s ease-out;
       border-radius: 8px;
@@ -358,7 +378,7 @@
       
     }
     .active {
-      width: 490px;
+      width: 500px;
       transition: all .5s ease-out;
       border: 3px solid #ee5a00;
       border-radius: 10px;
