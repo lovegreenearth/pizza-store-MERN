@@ -341,7 +341,7 @@
       }
       .selected {
         display: flex;
-        position: relative;
+        justify-content: space-around;
         .baseSauce-img-selected {
           width: 40%;
         }
@@ -358,9 +358,6 @@
           }
         }
         .quantity {
-          position: absolute;
-          bottom: 30px;
-          right: 30px;
           display: flex;
           align-items: center;
           button {
