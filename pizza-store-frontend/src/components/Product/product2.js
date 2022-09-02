@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Button_1 from "../Button/button1";
+import ButtonOne from "../Button/button1";
 
-export default class Product2 extends Component {
+export default class ProductTwo extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +23,7 @@ export default class Product2 extends Component {
                     <div><div className="title">{this.props.title}</div>
                         <div className="desc">{this.props.desc}</div>
                         <div className="price">{this.props.price}</div>
-                        <Button_1 onClick={this.clickEvent} value={this.props.button_value} />
+                        <ButtonOne onClick={this.clickEvent} value={this.props.button_value} />
                     </div>
                 </div>
             </div>

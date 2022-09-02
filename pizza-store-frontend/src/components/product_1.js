@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { IoMdArrowDropright } from "react-icons/io";
 
-export default class Product1 extends Component {
+export default class ProductOne extends Component {
     constructor(props) {
         super(props);
         this.state = {

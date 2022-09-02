@@ -53,8 +53,9 @@ class Customization extends Component {
       toppingMeatData: [],
       toppingCheeseData: [],
     }
+  }
 
-    
+  componentDidMount() {
     fetch(`http://localhost:5000/doughs`, {
       method: 'POST',
       headers: {
@@ -118,8 +119,8 @@ class Customization extends Component {
           object.count = 1;
         });
     })
-    
   }
+
   _renderTabItem = (tab, activeTab) => {
     return (
       <div className={"tab-item" + (activeTab === tab.id ? ' active-tab' : '')} 

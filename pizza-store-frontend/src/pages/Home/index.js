@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
-import Product1 from "../../components/Product/product1";
+import ProductOne from "../../components/Product/product1";
 import DemoCarousel from "../../components/Carousel";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
@@ -48,7 +48,7 @@ const Home = () => {
           data.map((item, key) => {
             return(
               <div key={key}>
-                <Product1
+                <ProductOne
                   source={Static}
                   className='product1'
                   title={item.name}

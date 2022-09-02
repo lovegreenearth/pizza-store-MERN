@@ -38,7 +38,11 @@ const Product = () => {
 
   const toCustomize = (pizza) => {
     localStorage.setItem('pizza', JSON.stringify(pizza));
-    navigate("/customize")
+    if (params.id === '62f34ad91394ef1158cfab66') {
+      navigate("/chickenWings");
+    } else {
+      navigate("/customize")
+    }
   }
 
   return (

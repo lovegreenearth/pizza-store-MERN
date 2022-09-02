@@ -6,6 +6,7 @@ import Customization from "../../src/redux/container/appContainers";
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Product from '../pages/Product';
+import ChickenWings from '../pages/ChickenWing';
 
 const Routing = () => {
 
@@ -21,7 +22,8 @@ const Routing = () => {
             <Route path='/signIn' element={<SignIn onSuccess={changeLogged} />} />
             <Route path='/signup' element={<SignUp onSuccess={changeLogged} />} />
             <Route path="/see-all" element={logged ? <SeeAll /> : <Navigate to="/signIn" />} />
-            <Route path="/customize" element={logged ? <Customization /> : <Navigate to="/signIn" />} />
+            <Route path="/customize" element={<Customization />} />
+            <Route path="/chickenWings" element={<ChickenWings />} />
             <Route path='Product/:id' element={<Product />} />
         </Routes>
     )
