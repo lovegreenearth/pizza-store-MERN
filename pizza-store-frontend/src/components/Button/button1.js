@@ -1,7 +1,7 @@
 import './button1'
 import React, { Component } from "react";
 
-export default class Button_1 extends Component {
+export default class ButtonOne extends Component {
 
     constructor(props) {
         super(props);

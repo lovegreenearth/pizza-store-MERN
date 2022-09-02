@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import Product2 from "../../components/Product/product2";
+import ProductTwo from "../../components/Product/product2";
 import productImg from "../../assets/img/item.png";
 import Banner from "../../assets/img/banner-2.png";
 
@@ -94,7 +94,7 @@ export default class SeeAll extends Component {
                         {
                             products.map((item, key) => (
                                 <div key={key}>
-                                    <Product2 source={item.source} className={'product2'} title={item.title} desc={item.desc} price={item.price} button_value={item.button_value} history={this.props.history} />
+                                    <ProductTwo source={item.source} className={'product2'} title={item.title} desc={item.desc} price={item.price} button_value={item.button_value} history={this.props.history} />
                                 </div>
                                 
                             ))

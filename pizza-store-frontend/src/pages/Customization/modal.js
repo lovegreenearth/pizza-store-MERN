@@ -1,14 +1,13 @@
 import React from "react"
 import "./modal.css"
 import { AiFillCaretRight } from "react-icons/ai";
-import { Navigate, useNavigate } from "react-router-dom";
-import { BsTelephoneMinus } from "react-icons/bs";
+import { Navigate } from "react-router-dom";
 
 const Modal = (props) => {
   if(!props.show) {
     return null
   }
-  // let navigate = useNavigate();
+  
   return (
     <div  className="modal">
       <div className="modal-content">
@@ -16,7 +15,6 @@ const Modal = (props) => {
           <h4 className="modal-title">Modal Title</h4>
         </div>
         <div className="modal-body">
-          {/* <button onClick={() => navigate("Product/1")}>This is modal content <AiFillCaretRight /></button> */}
           <Navigate to="/Product/1">This is modal content <AiFillCaretRight /></Navigate>
         </div>
         <div className="modal-footer">

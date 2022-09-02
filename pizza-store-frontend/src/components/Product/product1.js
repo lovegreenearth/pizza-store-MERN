@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import Button_1 from "../Button/button1";
+import ButtonOne from "../Button/button1";
 
-export default class Product1 extends Component {
+export default class ProductOne extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +15,7 @@ export default class Product1 extends Component {
                     <img src={this.props.source} alt="#" />
                     <div className="title-button">
                         <div className="title">{this.props.title}</div>
-                        <Button_1 
+                        <ButtonOne 
                             value={this.props.button_value} 
                             onClick={this.props.onClick} />
                         
