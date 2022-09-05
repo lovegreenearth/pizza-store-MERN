@@ -4,3 +4,12 @@ export function addToCart(addPizza) {
     payload: addPizza,
   }
 }
+
+export function addToChicken(newChicken) {
+  return {
+    type: 'CHICKEN_TO_CART',
+    payload: newChicken,
+  }
+}
+
+

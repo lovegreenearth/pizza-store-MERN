@@ -7,6 +7,8 @@ import Button from "../../components/Button/button1";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Static from "../../assets/img/BaseSauce/Buffalo.png"
 import { BsCheckCircleFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addToChicken } from "../../redux/actions";
 
 const ChickenWings = () =>  {
   const [ quantity, setQuantity ] = useState(1)
@@ -17,9 +19,6 @@ const ChickenWings = () =>  {
   const [ sauceAmount, setSauceAmount ] = useState("");
   const [ bread, setBread ] = useState("");
 
-  const addCart = () => {
-    console.log("object ---> ")
-  }
   useEffect(() => {
     fetch(`http://localhost:5000/chickenWing`, {
         method: "POST",
@@ -39,6 +38,17 @@ const ChickenWings = () =>  {
     
   }
 
+  const dispatch = useDispatch();
+
+  const addCart = () => {
+    const newChicken = {
+      name: JSON.parse(localStorage.getItem("product")).name,
+      price: JSON.parse(localStorage.getItem("product")).price,
+      quantity: quantity,
+    } 
+    dispatch(addToChicken(newChicken))
+  }
+
   const getData = (title, content) => {
     switch (title) {
       case "Chicken Wings":
@@ -54,6 +64,7 @@ const ChickenWings = () =>  {
         setBread(content);
     }
   }
+
   const array = [];
   array.push(sauceType);
   array.push(wingStyle);
@@ -68,7 +79,7 @@ const ChickenWings = () =>  {
           <Radio title="Wings Style" contentOne="Bread" contentTwo="Non-Breaded" onChangeState={getData} />
         </div>
         <div className="configuration">
-          <div className="title">{ JSON.parse(localStorage.getItem("pizza")).name }</div> 
+          <div className="title">{ JSON.parse(localStorage.getItem("product")).name }</div> 
           <div className="chicken-img">
             <LazyLoadImage src={Chicken} />
           </div>
@@ -90,7 +101,7 @@ const ChickenWings = () =>  {
             <div className="add-cart">
               <div className="quantity-price">
                 <Quantity onChange={(qty) => setQuantity(qty)} />
-                <div className="price">{ "$ " + JSON.parse(localStorage.getItem("pizza")).price * quantity }</div>
+                <div className="price">{ "$ " + JSON.parse(localStorage.getItem("product")).price * quantity }</div>
               </div>
               <Button value="ADD TO CART" onClick={() => addCart()} />
             </div>

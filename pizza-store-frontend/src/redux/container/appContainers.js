@@ -1,22 +1,23 @@
 import { connect } from 'react-redux'
 import Customization from '../../pages/Customization'
-import { addToCart, CheckOut } from "../actions/index";
-import { useDispatch, useSelector } from 'react-redux';
+import ChickenWings from '../../pages/ChickenWing';
+import { addToCart } from "../actions/index";
+import { addToChicken } from '../actions/index';
 
 const mapStateToProps = (state) => {
   return {
-    addPizza: state
+    addPizza: state,
+    newChicken:state,
   }
 };
-
-// const {name} = useParams();
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (params) => dispatch(addToCart(params)),
-    // CheckOut: (params) => dispatch(CheckOut(params)),
-    dispatch
+    addToChicken: (params) => dispatch(addToChicken(params)),
+    dispatch 
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Customization)
+export default connect(mapStateToProps, mapDispatchToProps)(Customization);
+export const Wings = connect(mapStateToProps, mapDispatchToProps)(ChickenWings);

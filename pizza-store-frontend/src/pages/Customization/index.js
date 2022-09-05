@@ -43,8 +43,8 @@ class Customization extends Component {
       nameSelect: [],
       priceTotal: 0,
       priceTopping: 0,
-      priceBase: JSON.parse(localStorage.getItem('pizza')).price,
-      baseData: JSON.parse(localStorage.getItem('pizza')),
+      priceBase: JSON.parse(localStorage.getItem('product')).price,
+      baseData: JSON.parse(localStorage.getItem('product')),
       doughData: [],
       sauceData: [],
       cheeseData: [],
@@ -146,10 +146,10 @@ class Customization extends Component {
 
     const addPizza = () => {
       const newPizza = {
-        name: "My Pizza",
+        name: JSON.parse(localStorage.getItem('product')).name,
         quantity: this.state.quantity,
         desc: total_desc,
-        price: this.state.priceTotal,
+        price: JSON.parse(localStorage.getItem('product')).price,
       }
       this.props.addToCart(newPizza)
     }
@@ -176,18 +176,18 @@ class Customization extends Component {
         <div className="pizza-piece">
           <LazyLoadImage alt={images.initialPizzaImg.alt} src={this.state.toppingImg} />
           {
-            this.state.toppingBase.map((base) => {
+            this.state.toppingBase.map((base, index) => {
               return (
                 <div className="multiTopping">
-                  <LazyLoadImage alt={images.initialPizzaImg.alt} src={base} />
+                  <LazyLoadImage alt={images.initialPizzaImg.alt} src={base} key={index}/>
                 </div>
               )
             })
           }
           {
-            this.state.toppingExtra.map((extra) => {
+            this.state.toppingExtra.map((extra, index) => {
               return (
-                <div className="multiTopping">
+                <div className="multiTopping" key={index}>
                   <LazyLoadImage alt={images.initialPizzaImg.alt} src={extra} />
                 </div>
               )

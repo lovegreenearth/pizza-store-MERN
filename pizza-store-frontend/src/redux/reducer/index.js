@@ -1,5 +1,4 @@
 const initialState = {
-  add: false,
   items: []
 }
 
@@ -10,26 +9,32 @@ const {payload} = action;
   switch (action.type) {
     case 'ADD_TO_CART' : 
       const index = state.items.findIndex(c => c.name === action.payload.name);
-      let items;
-      console.log("index -----> ", index)
+      let items = state.items;
       
-      if(index === -1) 
-        {items = [state.items, payload];
-        console.log("items -----> ", items)}
-      else {items = state.items.map
-          (item => 
+      if(index === -1) {
+        items = [...state.items, payload];
+      } else {
+        items = state.items.map(item => 
             items.name === payload.name 
-                ? {...item, quantity: payload.quantity} 
-                : item);
-          console.log("items.name---> ", items.name)   };
+            ? {...item, quantity: payload.quantity} 
+            : item
+        );
+      };
       return {
-        add: true, 
-        items,
+        items:items,
       }
-    // case 'CHECK_OUT': 
-    //   return { 
-    //     count: 0 
-    //   }
+
+    case 'CHICKEN_TO_CART' :
+      const indexChicken = state.items.findIndex(c => c.name === action.payload.name);
+      let itemChicken = state.items;
+
+      if(indexChicken === -1) {
+        itemChicken = [...state.items, payload]
+      } 
+      return {
+        items: itemChicken,
+      }
+     
     default: return state || initialState
   }
 }
