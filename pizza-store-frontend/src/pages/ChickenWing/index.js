@@ -18,6 +18,7 @@ const ChickenWings = () =>  {
   const [ wingStyle, setWingStyle ] = useState("");
   const [ sauceAmount, setSauceAmount ] = useState("");
   const [ bread, setBread ] = useState("");
+  const [ array, setArray ] = useState({});
 
   useEffect(() => {
     fetch(`http://localhost:5000/chickenWing`, {
@@ -52,24 +53,33 @@ const ChickenWings = () =>  {
   const getData = (title, content) => {
     switch (title) {
       case "Chicken Wings":
-        setSauceType(content);
+        setWingStyle(content);
+        console.log(typeof(content))
+        setArray((prevState) => ({...prevState, [title]: content}))
       break;
+
       case "Wings Style":
         setWingStyle(content);
+        setArray((prevState) => ({...prevState, [title]: content}))
       break;
+
       case "Amount of Sauce(required)":
         setSauceAmount(content);
+        setArray((prevState) => ({...prevState, [title]: content}))
       break;
+
       default: 
         setBread(content);
+        setArray((prevState) => ({...prevState, [title]: content}))
     }
   }
 
-  const array = [];
-  array.push(sauceType);
-  array.push(wingStyle);
-  array.push(sauceAmount);
-  array.push(bread);
+  console.log("array ----> " , array)
+  // const array = [];
+  // array.push(sauceType);
+  // array.push(wingStyle);
+  // array.push(sauceAmount);
+  // array.push(bread);
 
   return (
     <div>
@@ -86,16 +96,12 @@ const ChickenWings = () =>  {
           <div className="desc">
             <div className="note">
               {
-                array.map((item, index) => {
-                  return (
-                    <div className="option" key={index}>
-                      {
-                        item[index] === undefined ? '' : <BsCheckCircleFill />
-                      }
-                      <div className="txt">{item}</div>
-                    </div>
-                  )
-                })
+                Object.entries(array).map(([key, val]) => 
+                <div className="option" key={key}>
+                  <div><BsCheckCircleFill /></div>
+                  <div className="txt">{" " + val}</div>
+                </div>
+              )
               }
             </div>
             <div className="add-cart">

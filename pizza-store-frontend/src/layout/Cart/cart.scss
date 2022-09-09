@@ -57,8 +57,9 @@ $cart-L-size: 450px;
       color: grey;
     }
     button {
-      margin: 0px 0px 10px 0px;
+      margin-top: 30px;
       background-color: grey;
+      width: 100%;
       &:hover {
         color: black;
         border: 1px solid black;
@@ -112,7 +113,6 @@ $cart-L-size: 450px;
               font-weight: 600;
             }
           }
-          
         }
       }
     }

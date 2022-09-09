@@ -239,6 +239,7 @@ class Customization extends Component {
         selection.dough = dough.name;
         return { selection };
       })
+      console.log("this.state.selection ---> ", this.state.selection)
     }
     const handleSauce = (sauce) =>  {
       this.setState({activeBaseSauce: sauce._id})
@@ -247,6 +248,7 @@ class Customization extends Component {
         selection.sauce = sauce.name;
         return { selection };
       })
+      console.log("this.state.selection ---> ", this.state.selection)
     };
     const handleCheese = (cheese) =>  {
       this.setState({activeBaseCheese: cheese._id})

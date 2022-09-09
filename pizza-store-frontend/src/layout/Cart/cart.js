@@ -74,10 +74,10 @@ class Cart extends Component {
                           </div>
                         )
                       })
-                  }
-                </div>
+                    }
+                  </div>
               }              
-              <Button value ={"CheckOut"} />
+              <Button value ={"Check  Out"} />
             </div>
           : ""
         }
