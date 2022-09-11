@@ -1,24 +1,25 @@
 import { React, useState, useEffect } from "react"
 import "./style.scss"
 import Radio from "../../components/Radio";
-import Chicken from "../../assets/img/chickenWings.jpg"
 import Quantity from "../../components/Button/qty";
 import Button from "../../components/Button/button1";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import Static from "../../assets/img/BaseSauce/Buffalo.png"
+import ChickenWing from "../../assets/img/classic-buffalo-wings.png"
+import Basic from "../../assets/img/traditional-chickenWing.png"
 import { BsCheckCircleFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { addToChicken } from "../../redux/actions";
 
+
 const ChickenWings = () =>  {
+  const [ chickenWingData, setChickenWingData ] = useState([]);
   const [ quantity, setQuantity ] = useState(1)
-  const [ chickenWing, setChickenWing ] = useState([]);
-  const [ active, setActive ] = useState("");
-  const [ sauceType, setSauceType ] = useState("");
-  const [ wingStyle, setWingStyle ] = useState("");
-  const [ sauceAmount, setSauceAmount ] = useState("");
-  const [ bread, setBread ] = useState("");
-  const [ array, setArray ] = useState({});
+  const chickenWings = [ "Tossed Sauce", "Onside Sauce" ];
+  const wingStyle = [ "Bread", "Non-Breaded" ];
+  const amountSauce = [ "Regular Sauce on Wings", "Light Sauce on Wings", "Extra Sauce on Wings" ];
+  const garlicSauce = [ "Garlic Bread Plair", "Garlic Bread Cheese" ];
+  const wingSauce = chickenWingData.map((item) => item.name);
+  const [ data, setData ] = useState({});
+  const [ active, setActive ] = useState([])
 
   useEffect(() => {
     fetch(`http://localhost:5000/chickenWing`, {
@@ -29,15 +30,10 @@ const ChickenWings = () =>  {
     })
     .then(res =>res.json())
     .then(data => {
-        setChickenWing(data)
+        setChickenWingData(data)
+        setActive(Array(data.length).fill(false))
     })
-    
   }, [])
-  
-  const activeIndividual = (item) => {
-    setActive(item._id);
-    
-  }
 
   const dispatch = useDispatch();
 
@@ -49,98 +45,78 @@ const ChickenWings = () =>  {
     } 
     dispatch(addToChicken(newChicken))
   }
-
-  const getData = (title, content) => {
-    switch (title) {
-      case "Chicken Wings":
-        setWingStyle(content);
-        console.log(typeof(content))
-        setArray((prevState) => ({...prevState, [title]: content}))
-      break;
-
-      case "Wings Style":
-        setWingStyle(content);
-        setArray((prevState) => ({...prevState, [title]: content}))
-      break;
-
-      case "Amount of Sauce(required)":
-        setSauceAmount(content);
-        setArray((prevState) => ({...prevState, [title]: content}))
-      break;
-
-      default: 
-        setBread(content);
-        setArray((prevState) => ({...prevState, [title]: content}))
-    }
+  const getData = (title, item) => {
+    setData({...data, [title]: item});
   }
-
-  console.log("array ----> " , array)
-  // const array = [];
-  // array.push(sauceType);
-  // array.push(wingStyle);
-  // array.push(sauceAmount);
-  // array.push(bread);
-
+  const selectOption = (index, item) => {
+    setActive(active.map((_, _index) => index === _index ? true: false));
+    setData({...data, "Wing Sauce(Select 1)(required)": item});
+  }
+  
   return (
-    <div>
-      <div className="chicken-configuration">
-        <div className="radio-selection">
-          <Radio title="Chicken Wings" contentOne="Tossed Sauce" contentTwo="Onside Sauce" onChangeState={getData} />
-          <Radio title="Wings Style" contentOne="Bread" contentTwo="Non-Breaded" onChangeState={getData} />
-        </div>
-        <div className="configuration">
-          <div className="title">{ JSON.parse(localStorage.getItem("product")).name }</div> 
-          <div className="chicken-img">
-            <LazyLoadImage src={Chicken} />
-          </div>
-          <div className="desc">
-            <div className="note">
-              {
-                Object.entries(array).map(([key, val]) => 
-                <div className="option" key={key}>
-                  <div><BsCheckCircleFill /></div>
-                  <div className="txt">{" " + val}</div>
-                </div>
-              )
-              }
-            </div>
-            <div className="add-cart">
-              <div className="quantity-price">
-                <Quantity onChange={(qty) => setQuantity(qty)} />
-                <div className="price">{ "$ " + JSON.parse(localStorage.getItem("product")).price * quantity }</div>
-              </div>
-              <Button value="ADD TO CART" onClick={() => addCart()} />
-            </div>
-          </div>
-        </div>
-        <div className="radio-selection">
-          <Radio title="Amount of Sauce(required)" contentOne="Regular" contentTwo="Light" onChangeState={getData} />
-          <Radio title="Garlic Bread(required)" contentOne="Garlic Bread Plair" contentTwo="Garlic Bread Cheese" onChangeState={getData} />
-        </div>
-      </div>
-
-      <div className="wingSauce">
-        {
-          chickenWing.map((item) => {
-            return (
-              <div className={ "individual" + (active === item._id ? " active" : "") }  onClick={() => activeIndividual(item)} key={item._id}>
-                {
-                  active === item._id
-                  ? <div className="select">
-                      <div className="select-img"><LazyLoadImage src={Static} /></div>
-                      <div className="select-content">
-                        <div className="select-title">{item.name}</div>
-                      </div> 
-                    </div> 
-                  : <div className="normal">
-                      <div className="img"><LazyLoadImage src={Static} /></div>
-                      <div className="title">{item.name}</div>
+    <div className="chicken-content">
+      <img className="background" src={ChickenWing} alt="ChickenWing" />
+      <div className="configuration">
+        <div className="blocks">
+          <div className="chicken-title">{ JSON.parse(localStorage.getItem("product")).name }</div>
+          <div className="block-group" >
+            <div className="customize-block">
+              <div className="block-content">
+                <div>
+                  <img className="basic-img" src={Basic} alt="basic" />
+                  <div className="add-cart">
+                    <div className="quantity-price">
+                      <Quantity onChange={(qty) => setQuantity(qty)} />
+                      <div className="price">{ "$ " + JSON.parse(localStorage.getItem("product")).price * quantity }</div>
                     </div>
-                }
+                    <Button value="ADD TO CART" onClick={() => addCart()} />
+                  </div>
+                </div>
+
+                <div className="note">
+                  {
+                    Object.entries(data).map(([key, value]) => 
+                      <div className="option" key={key}>
+                        <div><BsCheckCircleFill /></div>
+                        <div className="txt">{value}</div>
+                      </div>
+                  )}
+                </div>
               </div>
-            )
-          })
-        }
+            </div>
+            <div className="select-block">
+              <div className="select-block-title" >{JSON.parse(localStorage.getItem("product")).bonus}</div>
+              <div className="top-bottom">
+                <div className="top-block">
+                  <Radio title="12 Chicken Wings" content={chickenWings} onChange={getData} />
+                  <Radio title="Wings Style(required)" content={wingStyle} onChange={getData}  />
+                  <Radio title="Amount of Sauce(required)" content={amountSauce} onChange={getData}  />
+                  <Radio title="Garlic Bread(required)" content={garlicSauce} onChange={getData}  />
+                </div>
+                <div className="bottom-block" style={{border: active.filter(c => c === true).length === 1 ? "2px solid #FCA017" : "1px solid #FCA017" }} >
+                  <div className="bottom-content">
+                    <div className="bottom-title">Wing Sauce(Select 1)(required)</div>
+                    <div className="option-group">
+                      {
+                        wingSauce.map((item, index) => {
+                          return (
+                            <div key={index} className='new-option' onClick={() => selectOption(index, item)}>
+                              {
+                                active[index] ? <BsCheckCircleFill style={{color: "#FCA017"}} /> : <div className='new-check' />
+                              }
+                              <div className="new-content">{item}</div>
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
       </div>
     </div>
     
@@ -149,4 +125,3 @@ const ChickenWings = () =>  {
 
 export default ChickenWings;
 
-    

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { AiOutlineUp } from "react-icons/ai"
 import { AiOutlineDown } from "react-icons/ai"
-import { BsFillCartFill } from "react-icons/bs"
 import "./cart.scss"
 import Button from "../../components/Button/button1"
 import { connect } from 'react-redux';
 
 import Static from "../../assets/img/cart-small.png"
+import Basket from "../../assets/img/Vector.png";
 
 class Cart extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class Cart extends Component {
         <div className='cart-header'>
           <div className='small'>
             <div className='empty'>
-              <BsFillCartFill style={{fontSize: "25px", color: "grey"}}/>
+              <img src={Basket} alt="basket" />
               <div className='cart-status'>Empty Cart</div>
             </div>
             <button className='toggle-button' onClick={() => handleUpCart()}>
@@ -48,10 +48,9 @@ class Cart extends Component {
           this.state.activeCart
           ?
             <div className='cart-content'>
-              <div className='cart-title'>Your Cart</div>
               {
                 this.props.items.length === 0
-                ? <BsFillCartFill className='empty-cart' />
+                ? <img className='empty-cart' src={Basket} alt="basket" />
                 : <div className='cart-detail'> 
                     {
                       this.props.items.map((c, index) => {
