@@ -41,7 +41,6 @@ class Customization extends Component {
       type: "wholeSrc",
       selection: {},
       nameSelect: [],
-      priceTotal: 0,
       priceTopping: 0,
       priceBase: JSON.parse(localStorage.getItem('product')).price,
       baseData: JSON.parse(localStorage.getItem('product')),
@@ -198,7 +197,7 @@ class Customization extends Component {
           <div> 
             <div className="quantity-price">
                 <Quantity onChange={setQty}/>
-                <div className="price">{"$ " + price * this.state.quantity}</div>
+                <div className="price">{"$ " + (price * this.state.quantity).toFixed(2)}</div>
             </div>
             {/* <div className="desc">{ total_desc }</div> */}
             <div className="cart-button">
@@ -239,6 +238,7 @@ class Customization extends Component {
         selection.dough = dough.name;
         return { selection };
       })
+      console.log("this.state.selection ---> ", this.state.selection)
     }
     const handleSauce = (sauce) =>  {
       this.setState({activeBaseSauce: sauce._id})
@@ -247,6 +247,7 @@ class Customization extends Component {
         selection.sauce = sauce.name;
         return { selection };
       })
+      console.log("this.state.selection ---> ", this.state.selection)
     };
     const handleCheese = (cheese) =>  {
       this.setState({activeBaseCheese: cheese._id})

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { AiOutlineUp } from "react-icons/ai"
 import { AiOutlineDown } from "react-icons/ai"
-import { BsFillCartFill } from "react-icons/bs"
 import "./cart.scss"
 import Button from "../../components/Button/button1"
 import { connect } from 'react-redux';
 
 import Static from "../../assets/img/cart-small.png"
+import Basket from "../../assets/img/Vector.png";
 
 class Cart extends Component {
   constructor(props) {
@@ -23,20 +23,45 @@ class Cart extends Component {
         activeCart: !prevState.activeCart
       }));
     }
+    
+    // this.props.items.map((item) => 
+    // {
+    //   let price = item.quantity * item.price;
+      
+    // })
+    // const arr = [5, 15, 45];
+    // const sum = arr.reduce((accumulator, value) => {
+    //   return accumulator + value;
+    // }, 0);
+    const priceTotal = this.props.items.reduce((accumulator, value) => {
+      
+      return accumulator + value.price * value.quantity;
+    }, 0)
+    console.log((priceTotal).toFixed(2))
+
     const remove = () => {
       console.log("remove")
     }
     const edit = () => {
       console.log("edit")
     }
+
     return (
       <div className='cart'>
         <div className='cart-header'>
           <div className='small'>
-            <div className='empty'>
-              <BsFillCartFill style={{fontSize: "25px", color: "grey"}}/>
-              <div className='cart-status'>Empty Cart</div>
-            </div>
+            {
+              this.props.items.length > 0 
+              ? <div className='fill'>
+                  <img src={Basket} alt="basket" />
+                  <div className='fill-status'>{this.props.items.length + " items"}</div>
+                </div>
+              : <div className='empty'>
+                  <img src={Basket} alt="basket" />
+                  <div className='empty-status'>Empty Cart</div>
+                </div>
+            }
+            
             <button className='toggle-button' onClick={() => handleUpCart()}>
               {
                 this.state.activeCart ? <AiOutlineDown /> : <AiOutlineUp />
@@ -48,10 +73,9 @@ class Cart extends Component {
           this.state.activeCart
           ?
             <div className='cart-content'>
-              <div className='cart-title'>Your Cart</div>
               {
                 this.props.items.length === 0
-                ? <BsFillCartFill className='empty-cart' />
+                ? <img className='empty-cart' src={Basket} alt="basket" />
                 : <div className='cart-detail'> 
                     {
                       this.props.items.map((c, index) => {
@@ -74,10 +98,10 @@ class Cart extends Component {
                           </div>
                         )
                       })
-                  }
-                </div>
+                    }
+                  </div>
               }              
-              <Button value ={"CheckOut"} />
+              <Button value ={"Check  Out"} />
             </div>
           : ""
         }

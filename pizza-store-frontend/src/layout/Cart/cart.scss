@@ -11,32 +11,49 @@ $cart-L-size: 450px;
     width: 90%;
     right: 5%;
   }
-  // transition: all .5s ease-out;
   .cart-header {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     .small {
-      background-color: #ebf0f4;
+      background-color: #FCA017;
       display: flex;
       justify-content: space-between;
-      padding: 5px 10px;
-      width: 80%;
+      align-items: center ;
+      padding: 15px 30px;
+      width: 100%;
       display: flex;
-      border: 1px solid black;
-      border-bottom: none;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      .fill {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        .fill-status {
+          font-size: 18px;
+          font-weight: 800;
+          color: white;
+        }
+      }
       .empty {
         display: flex;
         justify-content: center;
         align-items: center;
         gap:  20px;
-        .cart-status {
+
+        .empty-status {
           font-size: 18px;
           font-weight: 800;
+          color: white;
         }
       }
       .toggle-button {
         border: none;
+        background-color: #FCA017;
+        color: white;
+        font-size: 20px;
+        font-weight: 800;
       }
     }
     
@@ -44,21 +61,14 @@ $cart-L-size: 450px;
   .cart-content {
     width: 100%;
     padding: 10px 10px;
-    background-color: #ebf0f4;
-    border: 1px solid black;
-    .cart-title {
-      text-align: left;
-      font-size: 18px;
-      font-weight: 800;
-    }
+    background-color: white;
     .empty-cart {
-      padding: 10px;
       font-size: 100px;
-      color: grey;
     }
     button {
-      margin: 0px 0px 10px 0px;
-      background-color: grey;
+      margin-top: 30px;
+      background-color: #FCA017;
+      width: 100%;
       &:hover {
         color: black;
         border: 1px solid black;
@@ -74,10 +84,14 @@ $cart-L-size: 450px;
         display: flex;
         align-items: center;
         column-gap: 20px;
+        border: 1px solid #FCA017;
         .image {
           width: 120px;
           height: 80px;
-          background-color: #ebf0f4;
+          display: flex;
+          img {
+            width: 100%;
+          }
         }
         .content {
           color: #4c3017;
@@ -112,7 +126,6 @@ $cart-L-size: 450px;
               font-weight: 600;
             }
           }
-          
         }
       }
     }
