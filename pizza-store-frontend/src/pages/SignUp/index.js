@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import Button1 from "../../components/Button/button1";
+import Button from "../../components/Button/button1";
 import images from '../../constant';
 
 
@@ -24,7 +24,8 @@ export default class SignUp extends Component {
     }
 
     onSignUp = () => {
-        const emailMatch = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.emailRef.current.value);
+        // const emailMatch = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.emailRef.current.value);
+        const emailMatch = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(this.emailRef.current.value);
         let flag = 0;
         this.setState({
             firstNameAlert: "",
@@ -83,7 +84,7 @@ export default class SignUp extends Component {
                 passwordCheck: this.confirmpwRef.current.value,
                 displayName: this.fnameRef.current.value + ' ' + this.lnameRef.current.value
             }
-            fetch(`http://localhost:5000/users/register`, {
+            fetch(`${localStorage.getItem('apiURL')}/users/register`, {
                 method: 'POST',
                 headers: {
                 "Content-Type": "application/json"
@@ -104,12 +105,12 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <div className="signup-container">
-                <header className="signup-header">REGISTER</header>
-                <div className="signup-content">
+            <div className="signUp-container">
+                <header className="signUp-header">REGISTER</header>
+                <div className="signUp-content">
                     <div className="email-container">
 
-                        <div className="signup-banner">
+                        <div className="signUp-banner">
                             <LazyLoadImage src={images.signUpBanner.src} alt={images.signUpBanner.alt} />
                         </div>
 
@@ -140,7 +141,7 @@ export default class SignUp extends Component {
                                 <div className="input"><input type="password" name="Uconfirmpassword" id="Uconfirmpassword" ref={this.confirmpwRef} /></div>
                             </div>
 
-                            <Button1 value="SIGN UP" onClick={this.onSignUp}/>
+                            <Button Color="#FCA017" value="SIGN UP" onClick={this.onSignUp}/>
                         </div>
                     </div>
                 </div>

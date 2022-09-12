@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Button1 from "../../components/Button/button1";
+import Button from "../../components/Button/button1";
 import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
 
@@ -18,7 +18,7 @@ export default class SignIn extends Component {
 			email: this.state.email,
 			password: this.state.password
 		}
-		fetch(`http://localhost:5000/users/login`, {
+		fetch(`${localStorage.getItem('apiURL')}/users/login`, {
 			method: 'POST',
 			headers: {
 			"Content-Type": "application/json"
@@ -75,7 +75,7 @@ export default class SignIn extends Component {
 
 							<div className="signIn-register-container">
 								<div className="signIn-button-container">
-										<Button1 value="SIGN IN" onClick={this.onSignIn} />
+										<Button Color="#FCA017" value="SIGN IN" onClick={this.onSignIn} />
 								</div>
 								<div className="register-comment">
 										Don't have an account?

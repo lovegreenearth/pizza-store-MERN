@@ -13,7 +13,7 @@ const Product = () => {
   const [title, setTitle] = useState("");
   const [pizzaData, setPizzaData] = useState([])
   useEffect(() => {
-    fetch(`http://localhost:5000/menus`, {
+    fetch(`${localStorage.getItem('apiURL')}/menus`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
@@ -23,7 +23,7 @@ const Product = () => {
     .then(data => {
         setTitle(data.filter(top => top._id === params.id)[0].name)
     })
-    fetch(`http://localhost:5000/pizzas/byMenu`, {
+    fetch(`${localStorage.getItem('apiURL')}/pizzas/byMenu`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
@@ -65,7 +65,7 @@ const Product = () => {
                       <div className='content-desc'>{item.bonus}</div>
                       <div className='content-footer'>
                         <div className='cals'>Staring from $ {item.price}</div>
-                        <Button value="Customize" onClick={() => toCustomize(item)}/>
+                        <Button Color="#FCA017" value="Customize" onClick={() => toCustomize(item)}/>
                       </div>
                     </div>
                   </div>

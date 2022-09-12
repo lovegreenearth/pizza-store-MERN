@@ -23,22 +23,11 @@ class Cart extends Component {
         activeCart: !prevState.activeCart
       }));
     }
-    
-    // this.props.items.map((item) => 
-    // {
-    //   let price = item.quantity * item.price;
-      
-    // })
-    // const arr = [5, 15, 45];
-    // const sum = arr.reduce((accumulator, value) => {
-    //   return accumulator + value;
-    // }, 0);
     const priceTotal = this.props.items.reduce((accumulator, value) => {
       
       return accumulator + value.price * value.quantity;
     }, 0)
-    console.log((priceTotal).toFixed(2))
-
+    console.log("priceTotal ----> ", priceTotal)
     const remove = () => {
       console.log("remove")
     }
@@ -101,7 +90,7 @@ class Cart extends Component {
                     }
                   </div>
               }              
-              <Button value ={"Check  Out"} />
+              <Button Color="#FCA017" value ={"Check  Out"} />
             </div>
           : ""
         }

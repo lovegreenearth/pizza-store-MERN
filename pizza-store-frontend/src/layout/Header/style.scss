@@ -1,14 +1,14 @@
 .header {
-  background-color: $bg-color1;
+  background-color: #FCA017;
 
   .top-nav {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: $bg-color1;
+    background-color: #FCA017;
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: $text-color3;
+    color: #ffffff;
     // height: 50px;
     padding: 10px 10px;
     max-width: 1600px;
@@ -70,7 +70,7 @@
   }
   
   #menu-toggle:checked + .menu-button-container .menu-button {
-    background: $bg-color1;
+    background: #FCA017;
   }
   
   #menu-toggle:checked + .menu-button-container .menu-button::after {
@@ -95,7 +95,7 @@
     align-items: center;
     margin-left: 20px;
     text-decoration: none;
-    color: $text-color3;
+    color: #ffffff;
 
     .icon-margin {
       margin-right: 10px;
@@ -138,7 +138,7 @@
       padding: 0.5em 0;
       width: 100%;
       color: white;
-      background-color: $bg-color1;
+      background-color: #FCA017;
     }
     .menu > li:not(:last-child) {
       border-bottom: 1px solid #fff;

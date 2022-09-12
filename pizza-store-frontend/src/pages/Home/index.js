@@ -11,7 +11,7 @@ const Home = () => {
   const [data, setData] = useState([])
   useEffect(
     () => {
-        fetch(`http://localhost:5000/menus`, {
+        fetch(`${localStorage.getItem('apiURL')}/menus`, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json"
@@ -57,7 +57,6 @@ const Home = () => {
               </div>
             )
           })
-          
         }
       </div>
     </div>

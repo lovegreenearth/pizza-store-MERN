@@ -1,6 +1,6 @@
 .customization-page {
   margin: 0 auto;
-  padding: 0 25px;
+  // padding: 0 25px;
 
   @media (max-width: 768px) {
     padding: 0 15px;
@@ -28,8 +28,6 @@
       align-items: center;
       justify-content: center;
       border-radius: 10px;
-      
-
       &:hover {
         cursor: pointer;
       }
@@ -65,7 +63,7 @@
   }
   .pizza-board {
     background-color: #fff;
-    max-width: 1200px;
+    max-width: 1600px;
     margin: auto;
     padding: 1rem 2rem;
     padding-bottom: 3rem;
@@ -81,23 +79,19 @@
 
     .configuration {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       margin-top: 3rem;
+      column-gap: 150px;
       @media only screen and (max-width: 860px) {
-        display: block;
+        display: grid;
         margin-top: 20px;
         .criteria {
           margin: 0px auto;
         }
         .pizza-piece {
-          // width: 30%;
+          width: 100%;
           margin: auto;
         }
-        // @media only screen and (max-width: 500px) {
-        //   .pizza-piece {
-        //     width: 50%;
-        //   }
-        // }
       }
       .criteria {
         width: 300px;
@@ -124,10 +118,14 @@
         .multiTopping {
           max-width: 100%;
           position:absolute;
-          top: 0px;
+          top: 10px;
           left: 0px;
+          @media only screen and (max-width: 850px) {
+            top: 10px;
+            left: 15px;
+          }
           img {
-            width: 100%;
+            width: 90%;
           }
         }
       }
@@ -192,7 +190,10 @@
       border-radius: 10px;
     }
   }
-
+  .sub-tab-content {
+    max-width: 1600px;
+    margin: auto;
+  }
   .ingredients {
     display: flex;
     flex-wrap: wrap;
@@ -394,7 +395,7 @@
       
     }
     .active {
-      width: 500px;
+      width: 484px;
       transition: all .5s ease-out;
       border: 3px solid #ee5a00;
       border-radius: 10px;

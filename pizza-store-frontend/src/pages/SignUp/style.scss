@@ -1,154 +1,150 @@
-.signup-container {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    color: $text-color1;
-    margin-bottom: 50px;
+.signUp-container {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #3C1C21;
+	margin-bottom: 50px;
 
-    .signup-header {
-        margin-top: 50px;
-        font-size: 30px;
-        font-weight: 900;
-    }
+	.signUp-header {
+		margin-top: 50px;
+		font-size: 30px;
+		font-weight: 900;
+	}
 
-    .signup-content {
-        display: flex;
-        justify-content: center;
+	.signUp-content {
+		display: flex;
+		justify-content: center;
 
-        .email-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+		.email-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
-            @media only screen and (max-width: $breakpoint-medium) {
-                display: block;
-            }
+			@media only screen and (max-width: $breakpoint-medium) {
+					display: block;
+			}
 
-            .signup-banner {
-                flex: 1;
-                padding: 50px;
-            }
+			.signUp-banner {
+				flex: 1;
+				padding: 50px;
+				img {
+					width: 100%;
+				}
+			}
 
-            .email {
-                flex: 1;
-                text-align: left;
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
+			.email {
+				flex: 1;
+				text-align: left;
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
 
-                @media only screen and (max-width: $breakpoint-medium) {
-                    text-align: center;
-                    max-width: 80%;
-                    margin-left: auto;
-                    margin-right: auto;
-                }
+				@media only screen and (max-width: $breakpoint-medium) {
+					text-align: center;
+					max-width: 80%;
+					margin-left: auto;
+					margin-right: auto;
+				}
 
-                span {
-                    color: #ff5656;
-                    margin-left: 5px;
-                    font-size: 12px;
-                }
+				span {
+					color: #ff5656;
+					margin-left: 5px;
+					font-size: 12px;
+				}
 
-                .first-name {
-                    label {}
+				.first-name {
+					input {
+						width: 90%;
+						border: none;
+						background-color: transparent;
+						border-bottom: 1px solid #ccd6d8;
+						margin-top: 10px;
+						font-size: 20px;
 
-                    input {
-                        width: 90%;
-                        border: none;
-                        background-color: transparent;
-                        border-bottom: 1px solid #ccd6d8;
-                        margin-top: 10px;
-                        font-size: 20px;
+						&:focus-visible {
+							outline: none;
+						}
+					}
+				}
 
-                        &:focus-visible {
-                            outline: none;
-                        }
-                    }
-                }
+				.last-name {
 
-                .last-name {
-                    label {}
+					input {
+						width: 90%;
+						border: none;
+						background-color: transparent;
+						border-bottom: 1px solid #ccd6d8;
+						margin-top: 10px;
+						font-size: 20px;
 
-                    input {
-                        width: 90%;
-                        border: none;
-                        background-color: transparent;
-                        border-bottom: 1px solid #ccd6d8;
-                        margin-top: 10px;
-                        font-size: 20px;
+						&:focus-visible {
+								outline: none;
+						}
+					}
+				}
 
-                        &:focus-visible {
-                            outline: none;
-                        }
-                    }
-                }
+				.email-input {
+					label {}
 
-                .email-input {
-                    label {}
+					input {
+						width: 90%;
+						border: none;
+						background-color: transparent;
+						border-bottom: 1px solid #ccd6d8;
+						margin-top: 10px;
+						font-size: 20px;
 
-                    input {
-                        width: 90%;
-                        border: none;
-                        background-color: transparent;
-                        border-bottom: 1px solid #ccd6d8;
-                        margin-top: 10px;
-                        font-size: 20px;
+						&:focus-visible {
+								outline: none;
+						}
+					}
+				}
 
-                        &:focus-visible {
-                            outline: none;
-                        }
-                    }
-                }
+				.password-input {
+					label {}
 
-                .password-input {
-                    label {}
+					input {
+						width: 90%;
+						border: none;
+						background-color: transparent;
+						border-bottom: 1px solid #ccd6d8;
+						margin-top: 10px;
+						font-size: 20px;
 
-                    input {
-                        width: 90%;
-                        border: none;
-                        background-color: transparent;
-                        border-bottom: 1px solid #ccd6d8;
-                        margin-top: 10px;
-                        font-size: 20px;
+						&:focus-visible {
+								outline: none;
+						}
+					}
+				}
 
-                        &:focus-visible {
-                            outline: none;
-                        }
-                    }
-                }
+				.password-confirm {
 
-                .password-confirm {
-                    label {}
+					input {
+						width: 90%;
+						border: none;
+						background-color: transparent;
+						border-bottom: 1px solid #ccd6d8;
+						margin-top: 10px;
+						font-size: 20px;
 
-                    input {
-                        width: 90%;
-                        border: none;
-                        background-color: transparent;
-                        border-bottom: 1px solid #ccd6d8;
-                        margin-top: 10px;
-                        font-size: 20px;
+						&:focus-visible {
+								outline: none;
+						}
+					}
+				}
 
-                        &:focus-visible {
-                            outline: none;
-                        }
-                    }
-                }
+				.show-forgot-container {
+					display: flex;
+					justify-content: space-between;
+					color: #FCA017;
+					width: 90%;
+				}
+			}
 
-                .show-forgot-container {
-                    display: flex;
-                    justify-content: space-between;
-                    color: $text-color2;
-                    width: 90%;
-
-                    .show-password {}
-
-                }
-            }
-
-            button {
-                margin-bottom: inherit;
-            }
-        }
+				button {
+						margin-bottom: inherit;
+				}
+      }
     }
 }
 

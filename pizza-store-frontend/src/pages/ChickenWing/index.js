@@ -20,9 +20,10 @@ const ChickenWings = () =>  {
   const wingSauce = chickenWingData.map((item) => item.name);
   const [ data, setData ] = useState({});
   const [ active, setActive ] = useState([])
+  const [ cartStatus, setCartStatus ] = useState(false)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/chickenWing`, {
+    fetch(`${localStorage.getItem('apiURL')}/chickenWing`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -44,6 +45,8 @@ const ChickenWings = () =>  {
       quantity: quantity,
     } 
     dispatch(addToChicken(newChicken))
+    setCartStatus(true)
+    console.log(cartStatus)
   }
   const getData = (title, item) => {
     setData({...data, [title]: item});
@@ -56,7 +59,7 @@ const ChickenWings = () =>  {
   return (
     <div className="chicken-content">
       <img className="background" src={ChickenWing} alt="ChickenWing" />
-      <div className="configuration">
+      <div className="chickenWing-config">
         <div className="blocks">
           <div className="chicken-title">{ JSON.parse(localStorage.getItem("product")).name }</div>
           <div className="block-group" >
@@ -69,7 +72,7 @@ const ChickenWings = () =>  {
                       <Quantity onChange={(qty) => setQuantity(qty)} />
                       <div className="price">{ "$ " + JSON.parse(localStorage.getItem("product")).price * quantity }</div>
                     </div>
-                    <Button value="ADD TO CART" onClick={() => addCart()} />
+                    <Button Color="#FCA017" HoverColor="#ffffff" value="ADD TO CART" onClick={() => addCart()} />
                   </div>
                 </div>
 
