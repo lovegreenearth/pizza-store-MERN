@@ -12,7 +12,7 @@ export default class ButtonOne extends Component {
 	render() {
 		return (
 			<div className="button">
-				<button style={{backgroundColor: this.props.Color, hover: this.props.HoverColor}} onClick={this.props.onClick}>{this.props.value}</button>
+				<button onClick={this.props.onClick}>{this.props.value}</button>
 			</div>
 	)
 	}

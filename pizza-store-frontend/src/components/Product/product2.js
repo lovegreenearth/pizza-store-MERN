@@ -23,7 +23,7 @@ export default class ProductTwo extends Component {
                     <div><div className="title">{this.props.title}</div>
                         <div className="desc">{this.props.desc}</div>
                         <div className="price">{this.props.price}</div>
-                        <Button Color="#FCA017"One onClick={this.clickEvent} value={this.props.button_value} />
+                        <Button onClick={this.clickEvent} value={this.props.button_value} />
                     </div>
                 </div>
             </div>

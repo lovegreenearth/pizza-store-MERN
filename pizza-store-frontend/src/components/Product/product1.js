@@ -17,7 +17,7 @@ export default class ProductOne extends Component {
 						<div className="title-button">
 							<div className="title">{this.props.title}</div>
 						</div>
-						<Button Color="#FCA017"One value={this.props.button_value} onClick={this.props.onClick} />
+						<Button value={this.props.button_value} onClick={this.props.onClick} />
 					</div>
 				</div>
 			</div>

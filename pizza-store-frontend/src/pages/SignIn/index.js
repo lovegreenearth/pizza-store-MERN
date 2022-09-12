@@ -75,7 +75,7 @@ export default class SignIn extends Component {
 
 							<div className="signIn-register-container">
 								<div className="signIn-button-container">
-										<Button Color="#FCA017" value="SIGN IN" onClick={this.onSignIn} />
+										<Button   value="SIGN IN" onClick={this.onSignIn} />
 								</div>
 								<div className="register-comment">
 										Don't have an account?

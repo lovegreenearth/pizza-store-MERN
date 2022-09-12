@@ -29,10 +29,10 @@ class Cart extends Component {
     }, 0)
     console.log("priceTotal ----> ", priceTotal)
     const remove = () => {
-      console.log("remove")
+      console.log("remove--->")
     }
-    const edit = () => {
-      console.log("edit")
+    const edit = (index) => {
+      console.log("edit", this.props.items[index].status)
     }
 
     return (
@@ -77,7 +77,7 @@ class Cart extends Component {
                               <div className='final'>
                                 <div className='remove-edit'>
                                   <div className='remove' onClick={remove}>remove</div>
-                                  <div className='edit' onClick={edit}>edit</div>
+                                  <div className='edit' onClick={() => edit(index)}>edit</div>
                                 </div>
                                 <div className='final-price'>
                                   {"$ " + c.price * c.quantity}
@@ -90,7 +90,7 @@ class Cart extends Component {
                     }
                   </div>
               }              
-              <Button Color="#FCA017" value ={"Check  Out"} />
+              <Button   value ={"Check  Out"} />
             </div>
           : ""
         }

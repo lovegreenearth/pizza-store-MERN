@@ -29,7 +29,10 @@ const {payload} = action;
       let itemChicken = state.items;
 
       if(indexChicken === -1) {
+        payload.status = true
         itemChicken = [...state.items, payload]
+
+        console.log("payload--->", state.items)
       } 
       return {
         items: itemChicken,

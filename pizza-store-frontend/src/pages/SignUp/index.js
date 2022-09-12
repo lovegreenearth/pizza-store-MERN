@@ -141,7 +141,7 @@ export default class SignUp extends Component {
                                 <div className="input"><input type="password" name="Uconfirmpassword" id="Uconfirmpassword" ref={this.confirmpwRef} /></div>
                             </div>
 
-                            <Button Color="#FCA017" value="SIGN UP" onClick={this.onSignUp}/>
+                            <Button   value="SIGN UP" onClick={this.onSignUp}/>
                         </div>
                     </div>
                 </div>

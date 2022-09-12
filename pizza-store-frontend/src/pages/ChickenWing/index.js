@@ -43,10 +43,11 @@ const ChickenWings = () =>  {
       name: JSON.parse(localStorage.getItem("product")).name,
       price: JSON.parse(localStorage.getItem("product")).price,
       quantity: quantity,
+      status: cartStatus,
     } 
     dispatch(addToChicken(newChicken))
     setCartStatus(true)
-    console.log(cartStatus)
+    console.log("cartStatus --->", cartStatus)
   }
   const getData = (title, item) => {
     setData({...data, [title]: item});
@@ -55,6 +56,9 @@ const ChickenWings = () =>  {
     setActive(active.map((_, _index) => index === _index ? true: false));
     setData({...data, "Wing Sauce(Select 1)(required)": item});
   }
+  console.log("JSON", JSON.parse(localStorage.getItem("product")).name)
+  console.log("JSON", JSON.parse(localStorage.getItem("product")).price)
+  
   
   return (
     <div className="chicken-content">
@@ -72,7 +76,7 @@ const ChickenWings = () =>  {
                       <Quantity onChange={(qty) => setQuantity(qty)} />
                       <div className="price">{ "$ " + JSON.parse(localStorage.getItem("product")).price * quantity }</div>
                     </div>
-                    <Button Color="#FCA017" HoverColor="#ffffff" value="ADD TO CART" onClick={() => addCart()} />
+                    <Button value={cartStatus ? "ADDED" : "ADD TO CART"} onClick={() => addCart()} />
                   </div>
                 </div>
 

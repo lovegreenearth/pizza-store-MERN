@@ -8,6 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #FCA017;
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -30,7 +31,7 @@
     }
 
     &:hover {
-      // background-color: #ffffff;
+      background-color: #ffffff;
       color: #FCA017;
       border: 1px solid #FCA017;
       transition-duration: 0.3s, 0.5s;

@@ -65,7 +65,7 @@ const Product = () => {
                       <div className='content-desc'>{item.bonus}</div>
                       <div className='content-footer'>
                         <div className='cals'>Staring from $ {item.price}</div>
-                        <Button Color="#FCA017" value="Customize" onClick={() => toCustomize(item)}/>
+                        <Button   value="Customize" onClick={() => toCustomize(item)}/>
                       </div>
                     </div>
                   </div>
