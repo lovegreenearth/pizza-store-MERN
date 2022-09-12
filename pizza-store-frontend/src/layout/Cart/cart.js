@@ -23,20 +23,45 @@ class Cart extends Component {
         activeCart: !prevState.activeCart
       }));
     }
+    
+    // this.props.items.map((item) => 
+    // {
+    //   let price = item.quantity * item.price;
+      
+    // })
+    // const arr = [5, 15, 45];
+    // const sum = arr.reduce((accumulator, value) => {
+    //   return accumulator + value;
+    // }, 0);
+    const priceTotal = this.props.items.reduce((accumulator, value) => {
+      
+      return accumulator + value.price * value.quantity;
+    }, 0)
+    console.log((priceTotal).toFixed(2))
+
     const remove = () => {
       console.log("remove")
     }
     const edit = () => {
       console.log("edit")
     }
+
     return (
       <div className='cart'>
         <div className='cart-header'>
           <div className='small'>
-            <div className='empty'>
-              <img src={Basket} alt="basket" />
-              <div className='cart-status'>Empty Cart</div>
-            </div>
+            {
+              this.props.items.length > 0 
+              ? <div className='fill'>
+                  <img src={Basket} alt="basket" />
+                  <div className='fill-status'>{this.props.items.length + " items"}</div>
+                </div>
+              : <div className='empty'>
+                  <img src={Basket} alt="basket" />
+                  <div className='empty-status'>Empty Cart</div>
+                </div>
+            }
+            
             <button className='toggle-button' onClick={() => handleUpCart()}>
               {
                 this.state.activeCart ? <AiOutlineDown /> : <AiOutlineUp />

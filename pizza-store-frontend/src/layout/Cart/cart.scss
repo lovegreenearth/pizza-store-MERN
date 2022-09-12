@@ -20,18 +20,29 @@ $cart-L-size: 450px;
       display: flex;
       justify-content: space-between;
       align-items: center ;
-      padding: 5px 10px;
+      padding: 15px 30px;
       width: 100%;
       display: flex;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
+      .fill {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        .fill-status {
+          font-size: 18px;
+          font-weight: 800;
+          color: white;
+        }
+      }
       .empty {
         display: flex;
         justify-content: center;
         align-items: center;
         gap:  20px;
 
-        .cart-status {
+        .empty-status {
           font-size: 18px;
           font-weight: 800;
           color: white;

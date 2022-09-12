@@ -65,7 +65,8 @@
   }
   .pizza-board {
     background-color: #fff;
-    max-width: 100%;
+    max-width: 1200px;
+    margin: auto;
     padding: 1rem 2rem;
     padding-bottom: 3rem;
     text-align: center;
@@ -89,14 +90,14 @@
           margin: 0px auto;
         }
         .pizza-piece {
-          width: 30%;
+          // width: 30%;
           margin: auto;
         }
-        @media only screen and (max-width: 500px) {
-          .pizza-piece {
-            width: 50%;
-          }
-        }
+        // @media only screen and (max-width: 500px) {
+        //   .pizza-piece {
+        //     width: 50%;
+        //   }
+        // }
       }
       .criteria {
         width: 300px;
@@ -125,6 +126,9 @@
           position:absolute;
           top: 0px;
           left: 0px;
+          img {
+            width: 100%;
+          }
         }
       }
 
@@ -351,9 +355,14 @@
       }
       .selected {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        padding-right: 20px;
         .baseSauce-img-selected {
           width: 40%;
+          display: flex;
+          img {
+            width: 100%;
+          }
         }
         .baseSauce-detail-selected {
           margin-top: 20px;
