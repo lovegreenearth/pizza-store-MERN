@@ -11,6 +11,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import Quantity from "../../components/Button/qty";
 import Button from "../../components/Button/button1";
 import { customizeData } from "./data";
+import { connect } from 'react-redux';
 
 import StaticDough from "../../assets/img/Dough/Regular Dough.png";
 import StaticSauce from "../../assets/img/BaseSauce/Buffalo.png";
@@ -159,6 +160,9 @@ class Customization extends Component {
     
     const price= (this.state.priceBase + this.state.priceTopping).toFixed(2)
 
+    const name = JSON.parse(localStorage.getItem("product")).name;
+    const isAdded = this.props.items.findIndex(v => v.name === name) === -1;
+
     return <div className="pizza-board">
       <div className="title">{this.state.baseData.name}</div>
       <div className="configuration">
@@ -201,7 +205,10 @@ class Customization extends Component {
             </div>
             {/* <div className="desc">{ total_desc }</div> */}
             <div className="cart-button">
-              <Button value="ADD TO CART" onClick={() => addPizza()} />
+              <Button Class={"pizza-Btn" + (!isAdded ? " active" :"")} 
+                      value={!isAdded ? "ADDED" : "ADD TO CART"} 
+                      onClick={() => addPizza()} 
+                      status={!isAdded ? true : false}/>
             </div>
           </div>
         </div>
@@ -238,7 +245,6 @@ class Customization extends Component {
         selection.dough = dough.name;
         return { selection };
       })
-      console.log("this.state.selection ---> ", this.state.selection)
     }
     const handleSauce = (sauce) =>  {
       this.setState({activeBaseSauce: sauce._id})
@@ -247,7 +253,6 @@ class Customization extends Component {
         selection.sauce = sauce.name;
         return { selection };
       })
-      console.log("this.state.selection ---> ", this.state.selection)
     };
     const handleCheese = (cheese) =>  {
       this.setState({activeBaseCheese: cheese._id})
@@ -995,4 +1000,16 @@ class Customization extends Component {
   }
 }
 
-export default Customization
+const mapStateToProps = state => {
+  return {
+    items: state.items,
+  }
+}
+
+const mapStateToDispatch = dispatch => {
+  return {
+    dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapStateToDispatch)(Customization);

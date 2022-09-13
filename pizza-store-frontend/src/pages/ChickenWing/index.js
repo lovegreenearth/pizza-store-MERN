@@ -6,11 +6,11 @@ import Button from "../../components/Button/button1";
 import ChickenWing from "../../assets/img/classic-buffalo-wings.png"
 import Basic from "../../assets/img/traditional-chickenWing.png"
 import { BsCheckCircleFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToChicken } from "../../redux/actions";
 
 
-const ChickenWings = () =>  {
+const ChickenWings = (props) =>  {
   const [ chickenWingData, setChickenWingData ] = useState([]);
   const [ quantity, setQuantity ] = useState(1)
   const chickenWings = [ "Tossed Sauce", "Onside Sauce" ];
@@ -20,7 +20,6 @@ const ChickenWings = () =>  {
   const wingSauce = chickenWingData.map((item) => item.name);
   const [ data, setData ] = useState({});
   const [ active, setActive ] = useState([])
-  const [ cartStatus, setCartStatus ] = useState(false)
 
   useEffect(() => {
     fetch(`${localStorage.getItem('apiURL')}/chickenWing`, {
@@ -43,11 +42,8 @@ const ChickenWings = () =>  {
       name: JSON.parse(localStorage.getItem("product")).name,
       price: JSON.parse(localStorage.getItem("product")).price,
       quantity: quantity,
-      status: cartStatus,
     } 
     dispatch(addToChicken(newChicken))
-    setCartStatus(true)
-    console.log("cartStatus --->", cartStatus)
   }
   const getData = (title, item) => {
     setData({...data, [title]: item});
@@ -56,9 +52,10 @@ const ChickenWings = () =>  {
     setActive(active.map((_, _index) => index === _index ? true: false));
     setData({...data, "Wing Sauce(Select 1)(required)": item});
   }
-  console.log("JSON", JSON.parse(localStorage.getItem("product")).name)
-  console.log("JSON", JSON.parse(localStorage.getItem("product")).price)
   
+  const name = JSON.parse(localStorage.getItem("product")).name;
+  const carts = useSelector(state => state.items);
+  const isAdded = carts.findIndex(v => v.name === name) === -1;
   
   return (
     <div className="chicken-content">
@@ -74,9 +71,12 @@ const ChickenWings = () =>  {
                   <div className="add-cart">
                     <div className="quantity-price">
                       <Quantity onChange={(qty) => setQuantity(qty)} />
-                      <div className="price">{ "$ " + JSON.parse(localStorage.getItem("product")).price * quantity }</div>
+                      <div className="price">{ "$ " + (JSON.parse(localStorage.getItem("product")).price * quantity).toFixed(2) }</div>
                     </div>
-                    <Button value={cartStatus ? "ADDED" : "ADD TO CART"} onClick={() => addCart()} />
+                    <Button Class={"chicken-Btn" + (!isAdded ? " active" :"")} 
+                      value={!isAdded ? "ADDED" : "ADD TO CART"} 
+                      onClick={() => addCart()} 
+                      status={!isAdded ? true : false}/>
                   </div>
                 </div>
 

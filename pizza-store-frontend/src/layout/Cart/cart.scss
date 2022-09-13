@@ -31,8 +31,8 @@ $cart-L-size: 450px;
         align-items: center;
         gap: 20px;
         .fill-status {
-          font-size: 18px;
-          font-weight: 800;
+          font-size: 25px;
+          font-weight: 700;
           color: white;
         }
       }
@@ -43,17 +43,20 @@ $cart-L-size: 450px;
         gap:  20px;
 
         .empty-status {
-          font-size: 18px;
-          font-weight: 800;
+          font-size: 25px;
+          font-weight: 700;
           color: white;
         }
       }
-      .toggle-button {
-        border: none;
-        background-color: #FCA017;
-        color: white;
-        font-size: 20px;
-        font-weight: 800;
+      .price-toggle {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        .priceTotal {
+          color: white;
+          font-size: 25px;
+          font-weight: 700;
+        }
       }
     }
     
@@ -61,18 +64,25 @@ $cart-L-size: 450px;
   .cart-content {
     width: 100%;
     padding: 10px 10px;
-    background-color: white;
+    background-color: #FFFFFF;
     .empty-cart {
-      font-size: 100px;
-    }
-    button {
-      margin-top: 30px;
-      background-color: #FCA017;
-      width: 100%;
-      &:hover {
+      .comment {
         color: black;
-        border: 1px solid black;
+        font-size: 15px;
+        font-weight: 400;
+        text-align: left;
+        margin-top: 30px;
+        margin-left: 40px;
       }
+      .cart-img {
+        margin-top: 60px;
+        margin-bottom: 60px;
+      }
+    }
+    
+    button {
+      margin-bottom: 0px;
+      width: 100%;
     }
     .cart-detail {
       display: grid;

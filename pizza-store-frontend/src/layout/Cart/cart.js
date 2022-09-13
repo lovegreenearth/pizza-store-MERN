@@ -1,102 +1,128 @@
-import React, { Component } from 'react';
-import { AiOutlineUp } from "react-icons/ai"
-import { AiOutlineDown } from "react-icons/ai"
+import { React, useState } from "react"
+import { useSelector } from 'react-redux';
 import "./cart.scss"
 import Button from "../../components/Button/button1"
 import { connect } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeToProduct } from "../../redux/actions";
 
 import Static from "../../assets/img/cart-small.png"
 import Basket from "../../assets/img/Vector.png";
+import EmptyCart from "../../assets/img/emptyCart.png"
+import ArrowDown from "../../assets/img/arrowDown.png"
+import ArrowUp from "../../assets/img/arrowUp.png"
 
-class Cart extends Component {
-  constructor(props) {
-    super(props);
+const Cart = () => {
+  const [activeCart, setActiveCart] = useState(false)
+  const items = useSelector((state) => state.items) 
+  let navigate = useNavigate();
 
-    this.state = {
-      activeCart: false
-    }
+  const handleUpCart = () => {
+    setActiveCart(activeCart => !activeCart);
   }
 
-  render() {
-    const handleUpCart = () => {
-      this.setState(prevState => ({
-        activeCart: !prevState.activeCart
-      }));
-    }
-    const priceTotal = this.props.items.reduce((accumulator, value) => {
-      
-      return accumulator + value.price * value.quantity;
-    }, 0)
-    console.log("priceTotal ----> ", priceTotal)
-    const remove = () => {
-      console.log("remove--->")
-    }
-    const edit = (index) => {
-      console.log("edit", this.props.items[index].status)
-    }
+  const priceTotal = items.reduce((accumulator, value) => {
+    return accumulator + value.price * value.quantity;
+  }, 0)
 
-    return (
-      <div className='cart'>
-        <div className='cart-header'>
-          <div className='small'>
+  const dispatch = useDispatch();
+
+  const remove = (index) => {
+    const removeProduct = {
+      index: index,
+    }
+    dispatch(removeToProduct(removeProduct))
+  }
+
+  const edit = (index) => {
+    console.log("edit")
+  }
+
+  const checkOut =() => {
+    if(items.length > 0){
+      navigate("/CheckOut");
+    } 
+  }
+
+  return (
+    <div className='cart'>
+      <div className='cart-header'>
+        <div className='small'>
+          {
+            items.length > 0 
+            ? <div className='fill'>
+                <img src={Basket} alt="basket" />
+                <div className='fill-status'>{items.length + " items"}</div>
+              </div>
+            : <div className='empty'>
+                <img src={Basket} alt="basket" />
+                <div className='empty-status'>Empty Cart</div>
+              </div>
+          }
+          
+          <div className="price-toggle">
             {
-              this.props.items.length > 0 
-              ? <div className='fill'>
-                  <img src={Basket} alt="basket" />
-                  <div className='fill-status'>{this.props.items.length + " items"}</div>
-                </div>
-              : <div className='empty'>
-                  <img src={Basket} alt="basket" />
-                  <div className='empty-status'>Empty Cart</div>
-                </div>
+              items.length > 0 
+              ? <div className="priceTotal">{"$"+ (priceTotal).toFixed(2)}</div>
+              : ''
             }
             
-            <button className='toggle-button' onClick={() => handleUpCart()}>
+            <div onClick={() => handleUpCart()}>
               {
-                this.state.activeCart ? <AiOutlineDown /> : <AiOutlineUp />
+                activeCart ? <img src={ArrowDown} alt="Down" /> : <img src={ArrowUp} alt="Up" />
               }
-            </button>
+            </div>
           </div>
         </div>
-        {
-          this.state.activeCart
-          ?
-            <div className='cart-content'>
-              {
-                this.props.items.length === 0
-                ? <img className='empty-cart' src={Basket} alt="basket" />
-                : <div className='cart-detail'> 
-                    {
-                      this.props.items.map((c, index) => {
-                        return (
-                          <div className='cart-individual' key={index}>
-                            <div className='image'><img src={Static} alt="cart-small" /></div>
-                            <div className='content'>
-                              <div className='title'>{c.name}</div>
-                              <div className='desc'>This is the most delicious chicken wings in this world</div>
-                              <div className='final'>
-                                <div className='remove-edit'>
-                                  <div className='remove' onClick={remove}>remove</div>
-                                  <div className='edit' onClick={() => edit(index)}>edit</div>
+      </div>
+      {
+        activeCart
+        ?
+          <div className='cart-content'>
+            {
+              items.length === 0
+              ? 
+                <div className="empty-cart">
+                  <div className="comment">Please Add to Cart</div>
+                  <img className='cart-img' src={EmptyCart} alt="basket" />
+                  <Button value ={"Check Out"} onClick={checkOut} status={true} />
+                </div>
+              : <div className='cart-detail'> 
+                  {
+                    items.map((c, index) => {
+                      return (
+                        <div className='cart-individual' key={index}>
+                          <div className='image'><img src={Static} alt="cart-small" /></div>
+                          <div className='content'>
+                            <div className='title'>{c.name}</div>
+                            <div className='desc'>This is the most delicious chicken wings in this world</div>
+                            <div className='final'>
+                              <div className='remove-edit'>
+                                <div className='remove' onClick={() =>remove(index)}>
+                                  remove
                                 </div>
-                                <div className='final-price'>
-                                  {"$ " + c.price * c.quantity}
-                                </div>
+                                <div className='edit' onClick={() => edit(index)}>edit</div>
+                              </div>
+                              <div className='final-price'>
+                                {"$ " + c.price * c.quantity}
                               </div>
                             </div>
                           </div>
-                        )
-                      })
-                    }
-                  </div>
-              }              
-              <Button   value ={"Check  Out"} />
-            </div>
-          : ""
-        }
-      </div>
-    )
-  }
+                        </div>
+                      )
+                    })
+                  }
+                  <Button value ={"Check Out"} onClick={checkOut} />
+                </div>
+            }              
+            
+          </div>
+        : ""
+      }
+    </div>
+  )
+  
 }
 
 const mapStateToProps = state => {

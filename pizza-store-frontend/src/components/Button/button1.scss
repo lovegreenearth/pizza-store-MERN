@@ -17,6 +17,7 @@
     font-size: 1.2rem;
     font-weight: 100;
     margin-bottom: 30px;
+    
     @media only screen and (max-width: $x-size) {
       margin-bottom: 0;
     }
@@ -37,5 +38,21 @@
       transition-duration: 0.3s, 0.5s;
       cursor: pointer;
     }
+    &:disabled,
+    &[disabled]{
+      background-color: #F3F3F3;
+      border: 1px solid #F3F3F3;
+      color: #9D9B9B;
+    }
   }
+  .active{
+    background-color: #4e7026;
+    color: #ffffff;
+  }
+  .active:disabled,
+    .active[disabled]{
+      background-color: #4e7026;
+      border: 1px solid #4e7026;
+      color: white;
+    }
 }

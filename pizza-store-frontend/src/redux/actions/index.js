@@ -12,4 +12,11 @@ export function addToChicken(newChicken) {
   }
 }
 
+export function removeToProduct(removeProduct) {
+  return {
+    type: 'REMOVE_PRODUCT',
+    payload: removeProduct,
+  }
+}
+
 
