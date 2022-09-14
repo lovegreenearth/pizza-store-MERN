@@ -17,23 +17,24 @@ const ChickenWings = (props) =>  {
   const wingStyle = [ "Bread", "Non-Breaded" ];
   const amountSauce = [ "Regular Sauce on Wings", "Light Sauce on Wings", "Extra Sauce on Wings" ];
   const garlicSauce = [ "Garlic Bread Plair", "Garlic Bread Cheese" ];
+  const [ wingSauceData, setWingSauceData ] = useState([])
   const wingSauce = chickenWingData.map((item) => item.name);
   const [ data, setData ] = useState({});
   const [ active, setActive ] = useState([])
 
   useEffect(() => {
-    fetch(`${localStorage.getItem('apiURL')}/chickenWing`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        }
+    fetch(`${localStorage.getItem('apiURL')}/chickenWingSauce`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
     .then(res =>res.json())
     .then(data => {
         setChickenWingData(data)
         setActive(Array(data.length).fill(false))
     })
-  }, [])
+    }, [])
 
   const dispatch = useDispatch();
 
@@ -48,9 +49,25 @@ const ChickenWings = (props) =>  {
   const getData = (title, item) => {
     setData({...data, [title]: item});
   }
-  const selectOption = (index, item) => {
-    setActive(active.map((_, _index) => index === _index ? true: false));
-    setData({...data, "Wing Sauce(Select 1)(required)": item});
+
+  let select = [...wingSauceData]
+  const selectOption = (item, index) => {
+    if(select.filter(c => c === item).length > 0) {
+      const index = select.indexOf(select.filter(c => c === item)[0]);
+      select.splice(index, 1);
+    } else {
+      select.push(item);
+    }
+    setWingSauceData(select);
+
+    let activeSelect = [...active]
+    
+    if(activeSelect[index] === false) {
+      activeSelect[index] = true
+    } else {
+      activeSelect[index] = false
+    }
+    setActive(activeSelect)
   }
   
   const name = JSON.parse(localStorage.getItem("product")).name;
@@ -88,6 +105,14 @@ const ChickenWings = (props) =>  {
                         <div className="txt">{value}</div>
                       </div>
                   )}
+                  {
+                    wingSauceData.map((item) => 
+                      <div className="option" key={item}>
+                        <div><BsCheckCircleFill /></div>
+                        <div className="txt">{item}</div>
+                      </div>
+                  )}
+
                 </div>
               </div>
             </div>
@@ -96,18 +121,25 @@ const ChickenWings = (props) =>  {
               <div className="top-bottom">
                 <div className="top-block">
                   <Radio title="12 Chicken Wings" content={chickenWings} onChange={getData} />
-                  <Radio title="Wings Style(required)" content={wingStyle} onChange={getData}  />
-                  <Radio title="Amount of Sauce(required)" content={amountSauce} onChange={getData}  />
-                  <Radio title="Garlic Bread(required)" content={garlicSauce} onChange={getData}  />
+                  <Radio title="Wings Style" content={wingStyle} onChange={getData}  />
+                  <Radio title="Amount of Sauce" content={amountSauce} onChange={getData}  />
+                  <Radio title="Garlic Bread" content={garlicSauce} onChange={getData}  />
                 </div>
                 <div className="bottom-block" style={{border: active.filter(c => c === true).length === 1 ? "2px solid #FCA017" : "1px solid #FCA017" }} >
                   <div className="bottom-content">
-                    <div className="bottom-title">Wing Sauce(Select 1)(required)</div>
+                    <div className="title-group">
+                      <div className="bottom-title">Wing Sauce(Select {JSON.parse(localStorage.getItem("product")).index + 1})<span>(required)</span></div>
+                      {
+                        active.filter(c => c === true).length > JSON.parse(localStorage.getItem("product")).index + 1
+                        ? <div className="alert-msg">You can select only 3 Sauces</div>
+                        : ""
+                      }
+                    </div>
                     <div className="option-group">
                       {
                         wingSauce.map((item, index) => {
                           return (
-                            <div key={index} className='new-option' onClick={() => selectOption(index, item)}>
+                            <div key={index} className='new-option' onClick={() => selectOption(item, index)}>
                               {
                                 active[index] ? <BsCheckCircleFill style={{color: "#FCA017"}} /> : <div className='new-check' />
                               }

@@ -6,6 +6,8 @@ import { BsCircleHalf } from "react-icons/bs"
 import { BsCircleFill } from "react-icons/bs"
 import { BiDollarCircle } from "react-icons/bi"
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+import { IoIosRadioButtonOn } from "react-icons/io"
+import { BiAdjust } from "react-icons/bi"; 
 import images from '../../constant';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Quantity from "../../components/Button/qty";
@@ -103,6 +105,7 @@ class Customization extends Component {
         })
         this.state.toppingVeggieData.forEach(object => {
           object.count = 1;
+          object.status = [false, true, false]
         });
 
         this.setState({
@@ -110,6 +113,7 @@ class Customization extends Component {
         })
         this.state.toppingMeatData.forEach(object => {
           object.count = 1;
+          object.status = [false, true, false]
         });
 
         this.setState({
@@ -117,6 +121,7 @@ class Customization extends Component {
         })
         this.state.toppingCheeseData.forEach(object => {
           object.count = 1;
+          object.status = [false, true, false]
         });
     })
   }
@@ -480,8 +485,16 @@ class Customization extends Component {
       let tempToppingBase = [...this.state.toppingBase];
       tempToppingBase[index] = StaticLeft;
 
+      let veggieData = [...this.state.toppingVeggieData]
+      veggieData.forEach((ing) => {
+        if(ing.name === veggie.name) {
+          veggie.status = [true, false, false]
+        }
+      })
+
       this.setState({
-        toppingBase: tempToppingBase
+        toppingBase: tempToppingBase,
+
       })
     }
     const addWholeImage = (e, veggie) => {
@@ -495,8 +508,16 @@ class Customization extends Component {
       })
       let tempToppingBase = [...this.state.toppingBase];
       tempToppingBase[index] = StaticWhole;
+
+      let veggieData = [...this.state.toppingVeggieData]
+      veggieData.forEach((ing) => {
+        if(ing.name === veggie.name) {
+          veggie.status = [false, true, false]
+        }
+      })
+
       this.setState({
-        toppingBase: tempToppingBase
+        toppingBase: tempToppingBase,
       })
     }
     const addRightImage = (e, veggie) => {
@@ -510,8 +531,16 @@ class Customization extends Component {
       })
       let tempToppingBase = [...this.state.toppingBase];
       tempToppingBase[index] = StaticRight;
+
+      let veggieData = [...this.state.toppingVeggieData]
+      veggieData.forEach((ing) => {
+        if(ing.name === veggie.name) {
+          veggie.status = [false, false, true]
+        }
+      })
+
       this.setState({
-        toppingBase: tempToppingBase
+        toppingBase: tempToppingBase,
       })
     }
     const calculatePrice = (nameSelect) => {
@@ -631,9 +660,9 @@ class Customization extends Component {
                         <div className="baseSauce-detail-selected">
                           <div className="baseSauce-title-selected">{veggie.name}</div>
                           <div className="icon-half">
-                            <button onClick={(e) => addLeftImage(e, veggie)}><BsCircleHalf /></button>
-                            <button onClick={(e) => addWholeImage(e, veggie)}><BsCircleFill /></button>
-                            <button className="flip" onClick={(e) => addRightImage(e, veggie)}><BsCircleHalf /></button>
+                            <button className={ "flip left-button" + (veggie.status[0] ? " activeBtn": "")} onClick={(e) => addLeftImage(e, veggie)}><BiAdjust /></button>
+                            <button className={ "whole-button" + (veggie.status[1] ? " activeBtn": "")} onClick={(e) => addWholeImage(e, veggie)}><IoIosRadioButtonOn /></button>
+                            <button className={ "right-button" + (veggie.status[2] ? " activeBtn": "")} onClick={(e) => addRightImage(e, veggie)}><BiAdjust /></button>
                           </div>
                           <div className="price">
                             <BiDollarCircle className="icon" /> 

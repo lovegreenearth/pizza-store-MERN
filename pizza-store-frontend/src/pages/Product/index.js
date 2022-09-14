@@ -36,7 +36,8 @@ const Product = () => {
     })
   }, [])
 
-  const toCustomize = (product) => {
+  const toCustomize = (product, index) => {
+    product["index"] = index
     localStorage.setItem('product', JSON.stringify(product));
     if (params.id === '62f34ad91394ef1158cfab66') {
       navigate("/chickenWings");
@@ -65,7 +66,7 @@ const Product = () => {
                       <div className='content-desc'>{item.bonus}</div>
                       <div className='content-footer'>
                         <div className='cals'>Staring from $ {item.price}</div>
-                        <Button   value="Customize" onClick={() => toCustomize(item)}/>
+                        <Button   value="Customize" onClick={() => toCustomize(item, index)}/>
                       </div>
                     </div>
                   </div>

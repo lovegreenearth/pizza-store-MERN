@@ -6,6 +6,10 @@
     color: black;
     font-weight: bold;
     text-align: left;
+    span {
+      color: grey;
+      font-size: 12px;
+    }
   }
   .radio-option {
     display: flex;

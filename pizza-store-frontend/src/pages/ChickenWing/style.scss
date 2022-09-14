@@ -121,11 +121,29 @@
             border-radius: 10px;
             .bottom-content {
               padding: 10px 10px;
-              .bottom-title {
-                font-size: 15px;
-                font-weight: 600;
-                text-align: left;
-                padding: 0px;
+              .title-group {
+                display: flex;
+                align-items: center;
+                column-gap: 30px;
+                row-gap: 10px;
+                @media only screen and (max-width: 500px) {
+                  display: grid;
+                  text-align: left;
+                }
+                .bottom-title {
+                  font-size: 15px;
+                  font-weight: 600;
+                  text-align: left;
+                  padding: 0px;
+                  span {
+                    color: gray;
+                    font-size: 12px;
+                  }
+                }
+                .alert-msg {
+                  color: red;
+                  font-size: 12px;
+                }
               }
               .option-group {
                 display: flex;

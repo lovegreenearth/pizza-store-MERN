@@ -213,16 +213,20 @@
     }
     .icon-half {
       display: flex;
-      column-gap: 15px;
+      justify-content: space-between;
       button {
         border: none;
-        color: #4e7026;
+        color: gray;
         background: none;
         font-size: 25px;
+        padding: 0px;
       }
       .flip {
         -webkit-transform: scaleX(-1);
         transform: scaleX(-1);
+      }
+      .activeBtn {
+        color: #4e7026;
       }
     }
     .price {
