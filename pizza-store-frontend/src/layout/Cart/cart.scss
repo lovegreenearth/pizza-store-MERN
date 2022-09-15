@@ -16,7 +16,7 @@ $cart-L-size: 450px;
     display: flex;
     justify-content: flex-end;
     .small {
-      background-color: #FCA017;
+      background-color: #f19307;
       display: flex;
       justify-content: space-between;
       align-items: center ;
@@ -125,9 +125,11 @@ $cart-L-size: 450px;
               color: #ee5a00;
               .remove {
                 font-weight: 500;
+                cursor: pointer;
               }
               .edit {
                 font-weight: 500;
+                cursor: pointer;
               }
             }
             .final-price {

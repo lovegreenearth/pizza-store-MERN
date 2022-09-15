@@ -7,16 +7,18 @@
     align-items: center;
     justify-content: space-between;
     background-color: #FCA017;
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: #ffffff;
-    // height: 50px;
-    padding: 10px 10px;
+    padding: 10px 0px;
     max-width: 1600px;
     margin: 0 auto;
+    @media only screen and (max-width: 1600px) {
+      padding: 10px 10px;
+    }
   }
   
   .menu {
     display: flex;
+    align-items: center;
     flex-direction: row;
     list-style-type: none;
     margin: 0;
