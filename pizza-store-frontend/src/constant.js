@@ -1,5 +1,4 @@
 import logo from './assets/img/logo.png';
-import footerLogo from './assets/img/footer-logo.png';
 import item from './assets/img/item.png';
 import smallBannner from './assets/img/small_card_banner.png';
 import initialPizza from './assets/img/initial.png';
@@ -655,11 +654,6 @@ const logoImg = {
   alt: 'logo'
 }
 
-const footerLogoImg = {
-  src: footerLogo,
-  alt: 'footerLogo'
-}
-
 const itemImg = {
   src: item,
   alt: 'item'
@@ -762,7 +756,6 @@ const texasbbq = {
 
 export default {
   logoImg,
-  footerLogoImg,
   itemImg,
   smallCardImg,
   initialPizzaImg,

@@ -1,26 +1,13 @@
 import React, { Component } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import images from '../../constant';
-
+import FooterLogo from "../../assets/img/footer-logo.png"
 class Footer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    }
-  }
-
   render() {
     return <div className='footer'>
       <div className='content'>
         <div className='navbar'>
           <div className='logo'>
-            <LazyLoadImage
-              alt={images.footerLogoImg.alt}
-              src={images.footerLogoImg.src}
-            />
+            <img src={FooterLogo} alt="footer-logo" />
           </div>
           <div className='footer-container'>
             <div className='footer-link'>

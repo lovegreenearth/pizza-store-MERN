@@ -1,4 +1,3 @@
-@import '../../assets/css/variable.scss';
 @import '../../assets/css/responsive.scss';
 
 .quantity-input {
@@ -10,7 +9,7 @@
     .quantity-input__modifier {
         background-color: transparent;
         border: none;
-        color: $text-color2;
+        color: #FCA017;
         font-size: 30px;
         cursor: pointer;
     }
@@ -20,8 +19,8 @@
         width: 45px;
         height: 45px;
         border: none;
-        background-color: $bg-color1;
-        color: $text-color3;
+        background-color: #FCA017;
+        color: #ffffff;
         border-radius: 5px;
         font-size: 30px;
     }

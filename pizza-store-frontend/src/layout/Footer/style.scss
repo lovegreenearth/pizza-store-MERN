@@ -1,16 +1,21 @@
 .footer {
-  background-color: $bg-color1;
-  color: $text-color1;
+  background-color: #FCA017;
+  color: #3C1C21;
   clear: both;
   .content {
-    padding: 90px 0px;
+    padding: 90px 50px;
+    @media only screen and (max-width: $breakpoint-medium) {
+      padding: 70px 0px;
+    }
 
     .navbar {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
-
+      max-width: 1600px;
+      padding: 0px 10px;
+      margin: auto;
       .logo {
         width: 12%;
       }
@@ -26,13 +31,13 @@
           width: 50%;
   
           .footer-link-title {
-            color: $text-color1;
+            color: #3C1C21;
             text-decoration: none;
             font-size: 30px;
           }
   
           .footer-link-text {
-            color: $text-color1;
+            color: #3C1C21;
             text-decoration: none;
             font-size: 18px;
           }

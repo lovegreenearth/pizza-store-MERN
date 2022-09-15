@@ -14,51 +14,51 @@
       }
 
       .header-1 {
-        font-size: $font-size-50;
+        font-size: 50px;
         color: #3c1c21;
         font-weight: 500;
         margin-bottom: 30px;
 
         @media only screen and (max-width: $s-size) {
-          font-size: $font-size-35
+          font-size: 35px
         }
       }
 
       span {
-        color: $text-color2;
+        color: #FCA017;
       }
 
       .header-2 {
-        font-size: $font-size-30;
+        font-size: 30px;
         color: #3c1c21;
         margin-bottom: 50px;
         line-height: 40px;
 
         @media only screen and (max-width: $s-size) {
-          font-size: $font-size-20
+          font-size: 20px
         }
       }
 
       .header-3 {
-        font-size: $font-size-15;
-        color: $text-color1;
+        font-size: 15px;
+        color: #3C1C21;
       }
 
       .price {
-        font-size: $font-size-50;
+        font-size: 50px;
         font-weight: 500;
         color: #fca017;
-        border-bottom: 2px solid $text-color2;
+        border-bottom: 2px solid #FCA017;
         text-align: right;
       }
 
       button {
-        color: $text-color3;
-        background-color: $text-color2;
+        color: #ffffff;
+        background-color: #FCA017;
         border: none;
         width: 172px;
         height: 39px;
-        font-size: $font-size-20;
+        font-size: 20px;
         margin-top: 30px;
         border-radius: 5px;
         cursor: pointer;

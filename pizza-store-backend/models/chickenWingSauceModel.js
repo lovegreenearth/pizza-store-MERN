@@ -1,7 +1,7 @@
 const { ObjectId } = require("mongoose");
 const mongoose = require("mongoose");
 
-const chickenWingSchema = new mongoose.Schema({
+const chickenWingSauceSchema = new mongoose.Schema({
   name: { 
     type: String, 
     required: true, 
@@ -9,4 +9,4 @@ const chickenWingSchema = new mongoose.Schema({
   },
 });
 
-module.exports = ChickenWing = mongoose.model("chickenWing", chickenWingSchema);
+module.exports = ChickenWingSauce = mongoose.model("chickenWingSauce", chickenWingSauceSchema);

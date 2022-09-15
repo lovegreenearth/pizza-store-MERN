@@ -13,10 +13,6 @@ export const customizeData = {
     },
     {
       id: 3,
-      name: 'Extra Flaviour Toppings'
-    },
-    {
-      id: 4,
       name: 'Special Introduction'
     }
   ],

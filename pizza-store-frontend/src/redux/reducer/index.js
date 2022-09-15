@@ -29,11 +29,19 @@ const {payload} = action;
       let itemChicken = state.items;
 
       if(indexChicken === -1) {
+        payload.status = true
         itemChicken = [...state.items, payload]
       } 
       return {
         items: itemChicken,
       }
+
+    case 'REMOVE_PRODUCT' :
+      let item = state.items
+      item.splice(action.payload, 1)
+    return {
+      items: [...item],
+    }
      
     default: return state || initialState
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ButtonOne from "../Button/button1";
+import Button from "../Button/button1";
 
 export default class ProductTwo extends Component {
     constructor(props) {
@@ -23,7 +23,7 @@ export default class ProductTwo extends Component {
                     <div><div className="title">{this.props.title}</div>
                         <div className="desc">{this.props.desc}</div>
                         <div className="price">{this.props.price}</div>
-                        <ButtonOne onClick={this.clickEvent} value={this.props.button_value} />
+                        <Button onClick={this.clickEvent} value={this.props.button_value} />
                     </div>
                 </div>
             </div>

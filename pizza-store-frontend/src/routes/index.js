@@ -7,6 +7,7 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Product from '../pages/Product';
 import ChickenWings from '../pages/ChickenWing';
+import CheckOut from '../pages/CheckOut';
 
 const Routing = () => {
 
@@ -24,6 +25,7 @@ const Routing = () => {
             <Route path="/see-all" element={logged ? <SeeAll /> : <Navigate to="/signIn" />} />
             <Route path="/customize" element={<Customization />} />
             <Route path="/chickenWings" element={<ChickenWings />} />
+            <Route path="/CheckOut" element={logged ? <CheckOut /> : <Navigate to="/signIn" />} />
             <Route path='Product/:id' element={<Product />} />
         </Routes>
     )

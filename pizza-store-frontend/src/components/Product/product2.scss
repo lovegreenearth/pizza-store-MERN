@@ -34,18 +34,18 @@
 
   .title {
     color: #3c1c21;
-    font-size: $font-size-30;
+    font-size: 30px;
     margin-bottom: 30px;
     margin-top: 10px;
 
     @media only screen and (max-width: $x-size) {
-      font-size: $font-size-25;
+      font-size: 25px;
       margin-right: 20px;
       margin-top: 0;
     }
 
     @media only screen and (max-width: $x-s-size) {
-      font-size: $font-size-20;
+      font-size: 20px;
       margin-bottom: 10px;
     }
   }
@@ -54,18 +54,18 @@
     padding-left: 20px;
     padding-right: 20px;
     font-size: 21px;
-    color: $text-color1;
+    color: #3C1C21;
     margin-bottom: 30px;
 
     @media only screen and (max-width: $x-s-size) {
-      font-size: $font-size-15;
+      font-size: 15px;
       margin-bottom: 10px;
     }
   }
 
   .price {
-    font-size: $font-size-20;
-    color: $text-color1;
+    font-size: 20px;
+    color: #3C1C21;
     margin-bottom: 30px;
 
     @media only screen and (max-width: $x-s-size) {
@@ -73,7 +73,7 @@
     }
 
     @media only screen and (max-width: $s-size) {
-      font-size: $font-size-15;
+      font-size: 15px;
     }
   }
 }

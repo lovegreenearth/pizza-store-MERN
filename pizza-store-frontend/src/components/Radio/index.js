@@ -13,7 +13,7 @@ const Radio = (props) => {
   return (
     <div className='radio-group' style={{border: active.filter(c => c === true).length === 1 ? "2px solid #FCA017" : "1px solid #FCA017"} }>
       
-      <div className='radio-title'>{props.title}</div>
+      <div className='radio-title'>{props.title}<span>(required)</span></div>
       { props.content.map((item, index) => 
           <div className='radio-option' onClick={() => select(index, item)} key={index}>
             {
