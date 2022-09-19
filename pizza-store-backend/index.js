@@ -41,3 +41,4 @@ app.use("/sauce", require("./routes/sauceRouter"));
 app.use("/cheese", require("./routes/cheeseRouter"));
 app.use("/topping", require("./routes/toppingRouter"));
 app.use("/chickenWingSauce", require("./routes/chickenWingSauceRouter"));
+app.use("/shawarma", require("./routes/shawarmaRouter"));

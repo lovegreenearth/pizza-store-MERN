@@ -25,12 +25,14 @@ const Cart = () => {
   const priceTotal = items.reduce((accumulator, value) => {
     return accumulator + value.price * value.quantity;
   }, 0)
+  
 
   const dispatch = useDispatch();
 
-  const remove = (index) => {
+  const remove = (c,index) => {
     const removeProduct = {
       index: index,
+      name: c.name
     }
     dispatch(removeToProduct(removeProduct))
   }
@@ -99,7 +101,7 @@ const Cart = () => {
                             <div className='desc'>This is the most delicious chicken wings in this world</div>
                             <div className='final'>
                               <div className='remove-edit'>
-                                <div className='remove' onClick={() =>remove(index)}>
+                                <div className='remove' onClick={() =>remove(c, index)}>
                                   remove
                                 </div>
                                 <div className='edit' onClick={() => edit(index)}>edit</div>

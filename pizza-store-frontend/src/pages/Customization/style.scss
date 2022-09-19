@@ -157,6 +157,14 @@
             color: #FCA017;
           }
         }
+        .select-size {
+          background-color: white;
+          border: 1px solid gray;
+          display: flex;
+          .select-individual {
+            width: 25%;
+          }
+        }
           
         .desc {
           margin: 1rem 0;

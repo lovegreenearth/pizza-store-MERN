@@ -18,5 +18,12 @@ export function removeToProduct(removeProduct) {
     payload: removeProduct,
   }
 }
+export function modalToCart(newModal) {
+  return {
+    type: 'MODAL_TO_CART',
+    payload: newModal,
+  }
+}
+
 
 

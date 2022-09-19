@@ -41,7 +41,7 @@ const ChickenWings = (props) =>  {
   const addCart = () => {
     const newChicken = {
       name: JSON.parse(localStorage.getItem("product")).name,
-      price: JSON.parse(localStorage.getItem("product")).price,
+      price: JSON.parse(localStorage.getItem("product")).price.price,
       quantity: quantity,
     } 
     dispatch(addToChicken(newChicken))
@@ -73,7 +73,6 @@ const ChickenWings = (props) =>  {
   const name = JSON.parse(localStorage.getItem("product")).name;
   const carts = useSelector(state => state.items);
   const isAdded = carts.findIndex(v => v.name === name) === -1;
-  
   return (
     <div className="chicken-content">
       <img className="background" src={ChickenWing} alt="ChickenWing" />
@@ -88,7 +87,7 @@ const ChickenWings = (props) =>  {
                   <div className="add-cart">
                     <div className="quantity-price">
                       <Quantity onChange={(qty) => setQuantity(qty)} />
-                      <div className="price">{ "$ " + (JSON.parse(localStorage.getItem("product")).price * quantity).toFixed(2) }</div>
+                      <div className="price">{ "$ " + (JSON.parse(localStorage.getItem("product")).price.price * quantity).toFixed(2) }</div>
                     </div>
                     <Button Class={"chicken-Btn" + (!isAdded ? " active" :"")} 
                       value={!isAdded ? "ADDED" : "ADD TO CART"} 

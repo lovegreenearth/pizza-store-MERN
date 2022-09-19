@@ -38,9 +38,21 @@ const {payload} = action;
 
     case 'REMOVE_PRODUCT' :
       let item = state.items
-      item.splice(action.payload, 1)
+      item.splice(action.payload.index, 1)
     return {
       items: [...item],
+    }
+
+    case 'MODAL_TO_CART' :
+      let indexModal = state.items.findIndex(c => c.name === action.payload.name);
+      let itemModal = state.items
+
+      if(indexModal === -1) {
+        payload.status = true
+        itemModal = [...state.items, payload]
+      } 
+    return {
+      items: [...itemModal],
     }
      
     default: return state || initialState

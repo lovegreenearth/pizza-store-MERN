@@ -1,17 +1,14 @@
 const { ObjectId } = require("mongoose");
 const mongoose = require("mongoose");
 
-const pizzaSchema = new mongoose.Schema({
+const shawarmaSchema = new mongoose.Schema({
   name: { 
     type: String, 
     required: true, 
     unique: true 
   },
-  bonus: { 
+  add: { 
     type: String, 
-  },
-  bonusTopping: { 
-    type: Number, 
   },
   price: { 
     type: Object, 
@@ -20,11 +17,7 @@ const pizzaSchema = new mongoose.Schema({
   menuId: { 
     type: ObjectId, 
     required: true, 
-  },
-  customize: { 
-    type: Boolean, 
-    required: true, 
   }
 });
 
-module.exports = Pizza = mongoose.model("pizza", pizzaSchema);
+module.exports = Shawarma = mongoose.model("shawarma", shawarmaSchema);
