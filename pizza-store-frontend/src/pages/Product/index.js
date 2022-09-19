@@ -5,6 +5,9 @@ import { useParams } from "react-router-dom";
 import Button from '../../components/Button/button1';
 import { useNavigate } from "react-router-dom";
 import Static from "../../assets/img/MeatProduct/bacondblchburg.png"
+import CustomizeModal from './Modal';
+import { useSelector } from "react-redux";
+
 
 const Product = () => {
 
@@ -12,6 +15,7 @@ const Product = () => {
   let navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [pizzaData, setPizzaData] = useState([])
+
   useEffect(() => {
     fetch(`${localStorage.getItem('apiURL')}/menus`, {
         method: 'POST',
@@ -31,11 +35,14 @@ const Product = () => {
         body:JSON.stringify({data: {id:params.id}})
     })
     .then(res =>res.json())
-    .then(pizzaData => {
-      setPizzaData(pizzaData)
+    .then(pizza => {
+      pizza.forEach(object => {
+        object.count = 1;
+      });
+      setPizzaData(pizza)
     })
-  }, [])
-
+    }, [])
+    
   const toCustomize = (product, index) => {
     product["index"] = index
     localStorage.setItem('product', JSON.stringify(product));
@@ -45,7 +52,18 @@ const Product = () => {
       navigate("/customize")
     }
   }
+  const productCart = useSelector(state => state.items);
+  const [modalShow, setModalShow] = useState(false);
+  const [modalData, setModalData] = useState({})
+  const [modalPrice, setModalPrice] = useState(1)
+  
 
+  const onShow = (item, index) => {
+    setModalShow(true);
+    setModalData(item)
+    setModalPrice(item.price.price)
+    console.log(productCart.filter(v => v.name === item.name).length)
+  }
   return (
       <div className='product-container col-lg-10'>
         <div className='product-header'>
@@ -65,8 +83,17 @@ const Product = () => {
                       <div className='title'>{item.name}</div>
                       <div className='content-desc'>{item.bonus}</div>
                       <div className='content-footer'>
-                        <div className='cals'>Staring from $ {item.price}</div>
-                        <Button   value="Customize" onClick={() => toCustomize(item, index)}/>
+                        <div className='cals'>Staring from $ {item.price.price ? item.price.price : item.price.Small}</div>
+                        
+                        {
+                          item.price.price 
+                          ? item.customize 
+                            ? <Button value="Customize" onClick={() => toCustomize(item, index)} />
+                            : <Button  value={productCart.filter(v => v.name === item.name).length > 0 ? "ADDED" : "Customize"}
+                                       onClick={() => onShow(item, index)}
+                                       status={productCart.filter(v => v.name === item.name).length > 0 ? true : false}/>
+                          : <Button value="Customize" onClick={() => toCustomize(item, index)}/>
+                        }
                       </div>
                     </div>
                   </div>
@@ -75,7 +102,18 @@ const Product = () => {
             }
           </div>
         </div>
+        {/* {
+         
+          params.id === "62f34af41394ef1158cfab6b" && 
+        } */}
+       <CustomizeModal 
+          data = {modalData}
+          show={modalShow} 
+          onHide={() => setModalShow(false)}
+          price={modalPrice}
+        />
       </div>
+
   )
 }
 

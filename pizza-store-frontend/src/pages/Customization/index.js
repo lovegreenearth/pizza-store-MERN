@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Cheese from '../../components/svg/cheese';
 import Topping from "../../components/svg/topping";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { BsCircleHalf } from "react-icons/bs"
-import { BsCircleFill } from "react-icons/bs"
 import { BiDollarCircle } from "react-icons/bi"
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { IoIosRadioButtonOn } from "react-icons/io"
@@ -45,7 +43,7 @@ class Customization extends Component {
       selection: {},
       nameSelect: [],
       priceTopping: 0,
-      priceBase: JSON.parse(localStorage.getItem('product')).price,
+      priceBase: JSON.parse(localStorage.getItem('product')).price["Small"],
       baseData: JSON.parse(localStorage.getItem('product')),
       doughData: [],
       sauceData: [],
@@ -56,7 +54,7 @@ class Customization extends Component {
       toppingCheeseData: [],
     }
   }
-
+  
   componentDidMount() {
     fetch(`http://localhost:5000/doughs`, {
       method: 'POST',
@@ -124,7 +122,9 @@ class Customization extends Component {
           object.status = [false, true, false]
         });
     })
+    
   }
+  
 
   _renderTabItem = (tab, activeTab) => {
     return (
@@ -154,11 +154,10 @@ class Customization extends Component {
         name: JSON.parse(localStorage.getItem('product')).name,
         quantity: this.state.quantity,
         desc: total_desc,
-        price: JSON.parse(localStorage.getItem('product')).price,
+        price: JSON.parse(localStorage.getItem('product')).price.Small,
       }
       this.props.addToCart(newPizza)
     }
-
     const total_desc = this.state.activeToppingIng
           + this.state.activeExtraTopping
           + this.state.activeSpecialTopping;
@@ -204,6 +203,9 @@ class Customization extends Component {
         </div>
         <div className="add-cart">
           <div> 
+            {/* <div className="select-size">
+              <div className="select-individual"></div>
+            </div> */}
             <div className="quantity-price">
                 <Quantity onChange={setQty}/>
                 <div className="price">{"$ " + (price * this.state.quantity).toFixed(2)}</div>
@@ -907,7 +909,6 @@ class Customization extends Component {
       
     </div>
   }
-  
   render() {
     const { activeTab, tabs } = this.state;
 

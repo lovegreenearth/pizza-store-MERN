@@ -1,37 +1,35 @@
 const router = require("express").Router();
-const Pizza = require("../models/pizzaModel");
+const Shawarma = require("../models/shawarmaModel");
 const mongoose = require("mongoose");
 
 router.post("/add", async (req, res) => {
   try {
-    let { name, bonus, bonusTopping, price, menuId, customize } = req.body.data;
+    let { name, add, price, menuId } = req.body.data;
 
     // validate
 
-    if (!name)
+    if (!name || !price)
       return res.status(400).json({ msg: "Not all fields have been entered." });
 
-    const newPizza = new Pizza({
+    const newShawarma = new Shawarma({
       name,
-      bonus,
-      bonusTopping,
+      add,
       price,
       menuId,
-      customize
     });
-    const savedPizza = await newPizza.save();
-    res.json(savedPizza);
+    const savedShawarma = await newShawarma.save();
+    res.json(savedShawarma);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-router.post("/byMenu", async (req, res) => {
-  Pizza.find({ menuId: req.body.data.id }, function (err, pizzas) {
+router.post("/", async (req, res) => {
+  Shawarma.find({}, function (err, shawarma) {
     if(err){
         res.send(err);
     }else{
-        res.send(pizzas);
+        res.send(shawarma);
     }
 })
 });

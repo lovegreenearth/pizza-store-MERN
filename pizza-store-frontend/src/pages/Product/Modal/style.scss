@@ -1,0 +1,66 @@
+.modal-body {
+  .special-input {
+    display: grid;
+    gap: 30px;
+    color: #FCA017;
+    font-weight: 700;
+    font-size: 25px;
+  }
+  .quantity-price {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 20px;
+    font-size: 25px;
+    .quantity-title {
+      color: #FCA017;
+      font-weight: 700;
+    }
+    .quantity-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      .quantity {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        button {
+          color: #FCA017;
+          border: none;
+          background-color: white;
+        }
+        span {
+          font-weight: 700;
+          color: #FCA017;
+        }
+      }
+      .price {
+        color: #FCA017;
+        font-weight: 700;
+      }
+    }
+    
+  }
+  
+}
+.modal-footer {
+  .cancel-btn {
+    button {
+      background-color: gray;
+      width: 150px;
+      margin: 0px;
+      &:hover {
+        border: 1px solid gray;
+        color: white;
+      }
+    }
+  }
+  .add-btn {
+    button {
+      width: 150px;
+      margin: 0px;
+    }
+  }
+  
+}

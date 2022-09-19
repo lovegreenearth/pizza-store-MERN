@@ -77,6 +77,9 @@
             }
             .button{
               width: 40%;
+              button {
+                margin-bottom: 0px;
+              }
               @media only screen and (max-width: 750px) {
                 width: 50%;
               }
