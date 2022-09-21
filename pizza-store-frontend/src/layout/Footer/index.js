@@ -5,10 +5,11 @@ class Footer extends Component {
   render() {
     return <div className='footer'>
       <div className='content'>
-        <div className='navbar'>
+        <div className='footer-navbar'>
           <div className='logo'>
             <img src={FooterLogo} alt="footer-logo" />
           </div>
+         
           <div className='footer-container'>
             <div className='footer-link'>
               <div><Link to="/about_us" className='footer-link-title'>ABOUT US</Link></div>
