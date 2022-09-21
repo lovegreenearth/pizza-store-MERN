@@ -130,7 +130,7 @@ const ChickenWings = (props) =>  {
                       <div className="bottom-title">Wing Sauce(Select {JSON.parse(localStorage.getItem("product")).index + 1})<span>(required)</span></div>
                       {
                         active.filter(c => c === true).length > JSON.parse(localStorage.getItem("product")).index + 1
-                        ? <div className="alert-msg">You can select only 3 Sauces</div>
+                        ? <div className="alert-msg">You can select maximum 3 Sauces</div>
                         : ""
                       }
                     </div>

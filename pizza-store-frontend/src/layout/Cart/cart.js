@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeToProduct } from "../../redux/actions";
+import { BsDashCircle } from "react-icons/bs"
+import { AiFillEdit } from "react-icons/ai"
 
 import Static from "../../assets/img/cart-small.png"
 import Basket from "../../assets/img/Vector.png";
@@ -102,9 +104,11 @@ const Cart = () => {
                             <div className='final'>
                               <div className='remove-edit'>
                                 <div className='remove' onClick={() =>remove(c, index)}>
-                                  remove
+                                 <BsDashCircle style={{fontSize: "12px"}} /> Remove
                                 </div>
-                                <div className='edit' onClick={() => edit(index)}>edit</div>
+                                <div className='edit' onClick={() => edit(index)}>
+                                  <AiFillEdit /> Edit
+                                </div>
                               </div>
                               <div className='final-price'>
                                 {"$ " + c.price * c.quantity}

@@ -12,6 +12,7 @@ import Quantity from "../../components/Button/qty";
 import Button from "../../components/Button/button1";
 import { customizeData } from "./data";
 import { connect } from 'react-redux';
+import { BsFillCircleFill } from "react-icons/bs";
 
 import StaticDough from "../../assets/img/Dough/Regular Dough.png";
 import StaticSauce from "../../assets/img/BaseSauce/Buffalo.png";
@@ -43,7 +44,6 @@ class Customization extends Component {
       selection: {},
       nameSelect: [],
       priceTopping: 0,
-      priceBase: JSON.parse(localStorage.getItem('product')).price["Small"],
       baseData: JSON.parse(localStorage.getItem('product')),
       doughData: [],
       sauceData: [],
@@ -52,6 +52,8 @@ class Customization extends Component {
       toppingVeggieData: [],
       toppingMeatData: [],
       toppingCheeseData: [],
+      selectSize: Array(4).fill(false),
+      selectPrice: "Small"
     }
   }
   
@@ -162,10 +164,56 @@ class Customization extends Component {
           + this.state.activeExtraTopping
           + this.state.activeSpecialTopping;
     
-    const price= (this.state.priceBase + this.state.priceTopping).toFixed(2)
+    const price= (JSON.parse(localStorage.getItem('product')).price[this.state.selectPrice] + this.state.priceTopping).toFixed(2)
 
     const name = JSON.parse(localStorage.getItem("product")).name;
     const isAdded = this.props.items.findIndex(v => v.name === name) === -1;
+
+    const selectData = [
+      {
+        size: "Small",
+        slices: 6,
+        imgSize: 18
+      },
+      {
+        size: "Medium",
+        slices: 8,
+        imgSize: 21
+      },
+      {
+        size: "Large",
+        slices: 10,
+        imgSize: 24
+      },
+      {
+        size: "X-Large",
+        slices: 12,
+        imgSize: 27
+      }
+    ]
+
+    const activeSize = (index) => {
+      let select = this.state.selectSize.map((_, _index) => index === _index ? true: false)
+      let size;
+      console.log(size)
+      if(index === 0) {
+        size = "Small"
+      }
+      if(index === 1) {
+        size = "Medium"
+      }
+      if(index === 2) {
+        size = "Large"
+      }
+      if(index === 3) {
+        size = "X-Large"
+      }
+      
+      this.setState({
+        selectSize: select,
+        selectPrice: size
+      })
+    }
 
     return <div className="pizza-board">
       <div className="title">{this.state.baseData.name}</div>
@@ -174,7 +222,7 @@ class Customization extends Component {
           {
             Object.entries(this.state.selection).map(([key, val]) => 
               <div className="criteria-item" key={key}>
-                <div><BsCheckCircleFill /></div>
+                {val.length > 0 && <div><BsCheckCircleFill /></div>}
                 <span>{" " + val}</span>
               </div>
             )
@@ -203,9 +251,27 @@ class Customization extends Component {
         </div>
         <div className="add-cart">
           <div> 
-            {/* <div className="select-size">
-              <div className="select-individual"></div>
-            </div> */}
+            <div className="select-size">
+              {
+                selectData.map((item, index) => {
+                  return (
+                    <div className="select-individual" 
+                         onClick={() => activeSize(index)} 
+                         style={{border: this.state.selectSize[index] && "2px solid #ee5a00"}}
+                         key={item.name}>
+                      <div className="size">
+                        <div className="size-img" style={{fontSize: item.imgSize}}><BsFillCircleFill /></div>
+                        <div className="size-text">
+                          <span style={{borderBottom: this.state.selectSize[index] && "2px solid #ee5a00"}}>{item.size}</span>
+                        </div>
+                      </div>
+                      <div className="slices">{item.slices + " Slices"}</div>
+                    </div>
+                  )
+                  
+                })
+              }
+            </div>
             <div className="quantity-price">
                 <Quantity onChange={setQty}/>
                 <div className="price">{"$ " + (price * this.state.quantity).toFixed(2)}</div>
