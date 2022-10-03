@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Button from "../../components/Button/button1";
-import images from '../../constant';
+import SignUpBanner from "../../assets/img/signup-banner.png"
 
 
 export default class SignUp extends Component {
@@ -111,7 +111,7 @@ export default class SignUp extends Component {
                     <div className="email-container">
 
                         <div className="signUp-banner">
-                            <LazyLoadImage src={images.signUpBanner.src} alt={images.signUpBanner.alt} />
+                            <LazyLoadImage src={SignUpBanner} alt="Sign up Banner" />
                         </div>
 
                         <div className="email">

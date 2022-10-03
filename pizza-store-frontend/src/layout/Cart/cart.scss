@@ -107,6 +107,7 @@ $cart-L-size: 450px;
           color: #4c3017;
           margin: 0px;
           padding: 0px;
+          width: 268px;
           .title {
             font-weight: 800;
             font-size: 18px;
@@ -117,7 +118,7 @@ $cart-L-size: 450px;
           .final {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 50px;
             .remove-edit {
               display: flex;
               align-items: center;

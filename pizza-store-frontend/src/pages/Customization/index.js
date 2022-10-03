@@ -6,7 +6,6 @@ import { BiDollarCircle } from "react-icons/bi"
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { IoIosRadioButtonOn } from "react-icons/io"
 import { BiAdjust } from "react-icons/bi"; 
-import images from '../../constant';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Quantity from "../../components/Button/qty";
 import Button from "../../components/Button/button1";
@@ -14,14 +13,16 @@ import { customizeData } from "./data";
 import { connect } from 'react-redux';
 import { BsFillCircleFill } from "react-icons/bs";
 
-import StaticDough from "../../assets/img/Dough/Regular Dough.png";
-import StaticSauce from "../../assets/img/BaseSauce/Buffalo.png";
-import StaticCheese from "../../assets/img/Cheese/Extra Cheese.png";
-import StaticVeggie from "../../assets/img/Veggie/Argula.png"
-import StaticWhole from "../../assets/img/VeggieTopping/Arugula.png"
-import StaticLeft from "../../assets/img/left-half/Arugula-left.png";
-import StaticRight from "../../assets/img/right-half/Arugular-right.png";
-import StaticMeat from "../../assets/img/Meat/Italian Ham.png";
+import StaticDough from "../../assets/img/static/Regular Dough.png";
+import StaticSauce from "../../assets/img/static/Buffalo.png";
+import StaticCheese from "../../assets/img/static/Extra Cheese.png";
+import StaticVeggie from "../../assets/img/static/Argula.png"
+import StaticWhole from "../../assets/img/static/Arugula.png"
+import StaticLeft from "../../assets/img/static/Arugula-left.png";
+import StaticRight from "../../assets/img/static/Arugular-right.png";
+import StaticMeat from "../../assets/img/static/Italian Ham.png";
+import StaticSpecial from "../../assets/img/Regular.png"
+import StaticInitial from "../../assets/img/initial.png"
 
 class Customization extends Component {
   constructor(props) {
@@ -32,12 +33,12 @@ class Customization extends Component {
       ...customizeData,
       quantity: 1,
       activeTopping: [],
+      activeBase: "",
       activeToppingIng: "",
       activeExtra: [],
-      activeExtraTopping: "",
       activeSpecial: [],
       activeSpecialTopping: "",
-      toppingImg: [images.initialPizzaImg.src],
+      toppingImg: [StaticInitial],
       toppingBase: [],
       toppingExtra: [],
       type: "wholeSrc",
@@ -48,6 +49,7 @@ class Customization extends Component {
       doughData: [],
       sauceData: [],
       cheeseData: [],
+      specialData: [],
       toppingData: [],
       toppingVeggieData: [],
       toppingMeatData: [],
@@ -89,6 +91,16 @@ class Customization extends Component {
     .then(res =>res.json())
     .then(data => {
         this.setState({cheeseData: data})
+    })
+    fetch(`http://localhost:5000/special`, {
+      method: 'POST',
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+    .then(res =>res.json())
+    .then(data => {
+        this.setState({specialData: data})
     })
 
     fetch(`http://localhost:5000/topping`, {
@@ -155,42 +167,21 @@ class Customization extends Component {
       const newPizza = {
         name: JSON.parse(localStorage.getItem('product')).name,
         quantity: this.state.quantity,
-        desc: total_desc,
-        price: JSON.parse(localStorage.getItem('product')).price.Small,
+        extra: total_desc,
+        price: price,
+        size: this.state.selectPrice
       }
       this.props.addToCart(newPizza)
     }
-    const total_desc = this.state.activeToppingIng
-          + this.state.activeExtraTopping
+    const total_desc = this.state.activeToppingIng + this.state.activeBase
           + this.state.activeSpecialTopping;
+
+    console.log("total Description ----", total_desc)
     
     const price= (JSON.parse(localStorage.getItem('product')).price[this.state.selectPrice] + this.state.priceTopping).toFixed(2)
 
     const name = JSON.parse(localStorage.getItem("product")).name;
     const isAdded = this.props.items.findIndex(v => v.name === name) === -1;
-
-    const selectData = [
-      {
-        size: "Small",
-        slices: 6,
-        imgSize: 18
-      },
-      {
-        size: "Medium",
-        slices: 8,
-        imgSize: 21
-      },
-      {
-        size: "Large",
-        slices: 10,
-        imgSize: 24
-      },
-      {
-        size: "X-Large",
-        slices: 12,
-        imgSize: 27
-      }
-    ]
 
     const activeSize = (index) => {
       let select = this.state.selectSize.map((_, _index) => index === _index ? true: false)
@@ -229,12 +220,12 @@ class Customization extends Component {
           }
         </div>
         <div className="pizza-piece">
-          <LazyLoadImage alt={images.initialPizzaImg.alt} src={this.state.toppingImg} />
+          <LazyLoadImage alt={StaticInitial} src={this.state.toppingImg} />
           {
             this.state.toppingBase.map((base, index) => {
               return (
                 <div className="multiTopping">
-                  <LazyLoadImage alt={images.initialPizzaImg.alt} src={base} key={index}/>
+                  <LazyLoadImage alt={StaticInitial} src={base} key={index}/>
                 </div>
               )
             })
@@ -243,7 +234,7 @@ class Customization extends Component {
             this.state.toppingExtra.map((extra, index) => {
               return (
                 <div className="multiTopping" key={index}>
-                  <LazyLoadImage alt={images.initialPizzaImg.alt} src={extra} />
+                  <LazyLoadImage alt={StaticInitial} src={extra} />
                 </div>
               )
             })
@@ -253,7 +244,7 @@ class Customization extends Component {
           <div> 
             <div className="select-size">
               {
-                selectData.map((item, index) => {
+                this.state.selectData.map((item, index) => {
                   return (
                     <div className="select-individual" 
                          onClick={() => activeSize(index)} 
@@ -276,7 +267,7 @@ class Customization extends Component {
                 <Quantity onChange={setQty}/>
                 <div className="price">{"$ " + (price * this.state.quantity).toFixed(2)}</div>
             </div>
-            {/* <div className="desc">{ total_desc }</div> */}
+            <div className="desc">{ total_desc }</div>
             <div className="cart-button">
               <Button Class={"pizza-Btn" + (!isAdded ? " active" :"")} 
                       value={!isAdded ? "ADDED" : "ADD TO CART"} 
@@ -317,6 +308,9 @@ class Customization extends Component {
         let selection = Object.assign({}, prevState.selection); 
         selection.dough = dough.name;
         return { selection };
+      })
+      this.setState({
+        activeBase: dough.name
       })
     }
     const handleSauce = (sauce) =>  {
@@ -917,10 +911,10 @@ class Customization extends Component {
     </div>
   }
   _renderSpecialIngredients = () => {
-    let { special, activeSpecial } = this.state;
+    let { activeSpecial } = this.state;
 
     const handleSpecial = (item) =>  {
-      this.setState({activeSpecial: item.id});
+      this.setState({activeSpecial: item._id});
       this.setState({activeSpecialTopping: item.name})
       this.setState(prevState => {
         let selection = Object.assign({}, prevState.selection); 
@@ -934,21 +928,21 @@ class Customization extends Component {
          <div className="sub-tab-1">
           <div className="ingredients">
           {
-            special.map((special, index) => {
+            this.state.specialData.map((special, index) => {
               return (
-                <div className={"baseSauce-item" + (activeSpecial === special.id ? " active" : "")}
+                <div className={"baseSauce-item" + (activeSpecial === special._id ? " active" : "")}
                     onClick={() => handleSpecial(special)}
                     key={special.name}>
                 {
-                  activeSpecial === special.id 
+                  activeSpecial === special._id 
                   ? <div className="selected">
                       <div className="baseSauce-img-selected" >
-                        <LazyLoadImage alt={special.src.alt} src={special.src.src} />
+                        <img alt="special" src={StaticSpecial} />
                       </div>
                       <div className="baseSauce-detail-selected">
                         <div className="baseSauce-title-selected">{special.name}</div>
                         <BiDollarCircle className="icon" /> <br />
-                          <div className="baseSauce-cals-selected">{special.cals} Cals</div>
+                          <div className="baseSauce-cals-selected">{special.cal} Cals</div>
                       </div>
                     </div>
                   : <div className="img-wrap">
@@ -959,10 +953,10 @@ class Customization extends Component {
                           <div style={{clear: "both"}}></div>
                         <BiDollarCircle className="icon" />
                           <div style={{clear: "both"}}></div>
-                        <div className="baseSauce-cals">{special.cals} Cals</div>
+                        <div className="baseSauce-cals">{special.cal} Cals</div>
                       </div>
                       <div className="baseSauce-img">
-                        <LazyLoadImage alt={special.src.alt} src={special.src.src} />
+                        <img alt="Special" src={StaticSpecial} />
                       </div>
                     </div>
                 }

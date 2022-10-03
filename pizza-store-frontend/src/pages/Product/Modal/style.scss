@@ -1,13 +1,41 @@
 .modal-body {
+  .select {
+    .select-title {
+      color: #FCA017;
+      font-size: 25px;
+      font-weight: 700;
+    }
+    .select-price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 18px;
+      color: #FCA017;
+      font-weight: 500;
+      .select-part {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .check-symbol {
+          border-radius: 50%;
+          width: 18px;
+          height: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid #FCA017;
+        }
+      }
+      
+    }
+  }
   .special-input {
     display: grid;
-    gap: 30px;
     color: #FCA017;
     font-weight: 700;
     font-size: 25px;
   }
   .quantity-price {
-    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;

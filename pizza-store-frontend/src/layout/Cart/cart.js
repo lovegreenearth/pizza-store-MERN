@@ -17,7 +17,7 @@ import ArrowUp from "../../assets/img/arrowUp.png"
 
 const Cart = () => {
   const [activeCart, setActiveCart] = useState(false)
-  const items = useSelector((state) => state.items) 
+  const items = useSelector((state) => state.items)
   let navigate = useNavigate();
 
   const handleUpCart = () => {
@@ -100,7 +100,7 @@ const Cart = () => {
                           <div className='image'><img src={Static} alt="cart-small" /></div>
                           <div className='content'>
                             <div className='title'>{c.name}</div>
-                            <div className='desc'>This is the most delicious chicken wings in this world</div>
+                            <div className='desc'>{c.extra}</div>
                             <div className='final'>
                               <div className='remove-edit'>
                                 <div className='remove' onClick={() =>remove(c, index)}>

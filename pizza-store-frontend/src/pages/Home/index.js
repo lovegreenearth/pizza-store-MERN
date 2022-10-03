@@ -4,7 +4,7 @@ import ProductOne from "../../components/Product/product1";
 import DemoCarousel from "../../components/Carousel";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import Static from "../../assets/img/HomeProduct/create_your_own.png"
+import Static from "../../assets/img/static/create_your_own.png";
 
 const Home = () => {
   let navigate = useNavigate();
@@ -24,6 +24,7 @@ const Home = () => {
     }
     , []
   )
+  console.log(data)
   return (
     <div className="home-page">
     <div className="carousel-container">
@@ -45,9 +46,9 @@ const Home = () => {
       <div className="underline"></div>
       <div className="product-list">
         {
-          data.map((item, key) => {
+          data.map((item, index) => {
             return(
-              <div key={key}>
+              <div key={index}>
                 <ProductOne
                   source={Static}
                   className='product1'
