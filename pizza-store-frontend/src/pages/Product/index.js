@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import "./style.scss"
-import MeatPizza from "../../assets/img/HomeProduct/meat_favourites.png"
+import MeatPizza from "../../assets/img/static/create_your_own.png"
 import { useParams } from "react-router-dom";
 import Button from '../../components/Button/button1';
 import { useNavigate } from "react-router-dom";
-import Static from "../../assets/img/MeatProduct/bacondblchburg.png"
-import CustomizeModal from './Modal';
+import Static from "../../assets/img/static/bacondblchburg.png"
+import DirectAddModal from './Modal';
 import { useSelector } from "react-redux";
 
 
@@ -46,7 +46,7 @@ const Product = () => {
   const toCustomize = (product, index) => {
     product["index"] = index
     localStorage.setItem('product', JSON.stringify(product));
-    if (params.id === '62f34ad91394ef1158cfab66') {
+    if (params.id === '633330aa6fd0146064ccf05d') {
       navigate("/chickenWings");
     } else {
       navigate("/customize")
@@ -65,7 +65,7 @@ const Product = () => {
     console.log(productCart.filter(v => v.name === item.name).length)
   }
   return (
-      <div className='product-container col-lg-10'>
+      <div className='product-container'>
         <div className='product-header'>
           <div className='header-title'>
             <p className='title'>{title}</p>
@@ -102,16 +102,12 @@ const Product = () => {
             }
           </div>
         </div>
-        {/* {
-         
-          params.id === "62f34af41394ef1158cfab6b" && 
-        } */}
-       <CustomizeModal 
-          data = {modalData}
-          show={modalShow} 
+
+        <DirectAddModal 
+          data={modalData}
+          show={modalShow}
           onHide={() => setModalShow(false)}
-          price={modalPrice}
-        />
+          price={modalPrice} />
       </div>
 
   )

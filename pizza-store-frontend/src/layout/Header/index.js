@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import images from '../../constant';
 import { FaHome } from 'react-icons/fa';
 import { MdAccountCircle } from 'react-icons/md';
 import { BsBoxArrowInRight } from 'react-icons/bs';
+import Logo from "../../assets/img/logo.png"
 
 
 class Header extends Component {
@@ -21,8 +21,8 @@ class Header extends Component {
       <section className="top-nav">
         <div>
           <LazyLoadImage
-            alt={images.logoImg.alt}
-            src={images.logoImg.src}
+            alt="logo"
+            src={Logo}
           />
         </div>
         <input id="menu-toggle" type="checkbox" />
