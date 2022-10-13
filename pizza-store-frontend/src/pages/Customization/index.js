@@ -15,11 +15,6 @@ import { BsFillCircleFill } from "react-icons/bs";
 
 import StaticDough from "../../assets/img/static/Regular Dough.png";
 import StaticCheese from "../../assets/img/static/Extra Cheese.png";
-import StaticVeggie from "../../assets/img/static/Argula.png"
-import StaticWhole from "../../assets/img/static/Arugula.png"
-import StaticLeft from "../../assets/img/static/Arugula-left.png";
-import StaticRight from "../../assets/img/static/Arugular-right.png";
-import StaticMeat from "../../assets/img/static/Italian Ham.png";
 import StaticSpecial from "../../assets/img/Regular.png"
 import StaticInitial from "../../assets/img/initial.png"
 
