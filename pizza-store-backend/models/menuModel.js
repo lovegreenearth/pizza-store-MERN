@@ -8,10 +8,6 @@ const menuSchema = new mongoose.Schema({
   img: {
     type: String,
     required: true
-  },
-  src: {
-    type: String,
-    require: true
   }
 });
 

@@ -7,6 +7,22 @@ const toppingSchema = new mongoose.Schema({
     required: true, 
     unique: true 
   },
+  img: {
+    type: String,
+    required: true
+  },
+  imgWhole: {
+    type: String,
+    required: true
+  },
+  imgRight: {
+    type: String,
+    required: true
+  },
+  imgLeft: {
+    type: String,
+    required: true
+  },
   cal: { 
     type: Number, 
   },

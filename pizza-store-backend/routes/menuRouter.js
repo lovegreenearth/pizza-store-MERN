@@ -1,47 +1,24 @@
 const router = require("express").Router();
 const Menu = require("../models/menuModel");
-const path = require('path');
-const fs = require("fs");
-var Busboy = require('busboy');
 
-router.get('/', function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.write('<form action="menus/fileupload" method="post" enctype="multipart/form-data">');
-  res.write('<input type="file" name="filetoupload"><br>');
-  res.write('<input type="submit">');
-  res.write('</form>');
-  return res.end();
+const multer = require("multer");
+const upload = multer({dest: '../pizza-store-frontend/public/uploads/pic'})
+
+router.post('/fileupload', upload.single('pic'),  (req, res) => {
+  const iPath = req.file.path;
+  const menu = new Menu({
+    name: req.body.name,
+    img: iPath.substr(31)
+  });
+  menu.save()
+    .then(
+        res.json('upload is done')
+      )
 })
-
-
-router.post('/fileupload', function (req, res) {
-  var busboy = Busboy({ headers: req.headers });
-  busboy.on('file', function(name, file, info) {
-    const { filename, encoding, mimeType } = info;
-    const dir_path = "./uploads/HomeProduct";
-    const saveTo = path.join(dir_path, filename);
-    file.pipe(fs.createWriteStream(saveTo));
-    const menu = new Menu({
-      src: filename,
-      img: dir_path,
-      name
-    })
-    menu.save(function (err) {
-      if(err) console.log(err);
-    })
-  });
-  busboy.on('close', () => {
-    res.writeHead(200, { 'Connection': 'close' });
-    res.end(`That's all folks!`);
-  });
-  req.pipe(busboy);
-  
-  return;
-});
 
 router.post("/add", async (req, res) => {
   try {
-    let { name, img, src } = req.body.data;
+    let { name, img } = req.body.data;
 
     validate
 
@@ -56,8 +33,7 @@ router.post("/add", async (req, res) => {
 
     const newMenu = new Menu({
       name,
-      img,
-      src
+      img
     });
     const savedMenu = await newMenu.save();
     res.json(savedMenu);

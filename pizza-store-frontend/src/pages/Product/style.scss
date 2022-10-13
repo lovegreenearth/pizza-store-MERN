@@ -103,4 +103,37 @@
       }
     }
   }
+  .special-combo {
+    padding: 30px 0px 30px 0px;
+  }
+  .special-box {
+    display: flex;
+    justify-content: center ;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    gap: 50px;
+    .special-individual {
+      height: 350px;
+      width: 300px;
+      border-radius: 10px;
+      background: url("../../assets/img/small-bg.png");
+      background-size: 100% 100%;
+      box-shadow: 3px 5px 10px 5px #d1d1d1;
+      padding: 15px 15px;
+      .banner-img {
+        img {
+        }
+      }
+      .special-title {
+        font-size: 25px;
+        height: 130px;
+      }
+      .button {
+        button {
+          margin-bottom: 0px;
+          width: 100%;
+        }
+      }
+     }
+  }
 }

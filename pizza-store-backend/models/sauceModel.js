@@ -10,6 +10,10 @@ const sauceSchema = new mongoose.Schema({
   cal: { 
     type: Number,
     required: true, 
+  },
+  img: {
+    type: String, 
+    require: true
   }
 });
 
