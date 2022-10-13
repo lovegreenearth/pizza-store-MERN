@@ -8,6 +8,9 @@ import SignUp from '../pages/SignUp';
 import Product from '../pages/Product';
 import ChickenWings from '../pages/ChickenWing';
 import CheckOut from '../pages/CheckOut';
+import Combo from '../pages/Combo';
+import ComboProduct from '../pages/ComboProduct';
+import FileUpload from '../pages/FileUpload'
 
 const Routing = () => {
 
@@ -27,6 +30,9 @@ const Routing = () => {
             <Route path="/chickenWings" element={<ChickenWings />} />
             <Route path="/CheckOut" element={logged ? <CheckOut /> : <Navigate to="/signIn" />} />
             <Route path='Product/:id' element={<Product />} />
+            <Route path='Product/:id/Combo/:index' element={<Combo />} />
+            <Route path='Product/:id/Combo/:index/ComboProduct/:combo' element={<ComboProduct />} />
+            <Route path='/pic' element={<FileUpload />} />
         </Routes>
     )
     

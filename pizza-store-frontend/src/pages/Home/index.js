@@ -4,27 +4,25 @@ import ProductOne from "../../components/Product/product1";
 import DemoCarousel from "../../components/Carousel";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import Static from "../../assets/img/static/create_your_own.png";
 
 const Home = () => {
   let navigate = useNavigate();
   const [data, setData] = useState([])
   useEffect(
     () => {
-        fetch(`${localStorage.getItem('apiURL')}/menus`, {
-            method: 'POST',
-            headers: {
-              "Content-Type": "application/json"
-            }
-        })
-        .then(res =>res.json())
-        .then(data => {
-            setData(data)
-        })
+      fetch(`${localStorage.getItem('apiURL')}/menus`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res =>res.json())
+      .then(data => {
+        setData(data)
+      })
     }
     , []
   )
-  console.log(data)
   return (
     <div className="home-page">
     <div className="carousel-container">
@@ -50,7 +48,7 @@ const Home = () => {
             return(
               <div key={index}>
                 <ProductOne
-                  source={Static}
+                  source={item.img}
                   className='product1'
                   title={item.name}
                   button_value = "ORDER NOW"

@@ -2,6 +2,22 @@ const router = require("express").Router();
 const Sauce = require("../models/sauceModel");
 const mongoose = require("mongoose");
 
+const multer = require("multer");
+const upload = multer({dest: '../pizza-store-frontend/public/uploads/pic'})
+
+router.post('/fileupload', upload.single('pic'),  (req, res) => {
+  const iPath = req.file.path;
+  const sauce = new Sauce({
+    name: req.body.name,
+    img: iPath.substr(31),
+    cal: req.body.cal
+  });
+  sauce.save()
+    .then(
+        res.json('upload is done')
+      )
+})
+
 router.post("/add", async (req, res) => {
   try {
     let { name, cal } = req.body.data;

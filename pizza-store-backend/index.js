@@ -43,3 +43,4 @@ app.use("/special", require("./routes/specialRouter"));
 app.use("/chickenWingSauce", require("./routes/chickenWingSauceRouter"));
 app.use("/shawarma", require("./routes/shawarmaRouter"));
 app.use("/modal", require("./routes/modalRouter"));
+app.use("/combo", require("./routes/comboRouter"));

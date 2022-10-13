@@ -1,0 +1,94 @@
+.banner-img {
+  width: 100%;
+}
+.special-container {
+  padding: 30px 50px;
+  @media only screen and (max-width: 600px) {
+    padding: 30px 30px;
+  }
+  .special-title {
+    font-size: 30px;
+    margin-bottom: 40px;
+    color: #4c3017;
+    @media only screen and (max-width: 600px) {
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+    font-weight: 600;
+  }
+  .special-product {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1030px;
+    @media only screen and (max-width: 1130px) {
+      justify-content: center;
+    }
+    margin: auto;
+    .product-individual {
+      width: 500px;
+      height: fit-content;
+      border: 1px solid gray;
+      background: url("../../assets/img/small-bg.png");
+      background-size: 100% 100%;
+      column-gap: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      @media only screen and (max-width: 1130px) {
+        display: flex;
+      }
+      .left-part {
+        grid-row: 1/2;
+        @media only screen and (max-width: 1130px) {
+          width: 50%;
+        }
+        .left-title {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          @media only screen and (max-width: 1130px) {
+            display: flex;
+            width: 50%;
+          }
+          .title-color {
+            width: 100%;
+            background-color: #FCA017;
+            height: 50px;
+            grid-row: 1/2;
+          }
+        }
+        .left-img {
+          img {
+            width: 100%;
+          }
+        }
+      }
+      .right-part {
+        display: grid;
+        grid-row: 1/2;
+        .right-title {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 40px;
+          font-size: 20px;
+          font-weight: 600;
+          color: #4c3017;
+        }
+        .right-content {
+          padding-left: 20px;
+          .content-detail {
+            color: #4c3017;
+            font-size: 17px;
+            font-weight: 400;
+            text-align: left;
+          }
+        }
+        .button {
+          button {
+            margin-bottom: 0px;
+          }
+        }
+      }
+    }
+  }
+}
