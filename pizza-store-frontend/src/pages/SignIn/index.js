@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Button from "../../components/Button/button1";
 import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -18,22 +19,18 @@ export default class SignIn extends Component {
 			email: this.state.email,
 			password: this.state.password
 		}
-		fetch(`${localStorage.getItem('apiURL')}/users/login`, {
-			method: 'POST',
-			headers: {
-			"Content-Type": "application/json"
-			},
-			body:JSON.stringify(sendData)
-		})
-		.then(res =>res.json())
-		.then(data => {
-			if (data.token) {
-					this.props.onSuccess();
-					alert('success');
-			} else if (data.msg) {
-					alert(data.msg);
+
+		axios.post('/users/login',sendData)
+    .then(res => res.data)
+    .then(data => {
+      if (data.token) {
+				this.props.onSuccess();
+				alert('success');
+		} else if (data.msg) 
+			{
+				alert(data.msg);
 			}
-		})
+    })
 	}
 
 	render() {

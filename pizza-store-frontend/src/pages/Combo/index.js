@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./style.scss"
 import { useParams, useNavigate } from "react-router-dom";
 import Button from '../../components/Button/button1';
+import axios from "axios";
 
 import StaticSpecial from "../../assets/img/special.jpg"
 import StaticPanzerotti from "../../assets/img/panzerotti.jpg"
@@ -13,29 +14,22 @@ const Combo = () => {
   const [comboData, setComboData] = useState([]);
   const [title, setTitle] = useState("")
   useEffect(() => {
-    fetch(`${localStorage.getItem('apiURL')}/pizzas/byMenu`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ data: { id: params.id } })
+    axios.post('/pizzas/byMenu', {
+      data: { id: params.id }
     })
-    .then(res => res.json())
+    .then(res => res.data)
     .then(pizza => {
       setTitle(pizza.filter(top => top._id === params.index)[0].name)
     })
 
-    fetch(`${localStorage.getItem('apiURL')}/combo/bySpecial`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ data: { id: params.index } })
+    axios.post('/combo/bySpecial', {
+      data: { id: params.index }
     })
-    .then(res => res.json())
+    .then(res => res.data)
     .then(combo => {
       setComboData(combo)
     })
+
   }, [])
   
   const customizeCombo = (item) => {
@@ -76,7 +70,7 @@ const Combo = () => {
                     {
                       item.product.map((c) => {
                         return (
-                          <div className='content-detail' key={c}>{c}</div>
+                          <div className='content-detail' key={c.name}>{c.name}</div>
                         )
                       })
                     }

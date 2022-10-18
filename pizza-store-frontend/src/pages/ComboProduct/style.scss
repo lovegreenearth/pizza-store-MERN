@@ -3,3 +3,113 @@
     width: 100%;
   }
 }
+.detail-caption {
+  
+  padding-top: 50px;
+  .caption-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+
+    .content-detail {
+      width: 60%;
+      .detail-title {
+        font-weight: 800;
+        font-size: 30px;
+        color: #4c3017;
+        
+      }
+      .caption {
+        padding: 30px 0px;
+        color: #4c3017;
+        font-size: 20px;
+      }
+    }
+
+    .content-count {
+      width: 40%;
+      align-items: center;
+      .count-quantity {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        button {
+          background: none;
+          border: none;
+          color: #FCA017;
+          font-size: 35px;
+        }
+        span {
+          color: #4c3017;
+          font-size: 30px;
+          font-weight: 600;
+        }
+        .count-price {
+          color: #4c3017;
+          font-size: 30px;
+          font-weight: 600;
+        }
+      }
+      .button {
+        button {
+          margin-top: 20px;
+          margin-bottom: 30px;
+        }
+      }
+    }
+  }
+}
+
+.combo-product {
+  padding: 0px 40px 40px 40px;
+  max-width: 1200px;
+  margin: auto;
+  .combo-individual {
+    padding-top: 30px;
+    .individual-type {
+      .individual-title {
+        color: #FCA017;
+        font-size: 25px;
+        font-weight: 600;
+        text-align: left;
+      }
+      .individual-product {
+        display: flex;
+        border-radius: 10px;
+        .product-img {
+          width: 30%;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+          background-color: #ced7db;
+          img {
+            width: 50%;
+          }
+        }
+        .product-content {
+          width: 70%;
+          background-color: #e3ebee;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+          padding: 30px 10px 10px 30px;
+          position: relative;
+          .content-title {
+            color: #4c3017;
+            font-size: 25px;
+            font-weight: 800;
+            text-align: left;
+          }
+          .button {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            button {
+              margin-bottom: 0px;
+              width: 120px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

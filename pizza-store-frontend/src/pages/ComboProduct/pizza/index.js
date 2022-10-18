@@ -1,23 +1,23 @@
 import React, { Component } from "react";
-import Cheese from '../../components/svg/cheese';
-import Topping from "../../components/svg/topping";
+import Cheese from '../../../components/svg/cheese';
+import Topping from "../../../components/svg/topping";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { BiDollarCircle } from "react-icons/bi"
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { IoIosRadioButtonOn } from "react-icons/io"
 import { BiAdjust } from "react-icons/bi"; 
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import Quantity from "../../components/Button/qty";
-import Button from "../../components/Button/button1";
+import Quantity from "../../../components/Button/qty";
+import Button from "../../../components/Button/button1";
 import { customizeData } from "./data";
 import { connect } from 'react-redux';
 import { BsFillCircleFill } from "react-icons/bs";
 import axios from "axios";
 
-import StaticDough from "../../assets/img/static/Regular Dough.png";
-import StaticCheese from "../../assets/img/static/Extra Cheese.png";
-import StaticSpecial from "../../assets/img/Regular.png"
-import StaticInitial from "../../assets/img/initial.png"
+import StaticDough from "../../../assets/img/static/Regular Dough.png";
+import StaticCheese from "../../../assets/img/static/Extra Cheese.png";
+import StaticSpecial from "../../../assets/img/Regular.png"
+import StaticInitial from "../../../assets/img/initial.png"
 
 class Customization extends Component {
   constructor(props) {
@@ -28,9 +28,7 @@ class Customization extends Component {
       ...customizeData,
       quantity: 1,
       activeTopping: [],
-      activeDough: "",
-      activeSauce: "",
-      activeCheese: "",
+      activeBase: "",
       activeToppingIng: "",
       activeExtra: [],
       activeSpecial: [],
@@ -42,7 +40,7 @@ class Customization extends Component {
       selection: {},
       nameSelect: [],
       priceTopping: 0,
-      baseData: JSON.parse(localStorage.getItem('product')),
+      baseData: this.props.data,
       doughData: [],
       sauceData: [],
       cheeseData: [],
@@ -51,10 +49,9 @@ class Customization extends Component {
       toppingVeggieData: [],
       toppingMeatData: [],
       toppingCheeseData: [],
-      selectSize: Array(4).fill(false),
-      selectPrice: "Small"
     }
   }
+
   
   componentDidMount() {
     axios.post('/doughs', {
@@ -63,7 +60,6 @@ class Customization extends Component {
     .then(res => res.data)
     .then(data => {
       this.setState({doughData: data})
-      this.setState({activeDough: this.state.doughData.filter((item) => item._id === JSON.parse(localStorage.getItem("product")).standard[0])[0].name})
     })
 
     axios.post('/sauce', {
@@ -72,7 +68,6 @@ class Customization extends Component {
     .then(res => res.data)
     .then(data => {
       this.setState({sauceData: data})
-      this.setState({activeSauce: this.state.sauceData.filter((item) => item._id === JSON.parse(localStorage.getItem("product")).standard[1])[0].name})
     })
 
     axios.post('/cheese', {
@@ -81,7 +76,6 @@ class Customization extends Component {
     .then(res => res.data)
     .then(data => {
       this.setState({cheeseData: data})
-      this.setState({activeCheese: this.state.cheeseData.filter((item) => item._id === JSON.parse(localStorage.getItem("product")).standard[2])[0].name})
     })
 
     axios.post('/special', {
@@ -90,7 +84,6 @@ class Customization extends Component {
     .then(res => res.data)
     .then(data => {
       this.setState({specialData: data})
-      this.setState({activeSpecialTopping: this.state.specialData.filter((item) => item._id === JSON.parse(localStorage.getItem("product")).standard[3])[0].name})
     })
 
     axios.post('/topping', {
@@ -123,14 +116,7 @@ class Customization extends Component {
         object.status = [false, true, false]
       });
     })
-    this.setState({activeBaseDough: JSON.parse(localStorage.getItem("product")).standard[0]})
-    console.log("this-----", this.state.doughData)
-    this.setState({activeBaseSauce: JSON.parse(localStorage.getItem("product")).standard[1]})
-    this.setState({activeBaseCheese: JSON.parse(localStorage.getItem("product")).standard[2]})
-    this.setState({activeSpecial: JSON.parse(localStorage.getItem("product")).standard[3]})
-
-    let select = this.state.selectSize.map((_, _index) => JSON.parse(localStorage.getItem("product")).standard[4] === _index ? true: false)
-    this.setState({selectSize: select})
+    
   }
   
 
@@ -151,55 +137,14 @@ class Customization extends Component {
 
   _renderPizzaBoard = () => {
 
-    const setQty = (qty) => {
-      this.setState({
-        quantity: qty
-      })
-    }
-
-    const addPizza = () => {
-      const newPizza = {
-        name: JSON.parse(localStorage.getItem('product')).name,
-        quantity: this.state.quantity,
-        extra: total_desc,
-        price: price,
-        size: this.state.selectPrice
-      }
-      this.props.addToCart(newPizza)
-    }
-    const total_desc = this.state.activeToppingIng + this.state.activeDough + " " + this.state.activeSauce + " " + this.state.activeCheese
-          + ", " + this.state.activeSpecialTopping;
+    // const total_desc = this.state.activeToppingIng + this.state.activeBase
+    //       + this.state.activeSpecialTopping;
     
-    const price= (JSON.parse(localStorage.getItem('product')).price[this.state.selectPrice] + this.state.priceTopping).toFixed(2)
-
-    const name = JSON.parse(localStorage.getItem("product")).name;
-    const isAdded = this.props.items.findIndex(v => v.name === name) === -1;
-
-    const activeSize = (index) => {
-      let select = this.state.selectSize.map((_, _index) => index === _index ? true: false)
-      console.log(index)
-      let size;
-      if(index === 0) {
-        size = "Small"
-      }
-      if(index === 1) {
-        size = "Medium"
-      }
-      if(index === 2) {
-        size = "Large"
-      }
-      if(index === 3) {
-        size = "X-Large"
-      }
-      
-      this.setState({
-        selectSize: select,
-        selectPrice: size
-      })
-    }
+    // const price= (JSON.parse(localStorage.getItem('product')).price[this.state.selectPrice] + this.state.priceTopping).toFixed(2)
 
     return <div className="pizza-board">
       <div className="title">{this.state.baseData.name}</div>
+      {console.log(this.state.baseData)}
       <div className="configuration">
         <div className="criteria">
           {
@@ -232,42 +177,7 @@ class Customization extends Component {
             })
           }
         </div>
-        <div className="add-cart">
-          <div> 
-            <div className="select-size">
-              {
-                this.state.selectData.map((item, index) => {
-                  return (
-                    <div className="select-individual" 
-                         onClick={() => activeSize(index)} 
-                         style={{border: this.state.selectSize[index] && "2px solid #ee5a00"}}
-                         key={item.name}>
-                      <div className="size">
-                        <div className="size-img" style={{fontSize: item.imgSize}}><BsFillCircleFill /></div>
-                        <div className="size-text">
-                          <span style={{borderBottom: this.state.selectSize[index] && "2px solid #ee5a00"}}>{item.size}</span>
-                        </div>
-                      </div>
-                      <div className="slices">{item.slices + " Slices"}</div>
-                    </div>
-                  )
-                  
-                })
-              }
-            </div>
-            <div className="quantity-price">
-                <Quantity onChange={setQty}/>
-                <div className="price">{"$ " + (price * this.state.quantity).toFixed(2)}</div>
-            </div>
-            <div className="desc">{ total_desc }</div>
-            <div className="cart-button">
-              <Button Class={"pizza-Btn" + (!isAdded ? " active" :"")} 
-                      value={!isAdded ? "ADDED" : "ADD TO CART"} 
-                      onClick={() => addPizza()} 
-                      status={!isAdded ? true : false}/>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   }
@@ -293,6 +203,7 @@ class Customization extends Component {
   }
   _renderIngredients = () => {
     let { activeSubTab, activeBaseDough, activeBaseSauce, activeBaseCheese } = this.state;
+    
     const handleDough = (dough) =>  {
       this.setState({activeBaseDough: dough._id})
       this.setState(prevState => {
@@ -301,9 +212,8 @@ class Customization extends Component {
         return { selection };
       })
       this.setState({
-        activeDough: dough.name
+        activeBase: dough.name
       })
-      
     }
     const handleSauce = (sauce) =>  {
       this.setState({activeBaseSauce: sauce._id})
@@ -312,9 +222,6 @@ class Customization extends Component {
         selection.sauce = sauce.name;
         return { selection };
       })
-      this.setState({
-        activeSauce: sauce.name
-      })
     };
     const handleCheese = (cheese) =>  {
       this.setState({activeBaseCheese: cheese._id})
@@ -322,9 +229,6 @@ class Customization extends Component {
         let selection = Object.assign({}, prevState.selection); 
         selection.cheese = cheese.name;
         return { selection };
-      })
-      this.setState({
-        activeCheese: cheese.name
       })
     };
     return <div className="sub-tab-content">
@@ -384,7 +288,7 @@ class Customization extends Component {
                     activeBaseSauce === sauce._id 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected">
-                          <LazyLoadImage src={sauce.img} />
+                          <LazyLoadImage src={"/"+sauce.img} />
                         </div>
                         <div className="baseSauce-detail-selected">
                           <div className="baseSauce-title-selected">{sauce.name}</div>
@@ -403,7 +307,7 @@ class Customization extends Component {
                           <div className="baseSauce-cals">{sauce.cal} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage src={sauce.img} />
+                          <LazyLoadImage src={"/"+sauce.img} />
                         </div>
                       </div>
                   }
@@ -517,7 +421,7 @@ class Customization extends Component {
       } else {
         tempTopping.push(item._id);
         tempVeggie.push(item.name);
-        tempBaseTopping.push(item.imgWhole)
+        tempBaseTopping.push("/"+item.imgWhole)
         this.state.nameSelect.push(item.name)
         calculatePrice(this.state.nameSelect)
       }
@@ -543,7 +447,7 @@ class Customization extends Component {
         }
       })
       let tempToppingBase = [...this.state.toppingBase];
-      tempToppingBase[index] = item.imgLeft;
+      tempToppingBase[index] = "/"+item.imgLeft;
 
       let veggieData = [...this.state.toppingVeggieData]
       veggieData.forEach((ing) => {
@@ -579,7 +483,7 @@ class Customization extends Component {
         }
       })
       let tempToppingBase = [...this.state.toppingBase];
-      tempToppingBase[index] = item.imgWhole;
+      tempToppingBase[index] = "/"+item.imgWhole;
 
       let veggieData = [...this.state.toppingVeggieData]
       veggieData.forEach((ing) => {
@@ -614,7 +518,7 @@ class Customization extends Component {
         }
       })
       let tempToppingBase = [...this.state.toppingBase];
-      tempToppingBase[index] = item.imgRight;
+      tempToppingBase[index] = "/"+item.imgRight;
 
       let veggieData = [...this.state.toppingVeggieData]
       veggieData.forEach((ing) => {
@@ -751,7 +655,7 @@ class Customization extends Component {
                     activeTopping.filter(top => top === veggie._id).length > 0 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected">
-                          <LazyLoadImage src={veggie.img} />
+                          <LazyLoadImage src={"/"+veggie.img} />
                         </div>
                         <div className="baseSauce-detail-selected">
                           <div className="baseSauce-title-selected">{veggie.name}</div>
@@ -782,7 +686,7 @@ class Customization extends Component {
                           <div className="baseSauce-cals">{veggie.cal} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage src={veggie.img} />
+                          <LazyLoadImage src={"/"+veggie.img} />
                         </div>
                       </div>
                   }
@@ -807,7 +711,7 @@ class Customization extends Component {
                     activeTopping.filter(top => top === meat._id).length > 0 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected">
-                          <LazyLoadImage src={meat.img} />
+                          <LazyLoadImage src={"/"+meat.img} />
                         </div>
                         <div className="baseSauce-detail-selected">
                           <div className="baseSauce-title-selected">{meat.name}</div>
@@ -839,7 +743,7 @@ class Customization extends Component {
                           <div className="baseSauce-cals">{meat.cal} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage src={meat.img} />
+                          <LazyLoadImage src={"/"+meat.img} />
                         </div>
                       </div>
                   }
@@ -863,7 +767,7 @@ class Customization extends Component {
                     activeTopping.filter(top => top === cheese._id).length > 0 
                     ? <div className="selected">
                         <div className="baseSauce-img-selected">
-                          <LazyLoadImage src={cheese.img} />
+                          <LazyLoadImage src={"/"+cheese.img} />
                         </div>
                         <div className="baseSauce-detail-selected">
                           <div className="baseSauce-title-selected">{cheese.name}</div>
@@ -895,7 +799,7 @@ class Customization extends Component {
                           <div className="baseSauce-cals">{cheese.cal} Cals</div>
                         </div>
                         <div className="baseSauce-img">
-                          <LazyLoadImage src={cheese.img} />
+                          <LazyLoadImage src={"/"+cheese.img} />
                         </div>
                       </div>
                   }

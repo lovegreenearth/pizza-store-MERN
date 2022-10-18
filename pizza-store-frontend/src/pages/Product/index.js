@@ -6,6 +6,7 @@ import Button from '../../components/Button/button1';
 import { useNavigate } from "react-router-dom";
 import DirectAddModal from './Modal';
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 import StaticCombo from "../../assets/img/Combo1.png";
 import Static from "../../assets/img/static/bacondblchburg.png"
@@ -18,24 +19,21 @@ const Product = () => {
   const [pizzaData, setPizzaData] = useState([])
 
   useEffect(() => {
-    fetch(`${localStorage.getItem('apiURL')}/menus`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      }
+   
+    axios.post('/menus', {
+
     })
-    .then(res =>res.json())
-    .then(data => {
+    .then(res => res.data)
+    .then (data => {
       setTitle(data.filter(top => top._id === params.id)[0].name)
     })
-    fetch(`${localStorage.getItem('apiURL')}/pizzas/byMenu`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body:JSON.stringify({data: {id:params.id}})
+
+    axios.post('/pizzas/byMenu', {
+      
+      data: {id:params.id}
     })
-    .then(res =>res.json())
+    
+    .then(res => res.data)
     .then(pizza => {
       pizza.forEach(object => {
         object.count = 1;
@@ -43,6 +41,8 @@ const Product = () => {
       setPizzaData(pizza)
     })
     }, [])
+
+    console.log(pizzaData)
     
   const toCustomize = (product, index) => {
     product["index"] = index
