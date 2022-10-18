@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 router.post("/add", async (req, res) => {
   try {
-    let { name, bonus, bonusTopping, price, menuId, customize } = req.body.data;
+    let { name, bonus, bonusTopping, price, menuId, customize, standard } = req.body.data;
 
     // validate
 
@@ -17,7 +17,8 @@ router.post("/add", async (req, res) => {
       bonusTopping,
       price,
       menuId,
-      customize
+      customize,
+      standard
     });
     const savedPizza = await newPizza.save();
     res.json(savedPizza);

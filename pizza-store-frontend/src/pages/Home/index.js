@@ -4,25 +4,21 @@ import ProductOne from "../../components/Product/product1";
 import DemoCarousel from "../../components/Carousel";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
   let navigate = useNavigate();
   const [data, setData] = useState([])
   useEffect(
     () => {
-      fetch(`${localStorage.getItem('apiURL')}/menus`, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        }
+      axios.post('/menus', {
+       
       })
-      .then(res =>res.json())
+      .then(res =>res.data)
       .then(data => {
         setData(data)
       })
-    }
-    , []
-  )
+    }, [])
   return (
     <div className="home-page">
     <div className="carousel-container">

@@ -8,6 +8,7 @@ import Basic from "../../assets/img/traditional-chickenWing.png"
 import { BsCheckCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { addToChicken } from "../../redux/actions";
+import axios from "axios";
 
 
 const ChickenWings = (props) =>  {
@@ -20,19 +21,18 @@ const ChickenWings = (props) =>  {
   const [ wingSauceData, setWingSauceData ] = useState([])
   const wingSauce = chickenWingData.map((item) => item.name);
   const [ data, setData ] = useState({});
-  const [ active, setActive ] = useState([])
+  const [ active, setActive ] = useState([]);
+  const [ validate, setValidate ] = useState([false, false, false, false, false])
 
   useEffect(() => {
-    fetch(`${localStorage.getItem('apiURL')}/chickenWingSauce`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      }
+
+    axios.post('/chickenWingSauce', {
+
     })
-    .then(res =>res.json())
+    .then(res => res.data)
     .then(data => {
-        setChickenWingData(data)
-        setActive(Array(data.length).fill(false))
+      setChickenWingData(data)
+      setActive(Array(data.length).fill(false))
     })
     }, [])
 
@@ -46,22 +46,64 @@ const ChickenWings = (props) =>  {
     } 
     dispatch(addToChicken(newChicken))
   }
+  
   const getData = (title, item) => {
     setData({...data, [title]: item});
-  }
+    if(title === '12 Chicken Wings') {
+      let index;
+      index = 0;
+      let temp = [...validate]
+      temp[index] = true
+      setValidate(temp)
+    }
+    if(title === 'Wings Style') {
+      let index;
+      index = 1;
+      let temp = [...validate]
+      temp[index] = true
+      setValidate(temp)
+    }
+    if(title === 'Amount of Sauce') {
+      let index;
+      index = 2;
+      let temp = [...validate]
+      temp[index] = true
+      setValidate(temp)
+    }
+    if(title === 'Garlic Bread') {
+      let index;
+      index = 3;
+      let temp = [...validate]
+      temp[index] = true
+      setValidate(temp)
+    }
 
+  }
+  
+  
   let select = [...wingSauceData]
   const selectOption = (item, index) => {
     if(select.filter(c => c === item).length > 0) {
-      const index = select.indexOf(select.filter(c => c === item)[0]);
-      select.splice(index, 1);
+      const tempIndex = select.indexOf(select.filter(c => c === item)[0]);
+      select.splice(tempIndex, 1);
     } else {
       select.push(item);
     }
     setWingSauceData(select);
 
+    console.log(select)
+    if(select.length === JSON.parse(localStorage.getItem("product")).bonusTopping) {
+      console.log("object")
+      let temp = [...validate];
+      temp[4] = true;
+      setValidate(temp)
+    } else {
+      let temp = [...validate];
+      temp[4] = false;
+      setValidate(temp)
+    }
+
     let activeSelect = [...active]
-    
     if(activeSelect[index] === false) {
       activeSelect[index] = true
     } else {
@@ -89,10 +131,13 @@ const ChickenWings = (props) =>  {
                       <Quantity onChange={(qty) => setQuantity(qty)} />
                       <div className="price">{ "$ " + (JSON.parse(localStorage.getItem("product")).price.price * quantity).toFixed(2) }</div>
                     </div>
-                    <Button Class={"chicken-Btn" + (!isAdded ? " active" :"")} 
-                      value={!isAdded ? "ADDED" : "ADD TO CART"} 
-                      onClick={() => addCart()} 
-                      status={!isAdded ? true : false}/>
+                    {console.log(validate)}
+                    <Button Class="chicken-Btn" 
+                      // Class={"chicken-Btn" + (!isAdded ? " active" :"")}
+                      onClick={() => addCart()}
+                      value={!isAdded  ? "ADDED" : "ADD TO CART"}
+                      status={validate.filter(item => item === false).length > 0 || !isAdded ? true : false}
+                      />
                   </div>
                 </div>
 
@@ -127,10 +172,10 @@ const ChickenWings = (props) =>  {
                 <div className="bottom-block" style={{border: active.filter(c => c === true).length === 1 ? "2px solid #FCA017" : "1px solid #FCA017" }} >
                   <div className="bottom-content">
                     <div className="title-group">
-                      <div className="bottom-title">Wing Sauce(Select {JSON.parse(localStorage.getItem("product")).index + 1})<span>(required)</span></div>
+                      <div className="bottom-title">Wing Sauce(Select {JSON.parse(localStorage.getItem("product")).bonusTopping})<span>(required)</span></div>
                       {
-                        active.filter(c => c === true).length > JSON.parse(localStorage.getItem("product")).index + 1
-                        ? <div className="alert-msg">You can select maximum 3 Sauces</div>
+                        active.filter(c => c === true).length > JSON.parse(localStorage.getItem("product")).bonusTopping
+                        ? <div className="alert-msg">You can select maximum {JSON.parse(localStorage.getItem("product")).bonusTopping} Sauces</div>
                         : ""
                       }
                     </div>

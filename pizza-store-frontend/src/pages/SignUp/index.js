@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Button from "../../components/Button/button1";
 import SignUpBanner from "../../assets/img/signup-banner.png"
+import axios from "axios";
 
 
 export default class SignUp extends Component {
@@ -84,22 +85,17 @@ export default class SignUp extends Component {
                 passwordCheck: this.confirmpwRef.current.value,
                 displayName: this.fnameRef.current.value + ' ' + this.lnameRef.current.value
             }
-            fetch(`${localStorage.getItem('apiURL')}/users/register`, {
-                method: 'POST',
-                headers: {
-                "Content-Type": "application/json"
-                },
-                body:JSON.stringify(sendData)
-            })
-            .then(res =>res.json())
-            .then(data => {
+
+            axios.post('/users/register',sendData)
+                .then(res => res.data)
+                .then(data => {
                 if (data.msg) {
                     alert(data.msg);
                 } else if (data.role) {
                     this.props.onSuccess();
                     alert("success");
                 }
-            })
+                })
         }
     }
 

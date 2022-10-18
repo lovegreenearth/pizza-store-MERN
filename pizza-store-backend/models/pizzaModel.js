@@ -24,6 +24,10 @@ const pizzaSchema = new mongoose.Schema({
   customize: { 
     type: Boolean, 
     required: true, 
+  },
+  standard: { 
+    type: Array, 
+    required: true, 
   }
 });
 
