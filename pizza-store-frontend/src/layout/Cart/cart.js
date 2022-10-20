@@ -14,10 +14,12 @@ import Basket from "../../assets/img/Vector.png";
 import EmptyCart from "../../assets/img/emptyCart.png"
 import ArrowDown from "../../assets/img/arrowDown.png"
 import ArrowUp from "../../assets/img/arrowUp.png"
+import ConditionModal from "./ConditionModal";
 
 const Cart = () => {
-  const [activeCart, setActiveCart] = useState(false)
-  const items = useSelector((state) => state.items)
+  const [activeCart, setActiveCart] = useState(false);
+  const [onShow, setOnShow] = useState(false)
+  const items = useSelector((state) => state.items);
   let navigate = useNavigate();
 
   const handleUpCart = () => {
@@ -45,9 +47,18 @@ const Cart = () => {
 
   const checkOut =() => {
     if(items.length > 0){
-      navigate("/CheckOut");
+      if(!localStorage.getItem("log").token) {
+        setOnShow(true)
+      }
     } 
   }
+
+  const change = () => {
+    navigate("/signIn");
+    setOnShow(false);
+
+  }
+  
 
   return (
     <div className='cart'>
@@ -126,6 +137,7 @@ const Cart = () => {
           </div>
         : ""
       }
+      <ConditionModal show={onShow} onHide={() => setOnShow(false)} change={() => change()} />
     </div>
   )
   

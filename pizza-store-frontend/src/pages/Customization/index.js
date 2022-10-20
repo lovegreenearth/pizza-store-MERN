@@ -124,7 +124,6 @@ class Customization extends Component {
       });
     })
     this.setState({activeBaseDough: JSON.parse(localStorage.getItem("product")).standard[0]})
-    console.log("this-----", this.state.doughData)
     this.setState({activeBaseSauce: JSON.parse(localStorage.getItem("product")).standard[1]})
     this.setState({activeBaseCheese: JSON.parse(localStorage.getItem("product")).standard[2]})
     this.setState({activeSpecial: JSON.parse(localStorage.getItem("product")).standard[3]})
