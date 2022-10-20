@@ -3,8 +3,9 @@ import Button from "../../components/Button/button1";
 import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
+import { useNavigate } from 'react-router'
 
-export default class SignIn extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
 
@@ -24,8 +25,10 @@ export default class SignIn extends Component {
     .then(res => res.data)
     .then(data => {
       if (data.token) {
+				console.log(data)
+				localStorage.setItem('log', JSON.stringify(data));
 				this.props.onSuccess();
-				alert('success');
+				this.props.navigate("/")				
 		} else if (data.msg) 
 			{
 				alert(data.msg);
@@ -58,7 +61,7 @@ export default class SignIn extends Component {
 									<label>Password</label>
 								</div>
 								<div className="input">
-									<input type="password" name="Upassword" id="Upassword" value={password} onChange={(e) => this.setState({password: e.target.value})} />
+									<input type="password" name="uPassword" id="uPassword" value={password} onChange={(e) => this.setState({password: e.target.value})} />
 								</div>
 							</div>
 
@@ -78,7 +81,7 @@ export default class SignIn extends Component {
 										Don't have an account?
 								</div>
 								<div className="goto-register">
-										<a href="/signup">Creat one here.</a>
+										<a href="/signup">Create one here.</a>
 								</div>
 								<div className="signIn-avatar"><CgFacebook size={30} /></div>
 								<div className="signIn-avatar"><FcGoogle size={30} /></div>
@@ -110,3 +113,10 @@ export default class SignIn extends Component {
 		)
 	}
 }
+
+const Comp = (props) => {
+	const navigate = useNavigate()
+	return <SignIn navigate={navigate} {...props} />
+}
+
+export default Comp

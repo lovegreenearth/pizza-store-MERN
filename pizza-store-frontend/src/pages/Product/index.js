@@ -41,8 +41,6 @@ const Product = () => {
       setPizzaData(pizza)
     })
     }, [])
-
-    console.log(pizzaData)
     
   const toCustomize = (product, index) => {
     product["index"] = index
@@ -63,7 +61,6 @@ const Product = () => {
     setModalShow(true);
     setModalData(item)
     setModalPrice(item.price.price)
-    console.log(productCart.filter(v => v.name === item.name).length)
   }
   return (
       <div className='product-container'>
