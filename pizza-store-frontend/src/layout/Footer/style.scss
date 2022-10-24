@@ -1,64 +1,46 @@
 .footer {
   background-color: #FCA017;
-  color: #3C1C21;
-  clear: both;
-  .content {
-    padding: 50px 50px;
-    @media only screen and (max-width: $breakpoint-medium) {
-      padding: 70px 0px;
-    }
-
-    .footer-navbar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1600px;
-      margin: auto;
-
-      .footer-container {
-        width: 35%;
-        display: flex;
-        justify-content: space-around;
-
-        .footer-link {
-          text-align: left;
-          line-height: 40px;
-          width: 50%;
-  
-          .footer-link-title {
-            color: #3C1C21;
-            text-decoration: none;
-            font-size: 30px;
-          }
-  
-          .footer-link-text {
-            color: #3C1C21;
-            text-decoration: none;
-            font-size: 18px;
-          }
-        }
-
-        @media only screen and (max-width: $breakpoint-medium) {
-          width: 44%;
-        }
-
-        @media only screen and (max-width: $x-size) {
-          width: 80%;
-        }
-
-        @media only screen and (max-width: $x-s-size) {
-          display: block;
-        }
+  .footer-content {
+    display: flex;
+    align-items: center;
+    column-gap: 120px;
+    row-gap: 30px;
+    padding: 70px 0px;
+    max-width: 1320px;
+    margin: auto;
+    .footer-logo {
+      img {
+        width: 75%;
       }
-
-      @media only screen and (max-width: $breakpoint-medium) {
-        .logo {
-          display: none;
-        }
-        .footer-navbar {
-          padding: 0px 20px;
-        }
+    }
+    @media only screen and (max-width: 1320px) {
+      padding: 10px 10px;
+    }
+    @media only screen and (max-width: 1200px) {
+      column-gap: 8%;
+    }
+    @media only screen and (max-width: 1000px) {
+      justify-content: center;
+      flex-wrap: wrap;
+      .footer-logo {
+        display: none;
+      }
+    }
+    .individual-detail {
+      text-align: left;
+      display: grid;
+      row-gap: 10px;
+      .detail-title {
+        color: white;
+        text-decoration: none;
+        font-size: 25px;
+        font-weight: 600;
+      }
+      .detail {
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 400;
       }
     }
   }

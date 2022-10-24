@@ -10,16 +10,10 @@ export default class ProductOne extends Component {
 	}
 	render() {
 		return (
-			<div className={this.props.className} key={this.props.number}>
-				<div className="product-position">
-					<img src={this.props.source} alt="#" />
-					<div className="position-content">
-						<div className="title-button">
-							<div className="title">{this.props.title}</div>
-						</div>
-						<Button value={this.props.button_value} onClick={this.props.onClick} />
-					</div>
-				</div>
+			<div className="individual-product">
+				<div className="product-title">{this.props.title}</div>
+				<img className="product-img" src={this.props.source} alt="Home menu" />
+				<Button value={this.props.buttonValue} onClick={this.props.onClick} />
 			</div>
 		)
 	}

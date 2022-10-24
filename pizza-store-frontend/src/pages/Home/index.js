@@ -21,40 +21,41 @@ const Home = () => {
     }, [])
   return (
     <div className="home-page">
-    <div className="carousel-container">
-      <div className="label">
-        <div>FEATURED SPECIAL</div>
-        <div>
-          <Link to="/see-all" className="navigation-button">
-            SEE ALL<AiFillPlayCircle className="navigation-icon" />
-          </Link>
+      <div className="carousel-container">
+        <div className="label">
+          <div className="label-special">FEATURED SPECIAL</div>
+          <div>
+            <Link to="/see-all" className="navigation-button">
+              <div className="navigation-seeAll">See All</div>
+              <AiFillPlayCircle className="navigation-icon" />
+            </Link>
+          </div>
+        </div>
+        <div className="underline"></div>
+        <div className="banner">
+          <DemoCarousel />
         </div>
       </div>
-      <div className="underline"></div>
-      <div className="banner">
-        <DemoCarousel />
+      <div className="product-container">
+        <div className="label">MENU</div>
+        <div className="underline"></div>
+        <div className="product-list">
+          {
+            data.map((item, index) => {
+              return(
+                <div key={index}>
+                    <ProductOne
+                      title={item.name}
+                      source={item.img}
+                      buttonValue="Order Now"
+                      onClick={() => navigate(`Product/${item._id}`)}
+                    />
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
-    </div>
-    <div className="product-container">
-      <div className="label">MENU</div>
-      <div className="underline"></div>
-      <div className="product-list">
-        {
-          data.map((item, index) => {
-            return(
-              <div key={index}>
-                <ProductOne
-                  source={item.img}
-                  className='product1'
-                  title={item.name}
-                  button_value = "ORDER NOW"
-                  onClick={() => navigate(`Product/${item._id}`)} />
-              </div>
-            )
-          })
-        }
-      </div>
-    </div>
   </div>
   )
 }
