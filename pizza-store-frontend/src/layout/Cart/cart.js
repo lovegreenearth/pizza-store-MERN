@@ -103,7 +103,8 @@ const Cart = () => {
                   <img className='cart-img' src={EmptyCart} alt="basket" />
                   <Button value ={"Check Out"} onClick={checkOut} status={true} />
                 </div>
-              : <div className='cart-detail'> 
+              : <div className='cart-detail'>
+                {console.log(items)}
                   {
                     items.map((c, index) => {
                       return (

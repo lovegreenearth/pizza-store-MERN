@@ -4,8 +4,14 @@
   }
 }
 .detail-caption {
+  .caption-title {
+    font-size: 35px;
+    font-weight: 800;
+    color: #4c3017;
+    padding-bottom: 40px;
+  }
+  padding-top: 40px;
   
-  padding-top: 50px;
   .caption-content {
     max-width: 1200px;
     margin: auto;
@@ -14,7 +20,7 @@
     .content-detail {
       width: 60%;
       .detail-title {
-        font-weight: 800;
+        font-weight: 600;
         font-size: 30px;
         color: #4c3017;
         
@@ -96,13 +102,22 @@
           .content-title {
             color: #4c3017;
             font-size: 25px;
-            font-weight: 800;
+            font-weight: 600;
             text-align: left;
           }
           .button {
             position: absolute;
             right: 10px;
             bottom: 10px;
+            .selected {
+              background-color: green;
+              &:hover {
+                background-color: white;
+                color: green;
+                border: 2px solid green;
+
+              }
+            }
             button {
               margin-bottom: 0px;
               width: 120px;

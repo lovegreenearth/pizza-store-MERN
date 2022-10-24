@@ -1,0 +1,41 @@
+.dip-content {
+  display: grid;
+  gap: 10px;
+  .individual-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .checkbox-symbol {
+      display: flex;
+      border: 2px solid gray;
+      border-radius: 3px;
+      width: 24px;
+      height: 24px;
+      .check {
+        font-size: 20px;
+        color: white;
+      }
+    }
+    .checked {
+      border: 2px solid #0072E5;
+      background-color: #0072E5;
+    }
+    .checkbox-label {
+      font-size: 20px;
+    }
+    .checked-label {
+      color: #0072E5;
+    }
+  }
+}
+.modal-footer{
+  
+  .NextButton {
+    .button {
+      button {
+        width: 150px;
+        margin-bottom: 0px;
+      }
+    }
+  }
+}

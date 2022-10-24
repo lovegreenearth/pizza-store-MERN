@@ -34,14 +34,14 @@
     &:hover {
       background-color: #ffffff;
       color: #FCA017;
-      border: 1px solid #FCA017;
+      border: 2px solid #FCA017;
       transition-duration: 0.3s, 0.5s;
       cursor: pointer;
     }
     &:disabled,
     &[disabled]{
       background-color: #F3F3F3;
-      border: 1px solid #F3F3F3;
+      border: 2px solid #F3F3F3;
       color: #9D9B9B;
     }
   }
@@ -52,7 +52,7 @@
   .active:disabled,
     .active[disabled]{
       background-color: #F3F3F3;
-      border: 1px solid #F3F3F3;
+      border: 2px solid #F3F3F3;
       color: #9D9B9B;
     }
 }
