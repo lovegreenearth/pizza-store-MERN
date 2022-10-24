@@ -19,7 +19,7 @@ class Header extends Component {
   render() {
     return <div className='header'>
       <section className="top-nav">
-        <div>
+        <div className='top-logo'>
           <LazyLoadImage
             alt="logo"
             src={Logo}
@@ -30,7 +30,7 @@ class Header extends Component {
           <span className='menu-button'></span>
         </label>
         <ul className="menu">
-          <li>
+          <li className='home-li'>
             <Link to="/#" className='fa-home react-icons'>
               <div className='icon-margin'>
                 <FaHome size={30} />

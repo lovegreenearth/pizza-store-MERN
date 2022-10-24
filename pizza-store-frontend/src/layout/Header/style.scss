@@ -9,10 +9,15 @@
     background-color: #FCA017;
     color: #ffffff;
     padding: 10px 0px;
-    max-width: 1600px;
+    max-width: 1320px;
     margin: 0 auto;
-    @media only screen and (max-width: 1600px) {
+    @media only screen and (max-width: 1320px) {
       padding: 10px 10px;
+    }
+    .top-logo {
+      img {
+        width: 80%;
+      }
     }
   }
   
@@ -23,10 +28,19 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    column-gap: 50px;
+    .home-li {
+      padding: 5px 25px;
+      border: 2px solid;
+      border-radius: 7px;
+      @media (max-width: 700px) {
+        border-radius: 0px;
+      }
+    }
   }
   
   .menu > li {
-    margin: 0 1rem;
+    // margin: 0 1rem;
     overflow: hidden;
   }
   
@@ -82,6 +96,7 @@
 
   .fa-home {
     font-size: 15px;
+    text-align: left;
   }
 
   .md-account {
@@ -95,7 +110,6 @@
   .react-icons {
     display: flex;
     align-items: center;
-    margin-left: 20px;
     text-decoration: none;
     color: #ffffff;
 
@@ -108,6 +122,7 @@
     .menu-button-container {
       display: flex;
     }
+   
     .menu {
       position: absolute;
       top: 60px;
