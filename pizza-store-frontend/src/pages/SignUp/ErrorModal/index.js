@@ -15,14 +15,10 @@ const ErrorModal = (props) => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Error</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Free Dip</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div>{props.content}</div>
-        {
-          props.content === "An account with this email already exists." &&
-            <div>Please Change Your email</div>
-        }
+        
       </Modal.Body>
       <Modal.Footer>
         {

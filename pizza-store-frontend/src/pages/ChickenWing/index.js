@@ -91,9 +91,7 @@ const ChickenWings = (props) =>  {
     }
     setWingSauceData(select);
 
-    console.log(select)
     if(select.length === JSON.parse(localStorage.getItem("product")).bonusTopping) {
-      console.log("object")
       let temp = [...validate];
       temp[4] = true;
       setValidate(temp)
