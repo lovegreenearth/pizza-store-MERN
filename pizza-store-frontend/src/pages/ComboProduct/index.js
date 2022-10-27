@@ -4,7 +4,8 @@ import './style.scss'
 import axios from "axios";
 import Button from '../../components/Button/button1';
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
-import Customize from "./pizza/index";
+import Customization from '../Customization';
+import PizzaCustomization from "./pizza"
 import FreeDipModal from './FreeDip';
 import ExtraDipModal from './ExtraDip';
 
@@ -17,12 +18,17 @@ const ComboProduct = (props) => {
   const [ comboData, setComboData ] = useState({product:[]});
   const [ comboCount, setComboCount ] = useState(1);
   const [ active, setActive ] = useState([]);
-  const [ freeDipShow, setFreeDipShow ] = useState(false);
-  const [ ExtraDipShow, setExtraDipShow ] = useState(false);
   const [ dipData, setDipData ] = useState([]);
   const [ freeDipIndex, setFreeDipIndex ] = useState(0)
   const [ selectDip, setSelectDip ] = useState([false]);
   const [ selectExtraDip, setSelectExtraDip ] = useState([false])
+
+  // Show child component
+  const [ freeDipShow, setFreeDipShow ] = useState(false);
+  const [ ExtraDipShow, setExtraDipShow ] = useState(false);
+  const [ pizzaShow, setPizzaShow ] = useState(false);
+  const [ pizzaTitle, setPizzaTitle ] = useState("");  // Set pizza child component's title
+
 
   // calculate price state variable
   const [ comboPrice, setComboPrice] = useState(comboData.price)
@@ -70,7 +76,9 @@ const ComboProduct = (props) => {
 
   const goCustomize =(item, index) => {
     if(item.type === "pizza") {
-      <Customize data={item.name} />
+      setPizzaShow(true)
+      setPizzaTitle(item.name)
+      document.body.style.overflow = "hidden";
     }
     if(item.type === "other") {
       setFreeDipShow(true);
@@ -84,7 +92,6 @@ const ComboProduct = (props) => {
   const comboToCart = () => {
     const newCombo ={
       name: comboData.name,
-      // price: comboData.price,
       price: (comboData.price + extraDipPrice).toFixed(2),
       quantity: comboCount,
       "Free Dip": freeDip,
@@ -169,9 +176,13 @@ const ComboProduct = (props) => {
     }
     setExtraDip(temp)
   }
+  const pizzaHide = () => {
+    setPizzaShow(false);
+    document.body.style.overflow = "auto";
+  }
 
   return (
-    <div>
+    <div style={{overflow: "hidden"}}>
       <div className='detail-banner'>
         <img src={StaticBanner} alt="Banner" />
       </div>
@@ -260,7 +271,11 @@ const ComboProduct = (props) => {
         check={selectExtraDip}
         onSelect={ (index) => activeExtraDip(index) }
       />
-
+      <PizzaCustomization
+        show={pizzaShow}
+        onHide={() => pizzaHide()}
+        title={pizzaTitle}
+      />
     </div>
   )
 }
