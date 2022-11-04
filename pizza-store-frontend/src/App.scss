@@ -1,9 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
 @import './assets/css/responsive.scss';
+
+@font-face {
+  font-family: pizzaFont;
+  src: url(./assets/fonts/Prompt-Medium.ttf);
+}
 
 .App {
   text-align: center;
-  font-family: 'Prompt', sans-serif;
+  font-family: pizzaFont;
   height: 100%;
   color: #000;
   background-color: #f3f3f3;

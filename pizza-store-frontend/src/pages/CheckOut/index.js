@@ -183,7 +183,7 @@ const CheckOut = () => {
 
   return (
     <div className='checkOut-container'>
-      <div className='main-title'>CHECKOUT</div>
+      <div className='main-title'>CHECK OUT</div>
       <div className='main-content'>
         <div className='summary'>
           <div className='summary-title'>Order Summary</div>
@@ -191,7 +191,7 @@ const CheckOut = () => {
           <div className='detail-group'>
             <div className='summary-detail'>
               <div className='detail-title'>Sub total:</div>
-              <div className='detail-price'>{"$ " + priceSubTotal}</div>
+              <div className='detail-price'>{"$ " + (priceSubTotal).toFixed(2)}</div>
             </div>
             <div className='summary-detail'>
               <div className='detail-title'>GST:</div>
@@ -229,11 +229,35 @@ const CheckOut = () => {
                           <img src={Static} alt="Review" />
                         </div>
                         <div className='individual-content'>
-                          <div className='individual-title'>{item.size + " " + item.name}</div>
-                          <div className='individual-desc'>{item.extra}</div>
+                          <div className='individual-title'>
+                            {
+                              item.extra 
+                              ? item.size + " " + item.name
+                              : item.name
+                            }
+                          </div>
+                          <div className='individual-desc'>
+                            {
+                              item.extra 
+                              ? item.extra
+                              : <div className="combo-part">
+                              {
+                                 Object.entries(item).map(([key, val]) => 
+                                 key === 'name' || key === 'extra' || key === 'price' || key === 'quantity' ||
+                                 key === 'size' || key === 'status' 
+                                 ? ''
+                                 : <div className="combo-content" key={key}>
+                                    <span className="key">{key + ": "}</span>
+                                    <span className="value">{val}</span>
+                                 </div>
+                               )
+                              }
+                            </div>
+                            }
+                          </div>
                           <div className='individual-final'>
                             <div className='remove-button'><BsDashCircle style={{fontSize: "12px"}} /> Remove</div>
-                            <div className='individual-price'>{"$ " + item.quantity*item.price}</div>
+                            <div className='individual-price'>{"$ " + (item.quantity*item.price).toFixed(2)}</div>
                           </div>
                         </div>
                        

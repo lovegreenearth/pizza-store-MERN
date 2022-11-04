@@ -19,7 +19,7 @@
     .chicken-title {
       font-size: 30px;
       font-weight: 700;
-      color: black;
+      color: #4c3017;
       margin-bottom: 39px;
       text-align: left;
     }
@@ -85,13 +85,14 @@
             margin-top: 30px;
             .option {
               display: flex;
-              align-items: center;
+              align-items: flex-start;
               color: #FCA017;
               font-size: 15px;
               column-gap: 10px;
               font-weight: 400;
               .txt {
-                color: black;
+                color: #4c3017;
+                text-align: left;
               }
             }
           }

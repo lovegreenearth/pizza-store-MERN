@@ -22,7 +22,7 @@ const FreeDipModal = (props) => {
             props.content.map((item, index) => {
               return (
                 
-                <div className='individual-checkbox' onClick={() => props.onSelect(index)} key={item.name}>
+                <div className='individual-checkbox' onClick={() => props.onSelect(item, index)} key={item.name}>
                   <div className={'checkbox-symbol' + (props.check[index] ? ' checked' : '')}>
                   {
                     props.check && <BiCheck className="check"/>

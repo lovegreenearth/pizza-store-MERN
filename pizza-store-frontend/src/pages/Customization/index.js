@@ -136,7 +136,7 @@ class Customization extends Component {
   _renderTabItem = (tab, activeTab) => {
     return (
       <div className={"tab-item" + (activeTab === tab.id ? ' active-tab' : '')} 
-          onClick={() => this.setState({activeTab: tab.id})}>
+          onClick={() => this.setState({activeTab: tab.id})} key={tab.id+"tab"}>
         {
           tab.id === 1 && <Cheese className="cheese-icon" />
         }
@@ -176,7 +176,6 @@ class Customization extends Component {
 
     const activeSize = (index) => {
       let select = this.state.selectSize.map((_, _index) => index === _index ? true: false)
-      console.log(index)
       let size;
       if(index === 0) {
         size = "Small"
@@ -216,7 +215,7 @@ class Customization extends Component {
             this.state.toppingBase.map((base, index) => {
               return (
                 <div className="multiTopping">
-                  <LazyLoadImage alt={StaticInitial} src={base} key={index}/>
+                  <LazyLoadImage alt={StaticInitial} src={base} key={base}/>
                 </div>
               )
             })
@@ -224,7 +223,7 @@ class Customization extends Component {
           {
             this.state.toppingExtra.map((extra, index) => {
               return (
-                <div className="multiTopping" key={index}>
+                <div className="multiTopping" key={extra}>
                   <LazyLoadImage alt={StaticInitial} src={extra} />
                 </div>
               )
@@ -274,7 +273,7 @@ class Customization extends Component {
   _renderSubTabItems = (tab, activeTab, index) => {
     return <div className={"sub-tab-item" + (activeTab === tab.id ? ' active-sub-tab' : '')} 
                 onClick={() => this.setState({activeSubTab: tab.id})} 
-                key={index}>
+                key={tab.id+"render"}>
       {tab.name}
     </div>;
   }
@@ -717,6 +716,13 @@ class Customization extends Component {
         if(ing.name === item.name) {
           if(item.count >= 2) {
             item.count = item.count - 1;
+            let index = 0;
+            this.state.nameSelect.forEach((name, i) =>{
+              if(name === item.name) {
+                index = i;
+              }
+            })
+            this.state.nameSelect.splice(index, 1);
           }
         }
       })
@@ -725,6 +731,13 @@ class Customization extends Component {
         if(ing.name === item.name) {
           if(item.count >= 2) {
             item.count = item.count - 1;
+            let index = 0;
+            this.state.nameSelect.forEach((name, i) =>{
+              if(name === item.name) {
+                index = i;
+              }
+            })
+            this.state.nameSelect.splice(index, 1);
           }
         }
       })
