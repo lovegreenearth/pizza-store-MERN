@@ -18,6 +18,7 @@ export function removeToProduct(removeProduct) {
     payload: removeProduct,
   }
 }
+
 export function modalToCart(newModal) {
   return {
     type: 'MODAL_TO_CART',
@@ -25,5 +26,10 @@ export function modalToCart(newModal) {
   }
 }
 
-
+export function addToCombo(addCombo) {
+  return {
+    type: 'Combo_TO_CART',
+    payload: addCombo,
+  }
+}
 

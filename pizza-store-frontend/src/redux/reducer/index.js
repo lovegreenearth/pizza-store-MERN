@@ -22,7 +22,7 @@ const {payload} = action;
       };
       return {
         items:items,
-      }
+    }
 
     case 'CHICKEN_TO_CART' :
       const indexChicken = state.items.findIndex(c => c.name === action.payload.name);
@@ -34,7 +34,7 @@ const {payload} = action;
       } 
       return {
         items: itemChicken,
-      }
+    }
 
     case 'REMOVE_PRODUCT' :
       let item = state.items
@@ -53,6 +53,17 @@ const {payload} = action;
       } 
     return {
       items: [...itemModal],
+    }
+
+    case 'Combo_TO_CART':
+      let indexCombo = state.items.findIndex(c => c.name === action.payload.name);
+      let itemCombo = state.items
+      if(indexCombo === -1) {
+        payload.status = true
+        itemCombo = [...state.items, payload]
+      } 
+    return {
+      items: [...itemCombo]
     }
      
     default: return state || initialState

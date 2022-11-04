@@ -1,4 +1,4 @@
-import { React, useState } from "react"
+import { React, useEffect, useState } from "react"
 import { useSelector } from 'react-redux';
 import "./cart.scss"
 import Button from "../../components/Button/button1"
@@ -20,6 +20,8 @@ const Cart = () => {
   const [activeCart, setActiveCart] = useState(false);
   const [onShow, setOnShow] = useState(false)
   const items = useSelector((state) => state.items);
+  const [comboCart, setComboCart] = useState({})
+  
   let navigate = useNavigate();
 
   const handleUpCart = () => {
@@ -30,7 +32,6 @@ const Cart = () => {
     return accumulator + value.price * value.quantity;
   }, 0)
   
-
   const dispatch = useDispatch();
 
   const remove = (c,index) => {
@@ -46,19 +47,13 @@ const Cart = () => {
   }
 
   const checkOut =() => {
-    if(items.length > 0){
-      if(!localStorage.getItem("log").token) {
-        setOnShow(true)
-      }
-    } 
+    navigate("/CheckOut")
   }
 
   const change = () => {
     navigate("/signIn");
     setOnShow(false);
-
   }
-  
 
   return (
     <div className='cart'>
@@ -104,15 +99,31 @@ const Cart = () => {
                   <Button value ={"Check Out"} onClick={checkOut} status={true} />
                 </div>
               : <div className='cart-detail'>
-                {console.log(items)}
                   {
                     items.map((c, index) => {
                       return (
+                        
                         <div className='cart-individual' key={index}>
                           <div className='image'><img src={Static} alt="cart-small" /></div>
                           <div className='content'>
                             <div className='title'>{c.name}</div>
-                            <div className='desc'>{c.extra}</div>
+                            {
+                              c.extra ? <div className='desc'>{c.extra}</div>
+                              : <div className="combo-part">
+                                {
+                                   Object.entries(c).map(([key, val]) => 
+                                   key === 'name' || key === 'extra' || key === 'price' || key === 'quantity' ||
+                                   key === 'size' || key === 'status' 
+                                   ? ''
+                                   : <div className="combo-content" key={key}>
+                                      <span className="key">{key + ": "}</span>
+                                      <span className="value">{val}</span>
+                                   </div>
+                                 )
+                                }
+                              </div>
+                            }
+                            
                             <div className='final'>
                               <div className='remove-edit'>
                                 <div className='remove' onClick={() =>remove(c, index)}>
@@ -123,7 +134,7 @@ const Cart = () => {
                                 </div>
                               </div>
                               <div className='final-price'>
-                                {"$ " + c.price * c.quantity}
+                                {"$ " + (c.price * c.quantity).toFixed(2)}
                               </div>
                             </div>
                           </div>

@@ -11,9 +11,6 @@ import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { IoIosRadioButtonOn } from "react-icons/io"
 import { BiAdjust } from "react-icons/bi";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { BsFillCircleFill } from "react-icons/bs";
-import Quantity from "../../../components/Button/qty";
-import Button from "../../../components/Button/button1";
 
   // Static Image...
 import StaticDough from "../../../assets/img/static/Regular Dough.png";
@@ -30,39 +27,69 @@ const PizzaCustomization = (props) => {
   const [ activeBaseDough, setActiveBaseDough ] = useState("");
   const [ activeBaseSauce, setActiveBaseSauce ] = useState("");
   const [ activeBaseCheese, setActiveBaseCheese ] = useState("");
+  const [ activeBaseSpecial, setActiveBaseSpecial ] = useState("");
+  const [ activeDough, setActiveDough ] = useState("");
+  const [ activeSauce, setActiveSauce ] = useState("");
+  const [ activeCheese, setActiveCheese ] = useState("");
   const [ activeSpecial, setActiveSpecial ] = useState("");
-  const [activeTopping, setActiveTopping] = useState([])
-
+ 
   // Fetch Data from MongoDB
   const [doughData, setDoughData] = useState([]);
   const [sauceData, setSauceData] = useState([]);
   const [cheeseData, setCheeseData] = useState([]);
   const [specialData, setSpecialData] = useState([]);
-  const [toppingData, setToppingData] = useState([]);
   const [toppingVeggieData, setToppingVeggieData] = useState([]);
   const [toppingMeatData, setToppingMeatData] = useState([]);
-  const [toppingCheeseData, setToppingCheeseData] = useState([])
+  const [toppingCheeseData, setToppingCheeseData] = useState([]);
 
   // topping click
-  
+  const [activeTopping, setActiveTopping] = useState([]);
+  const [activeToppingIng, setActiveToppingIng] = useState([]);
+  const [toppingBase, setToppingBase] = useState([]);
+  const [nameSelect, setNameSelect] = useState([])
+  const [priceTopping, setPriceTopping] = useState(0)
 
   // pizza Board
-  const [quantity, setQuantity] = useState(1);
   const [selection, setSelection] = useState({})
-  const [toppingImg, setToppingImg] = useState([StaticInitial]);
-  const [toppingBase, setToppingBase] = useState([]);
-  const [toppingExtra, setToppingExtra] = useState([]);
-  const [selectSize, setSelectSize] = useState(Array(4).fill(false));
-  const [selectPrice, setSelectPrice] = useState("Small")
 
   useEffect(() => {
+    if(props.status) {
+      setActiveTab(props.data[0])
+      setActiveSubTab(props.data[1])
+      setActiveToppingSubTab(props.data[2])
+      setActiveBaseDough(props.data[3])
+      setActiveBaseSauce(props.data[4])
+      setActiveBaseCheese(props.data[5])
+      setActiveBaseSpecial(props.data[6])
+      setActiveTopping(props.data[7])
+      setActiveToppingIng(props.data[8])
+      setToppingBase(props.data[9])
+      setNameSelect(props.data[10])
+      setSelection(props.data[11])
+    } else {
+      setActiveTab(1)
+      setActiveSubTab(1)
+      setActiveToppingSubTab(1)
+      setActiveBaseDough("")
+      setActiveBaseSauce("")
+      setActiveBaseCheese("")
+      setActiveBaseSpecial("")
+      setActiveTopping([])
+      setActiveToppingIng([])
+      setToppingBase([])
+      setNameSelect([])
+      setSelection({})
+    }
+  }, [props.show])
+  
+  useEffect(() => {
+
     axios.post('/doughs', {
 
     })
     .then(res => res.data)
     .then(data => {
       setDoughData(data)
-      // this.setState({activeDough: this.state.doughData.filter((item) => item._id === JSON.parse(localStorage.getItem("product")).standard[0])[0].name})
     })
 
     axios.post('/sauce', {
@@ -71,7 +98,6 @@ const PizzaCustomization = (props) => {
     .then(res => res.data)
     .then(data => {
       setSauceData(data)
-      // this.setState({activeSauce: this.state.sauceData.filter((item) => item._id === JSON.parse(localStorage.getItem("product")).standard[1])[0].name})
     })
 
     axios.post('/cheese', {
@@ -80,7 +106,6 @@ const PizzaCustomization = (props) => {
     .then(res => res.data)
     .then(data => {
       setCheeseData(data);
-      // this.setState({activeCheese: this.state.cheeseData.filter((item) => item._id === JSON.parse(localStorage.getItem("product")).standard[2])[0].name})
     })
 
     axios.post('/special', {
@@ -89,7 +114,6 @@ const PizzaCustomization = (props) => {
     .then(res => res.data)
     .then(data => {
       setSpecialData(data)
-      // this.setState({activeSpecialTopping: this.state.specialData.filter((item) => item._id === JSON.parse(localStorage.getItem("product")).standard[3])[0].name})
     })
 
     axios.post('/topping', {
@@ -97,56 +121,29 @@ const PizzaCustomization = (props) => {
     })
     .then(res => res.data)
     .then(data => {
-      setToppingData(data)
+      // setToppingData(data)
+      data.filter(top => top.category === "Veggie").forEach(object => {
+        object.count = 1;
+        object.status = [false, true, false]
+      });
       setToppingVeggieData(data.filter(top => top.category === "Veggie"))
-      // this.setState({
-      //   toppingVeggieData: this.state.toppingData.filter(top => top.category === "Veggie")
-      // })
-      toppingVeggieData.forEach(object => {
+
+      data.filter(top => top.category === "Meat").forEach(object => {
         object.count = 1;
         object.status = [false, true, false]
       });
-
       setToppingMeatData(data.filter(top => top.category === "Meat"))
-      toppingMeatData.forEach(object => {
-        object.count = 1;
-        object.status = [false, true, false]
-      });
-
-      setToppingCheeseData(data.filter(top => top.category === "Cheese"))
       
-      toppingCheeseData.forEach(object => {
+      data.filter(top => top.category === "Cheese").forEach(object => {
         object.count = 1;
         object.status = [false, true, false]
       });
+      setToppingCheeseData(data.filter(top => top.category === "Cheese"))
     })
   }, [])
 
   const _renderPizzaBoard = () => {
-   
-    const addPizza = () => {
-     console.log("add to Combo")
-    }
-    const activeSize = (index) => {
-      let select = selectSize.map((_, _index) => index === _index ? true: false)
-      console.log(index)
-      let size;
-      if(index === 0) {
-        size = "Small"
-      }
-      if(index === 1) {
-        size = "Medium"
-      }
-      if(index === 2) {
-        size = "Large"
-      }
-      if(index === 3) {
-        size = "X-Large"
-      }
-      
-      setSelectSize(select);
-      setSelectPrice(size)
-    }
+
     return (
       <div className="pizza-board">
       <div className="title">{props.title}</div>
@@ -162,64 +159,18 @@ const PizzaCustomization = (props) => {
           }
         </div>
         <div className="pizza-piece">
-          <LazyLoadImage alt={StaticInitial} src={toppingImg} />
+          <LazyLoadImage alt={StaticInitial} src={StaticInitial} />
           {
             toppingBase.map((base, index) => {
               return (
                 <div className="multiTopping">
-                  <LazyLoadImage alt={StaticInitial} src={base} key={index}/>
-                </div>
-              )
-            })
-          }
-          {
-            toppingExtra.map((extra, index) => {
-              return (
-                <div className="multiTopping" key={index}>
-                  <LazyLoadImage alt={StaticInitial} src={extra} />
+                  <LazyLoadImage alt={base} src={"/" + base} key={base}/>
                 </div>
               )
             })
           }
         </div>
-        <div className="add-cart">
-          <div> 
-            <div className="select-size">
-              {
-                customizeData.selectData.map((item, index) => {
-                  return (
-                    <div className="select-individual" 
-                         onClick={() => activeSize(index)} 
-                         style={{border: selectSize[index] && "2px solid #ee5a00"}}
-                         key={item.name}>
-                      <div className="size">
-                        <div className="size-img" style={{fontSize: item.imgSize}}><BsFillCircleFill /></div>
-                        <div className="size-text">
-                          <span style={{borderBottom: selectSize[index] && "2px solid #ee5a00"}}>{item.size}</span>
-                        </div>
-                      </div>
-                      <div className="slices">{item.slices + " Slices"}</div>
-                    </div>
-                  )
-                  
-                })
-              }
-            </div>
-            <div className="quantity-price">
-                {/* <div className="price">{"$ " + (price * quantity).toFixed(2)}</div> */}
-            </div>
-            {/* <div className="desc">{ total_desc }</div> */}
-            <div className="cart-button">
-              {/* <Button Class={"pizza-Btn" + (!isAdded ? " active" :"")} 
-                      value={!isAdded ? "ADDED" : "ADD TO CART"} 
-                      onClick={() => addPizza()} 
-                      status={!isAdded ? true : false}/> */}
-              <Button value="Add To Card" 
-                onClick={() => addPizza()}
-                />
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
     )
@@ -267,14 +218,29 @@ const PizzaCustomization = (props) => {
 
     const handleDough = (dough) => {
       setActiveBaseDough(dough._id);
+      setActiveDough(dough.name);
+      setSelection({
+        ...selection,
+        "dough": dough.name
+      })
     }
 
     const handleSauce = (sauce) => {
-      setActiveBaseSauce(sauce._id)
+      setActiveBaseSauce(sauce._id);
+      setActiveSauce(sauce.name);
+      setSelection({
+        ...selection,
+        "sauce": sauce.name
+      })
     }
 
     const handleCheese = (cheese) => {
-      setActiveBaseCheese(cheese._id)
+      setActiveBaseCheese(cheese._id);
+      setActiveCheese(cheese.name);
+      setSelection({
+        ...selection,
+        "cheese": cheese.name
+      })
     }
 
     return (
@@ -439,24 +405,261 @@ const PizzaCustomization = (props) => {
 
   const _renderToppingIngredients = () => {
     
+    let tempTopping = [...activeTopping];
+    let tempVeggie = [...activeToppingIng];
+    let tempBaseTopping = [...toppingBase];
 
-    const handleTopping = () => {
-      
+    const handleTopping = (item) => {
+      if (tempTopping.filter(top => top === item._id).length > 0) {
+        const index = tempTopping.indexOf(tempTopping.filter(top => top === item._id)[0]);
+        const indexName = tempVeggie.indexOf(tempVeggie.filter(top => top === item.name)[0]);
+        
+        tempTopping.splice(index, 1);
+        tempVeggie.splice(indexName, 1);
+        tempBaseTopping.splice(indexName, 1);
+        nameSelect.splice(indexName,1);
+
+        let newArray = nameSelect.filter(
+          (value) => {
+            return value !== item.name
+          }
+        )
+        setNameSelect(newArray)    // remove the whole names in nameSelect
+        calculation(newArray)
+
+        toppingVeggieData.forEach(ing => {
+          if(ing.name === item.name) {
+            item.count = 1;
+          }
+        })
+        toppingMeatData.forEach(ing => {
+          if(ing.name === item.name) {
+            item.count = 1;
+          }
+        })
+        toppingCheeseData.forEach(ing => {
+          if(ing.name === item.name) {
+            item.count = 1;
+          }
+        })
+
+      } else {
+        tempTopping.push(item._id);
+        tempVeggie.push(item.name);
+        tempBaseTopping.push(item.imgWhole);
+        nameSelect.push(item.name);
+        calculation(nameSelect)
+      }
+      setActiveTopping(tempTopping);
+      setToppingBase(tempBaseTopping);
+      setActiveToppingIng(tempVeggie);
+      setSelection({
+        ...selection,
+        "topping": tempVeggie
+      })
     }
-    const minusQuantity = () => {
-      console.log("Minus")
+    const minusQuantity = (e, item) => {
+      e.stopPropagation();
+      let veggie = [...toppingVeggieData]
+      veggie.forEach(ing => {
+        if(ing.name === item.name) {
+          if(item.count >= 2) {
+            item.count = item.count - 1;
+            let index = 0;
+            nameSelect.forEach((name, i) =>{
+              if(name === item.name) {
+                index = i;
+              }
+            })
+            nameSelect.splice(index, 1);
+          }
+        }
+      })
+      let meat = [...toppingMeatData]
+      meat.forEach(ing => {
+        if(ing.name === item.name) {
+          if(item.count >= 2) {
+            item.count = item.count - 1;
+            let index = 0;
+            nameSelect.forEach((name, i) =>{
+              if(name === item.name) {
+                index = i;
+              }
+            })
+            nameSelect.splice(index, 1);
+          }
+        }
+      })
+      let cheese = [...toppingCheeseData]
+      cheese.forEach(ing => {
+        if(ing.name === item.name) {
+          if(item.count >= 2) {
+            item.count = item.count - 1;
+            let index = 0;
+            nameSelect.forEach((name, i) =>{
+              if(name === item.name) {
+                index = i;
+              }
+            })
+            nameSelect.splice(index, 1);
+          }
+        }
+      })
+      setToppingVeggieData(veggie)
+      setToppingMeatData(meat)
+      setToppingCheeseData(cheese)
+      calculation(nameSelect)
     }
-    const plusQuantity = () => {
-      console.log("Plus")
+    const plusQuantity = (e,item) => {
+      e.stopPropagation();
+      let veggie = [...toppingVeggieData]
+      veggie.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.count = item.count + 1;
+          nameSelect.push(item.name)
+        }
+      })
+      let meat = [...toppingMeatData]
+      meat.forEach(ing => {
+        if(ing.name === item.name) {
+          item.count = item.count + 1;
+          nameSelect.push(item.name)
+        }
+      })
+      let cheese = [...toppingCheeseData]
+      cheese.forEach(ing => {
+        if(ing.name === item.name) {
+          item.count = item.count + 1;
+          nameSelect.push(item.name)
+        }
+      })
+      setToppingVeggieData(veggie);
+      setToppingMeatData(meat);
+      setToppingCheeseData(cheese)
+      calculation(nameSelect)
     }
-    const addLeftImage = () => {
-      console.log("add Left image")
+    
+    const calculation = (nameSelect) => {
+      let price = 0;
+      if(nameSelect.length > 4) {
+        for (let i = 4; i < nameSelect.length; i++) {
+          let veggie = toppingVeggieData.filter(top => top.name === nameSelect[i]);
+          let meat = toppingMeatData.filter(top => top.name === nameSelect[i]);
+          let cheese = toppingCheeseData.filter(top => top.name === nameSelect[i]);
+          if(veggie.length > 0) {
+            price += veggie[0].price;
+          }
+          if(meat.length > 0) {
+            price += meat[0].price;
+          }
+          if(cheese.length > 0) {
+            price += cheese[0].price;
+          }
+        }
+      } else {
+        price = 0;
+      }
+      setPriceTopping(price)
     }
-    const addWholeImage = () => {
-      console.log("add Whole Image")
+    const addLeftImage = (e, item) => {
+      e.stopPropagation();
+      let tempActiveTopping = [...activeToppingIng]
+      let index = 0;
+      tempActiveTopping.forEach((c, i) => {
+        if(c === item.name) {
+          index = i;
+          
+        }
+      })
+      let tempToppingBase = [...toppingBase];
+      tempToppingBase[index] = item.imgLeft;
+
+      let veggieData = [...toppingVeggieData]
+      veggieData.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.status = [true, false, false]
+        }
+      })
+      let meatData = [...toppingMeatData]
+      meatData.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.status = [true, false, false]
+        }
+      })
+      let cheeseData = [...toppingCheeseData]
+      cheeseData.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.status = [true, false, false]
+        }
+      })
+
+      setToppingBase(tempToppingBase)
     }
-    const addRightImage = () => {
-      console.log("add Right Image")
+    const addWholeImage = (e, item) => {
+      e.stopPropagation();
+      let tempActiveTopping = [...activeToppingIng]
+      let index = 0;
+      tempActiveTopping.forEach((c, i) => {
+        if(c === item.name) {
+          index = i;
+        }
+      })
+      let tempToppingBase = [...toppingBase];
+      tempToppingBase[index] = item.imgWhole;
+
+      let veggieData = [...toppingVeggieData]
+      veggieData.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.status = [false, true, false]
+        }
+      })
+      let meatData = [...toppingMeatData]
+      meatData.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.status = [false, true, false]
+        }
+      })
+      let cheeseData = [...toppingCheeseData]
+      cheeseData.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.status = [false, true, false]
+        }
+      })
+
+      setToppingBase(tempToppingBase)
+    }
+    const addRightImage = (e, item) => {
+      e.stopPropagation();
+      let tempActiveTopping = [...activeToppingIng]
+      let index = 0;
+      tempActiveTopping.forEach((c, i) => {
+        if(c === item.name) {
+          index = i;
+        }
+      })
+      let tempToppingBase = [...toppingBase];
+      tempToppingBase[index] = item.imgRight;
+
+      let veggieData = [...toppingVeggieData]
+      veggieData.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.status = [false, false, true]
+        }
+      })
+      let meatData = [...toppingMeatData]
+      meatData.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.status = [false, false, true]
+        }
+      })
+      let cheeseData = [...toppingCheeseData]
+      cheeseData.forEach((ing) => {
+        if(ing.name === item.name) {
+          item.status = [false, false, true]
+        }
+      })
+
+      setToppingBase(tempToppingBase)
     }
     return (
       <div className='sub-tab-content'>
@@ -469,7 +672,7 @@ const PizzaCustomization = (props) => {
                 return (
                   <div className={"baseSauce-item" + (activeTopping.filter(top => top === veggie._id).length > 0 ? " active" : "")}
                       onClick={() => handleTopping(veggie)}
-                      key={veggie.name}>
+                      key={index}>
                   {
                     activeTopping.filter(top => top === veggie._id).length > 0 
                     ? <div className="selected">
@@ -637,7 +840,12 @@ const PizzaCustomization = (props) => {
 
   const _renderSpecialIngredients = () => {
     const handleSpecial = (special) => {
-      setActiveSpecial(special._id)
+      setActiveBaseSpecial(special._id);
+      setActiveSpecial(special.name)
+      setSelection({
+        ...selection,
+        "special": special.name
+      })
     }
     return (
       <div className="sub-tab-content">
@@ -647,11 +855,11 @@ const PizzaCustomization = (props) => {
           {
             specialData.map((special, index) => {
               return (
-                <div className={"baseSauce-item" + (activeSpecial === special._id ? " active" : "")}
+                <div className={"baseSauce-item" + (activeBaseSpecial === special._id ? " active" : "")}
                     onClick={() => handleSpecial(special)}
                     key={special.name}>
                 {
-                  activeSpecial === special._id 
+                  activeBaseSpecial === special._id 
                   ? <div className="selected">
                       <div className="baseSauce-img-selected" >
                         <img alt="special" src={StaticSpecial} />
@@ -687,6 +895,21 @@ const PizzaCustomization = (props) => {
     </div>
     )
   }
+  const status = [
+    activeTab, 
+    activeSubTab, 
+    activeToppingSubTab, 
+    activeBaseDough, 
+    activeBaseSauce,
+    activeBaseCheese,
+    activeBaseSpecial,
+    activeTopping,
+    activeToppingIng,
+    toppingBase,
+    nameSelect,
+    selection,
+  ]
+  const total = activeDough + " " + activeSauce + " " + activeCheese + " " + activeToppingIng + " " + activeSpecial
   
   return (
     <div style={{
@@ -698,7 +921,7 @@ const PizzaCustomization = (props) => {
                  }}
          className="pizza-customization"
     >
-      <button className='closeButton' onClick={props.onHide}><AiOutlineClose /></button>
+      <button className='closeButton' onClick={() => props.onHide(status, total)}><AiOutlineClose /></button>
       <div className='top-tabs'>
         {
           customizeData.tabs.map(tab => {

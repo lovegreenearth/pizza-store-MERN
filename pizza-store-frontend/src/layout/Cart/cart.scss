@@ -95,6 +95,8 @@ $cart-L-size: 450px;
         align-items: center;
         column-gap: 20px;
         border: 1px solid #FCA017;
+        max-height: 600px;
+        overflow: auto;
         .image {
           width: 120px;
           height: 80px;
@@ -112,13 +114,24 @@ $cart-L-size: 450px;
             font-weight: 800;
             font-size: 18px;
           }
+          .combo-part {
+            .combo-content {
+              color: black;
+              .key {
+                font-weight: 600;
+              }
+              .value {
+                font-weight: 100;
+              }
+            }
+          }
           .desc {
             font-size: 15px;
           }
           .final {
             display: flex;
             align-items: center;
-            gap: 50px;
+            justify-content: space-between;
             .remove-edit {
               display: flex;
               align-items: center;

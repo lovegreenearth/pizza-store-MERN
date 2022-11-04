@@ -21,7 +21,7 @@ class SignIn extends Component {
 			password: this.state.password
 		}
 
-		axios.post('/users/login',sendData)
+		axios.post('/users/login', sendData)
     .then(res => res.data)
     .then(data => {
       if (data.token) {
@@ -29,7 +29,7 @@ class SignIn extends Component {
 				localStorage.setItem('log', JSON.stringify(data));
 				this.props.onSuccess();
 				this.props.navigate("/")				
-		} else if (data.msg) 
+		} else
 			{
 				alert(data.msg);
 			}
@@ -41,7 +41,7 @@ class SignIn extends Component {
 
 		return (
 			<div className="signIn-container">
-				<header className="signIn-header">SIGN IN</header>
+				<header className="signIn-header">Sign In</header>
 				<div className="signIn-content">
 					<div className="email-container">
 						<div className="email">
@@ -75,7 +75,7 @@ class SignIn extends Component {
 
 							<div className="signIn-register-container">
 								<div className="signIn-button-container">
-										<Button   value="SIGN IN" onClick={this.onSignIn} />
+										<Button   value="Sign In" onClick={this.onSignIn} />
 								</div>
 								<div className="register-comment">
 										Don't have an account?

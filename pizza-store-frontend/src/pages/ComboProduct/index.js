@@ -4,10 +4,12 @@ import './style.scss'
 import axios from "axios";
 import Button from '../../components/Button/button1';
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
-import Customization from '../Customization';
-import PizzaCustomization from "./pizza"
+import PizzaCustomization from "./pizza";
 import FreeDipModal from './FreeDip';
 import ExtraDipModal from './ExtraDip';
+import ChickenWingCustomization from './ChieckenWing';
+import { useDispatch } from "react-redux";
+import { addToCombo } from '../../redux/actions';
 
 import StaticBanner from "../../assets/img/special.jpg"
 import Static from "../../assets/img/static/bacondblchburg.png"
@@ -18,27 +20,49 @@ const ComboProduct = (props) => {
   const [ comboData, setComboData ] = useState({product:[]});
   const [ comboCount, setComboCount ] = useState(1);
   const [ active, setActive ] = useState([]);
+  const [ index, setIndex ] = useState(0)
   const [ dipData, setDipData ] = useState([]);
   const [ freeDipIndex, setFreeDipIndex ] = useState(0)
   const [ selectDip, setSelectDip ] = useState([false]);
-  const [ selectExtraDip, setSelectExtraDip ] = useState([false])
+  const [ selectExtraDip, setSelectExtraDip ] = useState([false]);
+  const [ selectPizza, setSelectPizza ] = useState([0]);
 
   // Show child component
   const [ freeDipShow, setFreeDipShow ] = useState(false);
   const [ ExtraDipShow, setExtraDipShow ] = useState(false);
   const [ pizzaShow, setPizzaShow ] = useState(false);
   const [ pizzaTitle, setPizzaTitle ] = useState("");  // Set pizza child component's title
-
+  const [ chickenShow, setChickenShow ] = useState(false);
+  const [ chickenIndex, setChickenIndex ] = useState(0);
+  const [ chickenData, setChickenData ] = useState({})
 
   // calculate price state variable
-  const [ comboPrice, setComboPrice] = useState(comboData.price)
-  const [extraDipPrice, setExtraDipPrice] = useState(0)
-
+  const [ comboPrice, setComboPrice] = useState(comboData.price);
+  const [ extraDipPrice, setExtraDipPrice ] = useState(0)
 
   // add to Combo Product
   const [ freeDip, setFreeDip ] = useState([]);
-  const [ extraDip, setExtraDip ] = useState([]);
-  
+
+  const newCombo = {
+    name: comboData.name,
+    quantity: comboCount,
+  }
+  const [ combo, setCombo ] = useState(newCombo)
+
+  useEffect(() => {
+    setCombo({
+      ...combo,
+      name: comboData.name,
+    })
+  }, [comboData])
+
+  useEffect(() => {
+    setCombo({
+      ...combo,
+      quantity: comboCount
+    })
+  }, [comboCount])
+
   useEffect(() => {
     let temp
     axios.post('/combo/bySpecial', {
@@ -46,13 +70,13 @@ const ComboProduct = (props) => {
     })
     .then(res => res.data)
     .then(combo => {
+      setSelectPizza(Array(combo.filter(top => top._id === params.combo)[0].product.filter(item => item.type === "pizza").length).fill(0))
       setComboData(combo.filter(top => top._id === params.combo)[0])
       setActive(Array(combo.filter(top => top._id === params.combo)[0].product.length).fill(false))
       setComboPrice(combo.filter(top => top._id === params.combo)[0].price)
       temp = combo.filter(top => top._id === params.combo)[0].product.filter(item => item.type === "other").length;
     })
     
-
     axios.post('/dip', {
 
     })
@@ -65,7 +89,7 @@ const ComboProduct = (props) => {
   }, [])
 
   const minus = () => {
-    if (comboCount > 2) {
+    if (comboCount > 1) {
       setComboCount(comboCount - 1 )
     }
   }
@@ -79,6 +103,12 @@ const ComboProduct = (props) => {
       setPizzaShow(true)
       setPizzaTitle(item.name)
       document.body.style.overflow = "hidden";
+      setIndex(index)
+    }
+    if (item.type === "chicken") {
+      setChickenShow(true);
+      setChickenIndex(comboData.product.findIndex(combo => combo.name === item.name));
+      setChickenData(item)
     }
     if(item.type === "other") {
       setFreeDipShow(true);
@@ -89,36 +119,33 @@ const ComboProduct = (props) => {
     }
   }
 
+  const dispatch = useDispatch();
   const comboToCart = () => {
-    const newCombo ={
-      name: comboData.name,
-      price: (comboData.price + extraDipPrice).toFixed(2),
-      quantity: comboCount,
-      "Free Dip": freeDip,
-      "Extra Dip": extraDip
-    }
-    console.log(newCombo)
-    console.log("active ----", active)
+    dispatch(addToCombo(combo))
   }
 
-  const selectFreeDip = (index) => {
+  const selectFreeDip = (item, index) => {
     setSelectDip(temp => {
       const newArray = [...selectDip];
       newArray[freeDipIndex] = selectDip[freeDipIndex].map((_, _index) => index === _index)
       return newArray
     })
+
+    setFreeDip(temp => {
+      const newArray = [...freeDip];
+      newArray[freeDipIndex] = item.name;
+      return newArray;
+    })
   }
+
   const addFreeToCombo = () => {
     let temp = [...selectDip[freeDipIndex]]
     let tempSelected = comboData.product.filter((item) => item.type === "other")[freeDipIndex].name
     if(temp.filter(item => item === true).length > 0) {
-      let tempIndex = temp.findIndex(item => item === true)
-
-      setFreeDip(temp => {
-        const newArray = [...freeDip];
-        newArray[freeDipIndex] = dipData[tempIndex].name;
-        return newArray;
-      })
+      
+      let tempCombo = {...combo}
+      tempCombo = {...combo, "Free Dip": freeDip }
+      setCombo(tempCombo)                           // add FreeDip array to Combo
 
       let tempActiveNo = comboData.product.findIndex((item) => item.name === tempSelected)
       setActive(temp => {
@@ -135,6 +162,7 @@ const ComboProduct = (props) => {
       dipDataName.push(item.name)
     )
   })
+
   const activeExtraDip = (index) => {
     if(selectExtraDip[index]) {
       setSelectExtraDip(tempExtra => {
@@ -152,7 +180,6 @@ const ComboProduct = (props) => {
         return newArray;
       })
       setComboPrice(comboPrice + dipData[index].price)
-    
     }
   }
   const addExtraToCombo = () => {
@@ -174,15 +201,43 @@ const ComboProduct = (props) => {
         temp.push(dipDataName[i])
       }
     }
-    setExtraDip(temp)
+    let tempCombo = {...combo}
+    tempCombo = {...combo, "Extra Dip": temp , "price": (comboData.price + tempPrice).toFixed(2) }
+    setCombo(tempCombo)
   }
-  const pizzaHide = () => {
+  const pizzaHide = (item, total) => {
     setPizzaShow(false);
     document.body.style.overflow = "auto";
+    setActive(temp => {
+      const newArray = [...active];
+      newArray[index] = true;
+      return newArray
+    })
+
+    let temp = {...combo}
+    temp = {...temp, [pizzaTitle] : total}
+    setCombo(temp)
+
+    setSelectPizza(temp => {
+      const newArray = [...selectPizza];
+      newArray[index] = item;
+      return newArray
+    })
+  }
+  const onChickenNext = (data) => {
+    setChickenShow(false)
+    setActive(temp => {
+      const newArray = [...active];
+      newArray[chickenIndex] = true;
+      return newArray
+    })
+    let tempCombo = {...combo}
+    tempCombo = {...combo, "Chicken": data}
+    setCombo(tempCombo)
   }
 
   return (
-    <div style={{overflow: "hidden"}}>
+    <div>
       <div className='detail-banner'>
         <img src={StaticBanner} alt="Banner" />
       </div>
@@ -206,7 +261,7 @@ const ComboProduct = (props) => {
             </div>
             <Button 
               value="Add to Cart"
-              // status={active.filter(item => item === false).length > 0 ? true : false}
+              status={active.filter(item => item === false).length > 0 ? true : false}
               onClick={() => comboToCart()}
               />
           </div>
@@ -261,7 +316,7 @@ const ComboProduct = (props) => {
         onHide={() => {setFreeDipShow(false); addFreeToCombo();}}
         content={dipData}
         check={selectDip[freeDipIndex]}
-        onSelect={ (index) => selectFreeDip(index) }
+        onSelect={ (item, index) => selectFreeDip(item, index) }
       />
       <ExtraDipModal 
         show={ExtraDipShow}
@@ -273,8 +328,16 @@ const ComboProduct = (props) => {
       />
       <PizzaCustomization
         show={pizzaShow}
-        onHide={() => pizzaHide()}
+        onHide={(item, total) => pizzaHide(item, total)}
         title={pizzaTitle}
+        data={selectPizza[index]}
+        status={active[index]}
+      />
+      <ChickenWingCustomization 
+        show={chickenShow}
+        onHide={() => onChickenNext()}
+        data={chickenData}
+        onChickenNext={(data) => onChickenNext(data)}
       />
     </div>
   )

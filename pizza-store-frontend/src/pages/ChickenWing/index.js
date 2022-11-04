@@ -129,7 +129,6 @@ const ChickenWings = (props) =>  {
                       <Quantity onChange={(qty) => setQuantity(qty)} />
                       <div className="price">{ "$ " + (JSON.parse(localStorage.getItem("product")).price.price * quantity).toFixed(2) }</div>
                     </div>
-                    {console.log(validate)}
                     <Button Class="chicken-Btn" 
                       // Class={"chicken-Btn" + (!isAdded ? " active" :"")}
                       onClick={() => addCart()}
