@@ -65,6 +65,7 @@ $cart-L-size: 450px;
     width: 100%;
     padding: 10px 10px;
     background-color: #FFFFFF;
+    overflow: auto;
     .empty-cart {
       .comment {
         color: black;
@@ -79,14 +80,12 @@ $cart-L-size: 450px;
         margin-bottom: 60px;
       }
     }
-    
-    button {
-      margin-bottom: 0px;
-      width: 100%;
-    }
     .cart-detail {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       row-gap: 20px;
+      overflow: auto;
+      height: 300px;
       .cart-individual {
         background-color: white;
         text-align: left;
@@ -96,7 +95,6 @@ $cart-L-size: 450px;
         column-gap: 20px;
         border: 1px solid #FCA017;
         max-height: 600px;
-        overflow: auto;
         .image {
           width: 120px;
           height: 80px;
@@ -153,6 +151,40 @@ $cart-L-size: 450px;
             }
           }
         }
+      }
+    }
+    .scrollbar {
+      background: #fff;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-right: 10px;
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+      &::-webkit-scrollbar-corner {
+        background: #393939;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #FBAF3F;
+        border: 1px solid #FBAF3F;
+        &:hover {
+          background: lighten(#a46505, 15);
+        }
+      }
+      
+      
+      &::-webkit-scrollbar-track {
+        border: 1px solid #d4d4d4;
+        background-color: #d4d4d4;
+      }
+       
+
+    }
+    .button {
+      button {
+        margin-top: 20px;
+        margin-bottom: 0px;
+        width: 100%;
       }
     }
   }

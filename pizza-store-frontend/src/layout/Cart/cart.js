@@ -98,11 +98,10 @@ const Cart = () => {
                   <img className='cart-img' src={EmptyCart} alt="basket" />
                   <Button value ={"Check Out"} onClick={checkOut} status={true} />
                 </div>
-              : <div className='cart-detail'>
+              : <div className='cart-detail scrollbar scrollbar--light'>
                   {
                     items.map((c, index) => {
                       return (
-                        
                         <div className='cart-individual' key={index}>
                           <div className='image'><img src={Static} alt="cart-small" /></div>
                           <div className='content'>
@@ -142,10 +141,9 @@ const Cart = () => {
                       )
                     })
                   }
-                  <Button value ={"Check Out"} onClick={checkOut} />
                 </div>
-            }              
-            
+            }
+            <Button value ={"Check Out"} onClick={checkOut} />
           </div>
         : ""
       }
