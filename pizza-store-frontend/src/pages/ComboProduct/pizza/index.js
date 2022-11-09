@@ -146,7 +146,10 @@ const PizzaCustomization = (props) => {
 
     return (
       <div className="pizza-board">
-      <div className="title">{props.title}</div>
+      <div className="title">
+        <div className='pizza-title'>{props.title}</div>
+        <div className='pizza-price'>{"$ " + (props.price + priceTopping).toFixed(2)}</div>
+      </div>
       <div className="configuration">
         <div className="criteria">
           {
@@ -157,6 +160,7 @@ const PizzaCustomization = (props) => {
               </div>
             )
           }
+          
         </div>
         <div className="pizza-piece">
           <LazyLoadImage alt={StaticInitial} src={StaticInitial} />
@@ -169,8 +173,8 @@ const PizzaCustomization = (props) => {
               )
             })
           }
+          
         </div>
-        
       </div>
     </div>
     )
@@ -895,6 +899,7 @@ const PizzaCustomization = (props) => {
     </div>
     )
   }
+
   const status = [
     activeTab, 
     activeSubTab, 
@@ -921,7 +926,7 @@ const PizzaCustomization = (props) => {
                  }}
          className="pizza-customization"
     >
-      <button className='closeButton' onClick={() => props.onHide(status, total)}><AiOutlineClose /></button>
+      <button className='closeButton' onClick={() => props.onHide(status, total, priceTopping)}><AiOutlineClose /></button>
       <div className='top-tabs'>
         {
           customizeData.tabs.map(tab => {
