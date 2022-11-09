@@ -90,7 +90,6 @@ const Cart = () => {
         activeCart
         ?
           <div className='cart-content'>
-            {console.log(items)}
             {
               items.length === 0
               ? 
