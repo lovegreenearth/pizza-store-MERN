@@ -32,17 +32,21 @@ const ComboProduct = (props) => {
   const [ ExtraDipShow, setExtraDipShow ] = useState(false);
   const [ pizzaShow, setPizzaShow ] = useState(false);
   const [ pizzaTitle, setPizzaTitle ] = useState("");  // Set pizza child component's title
+  // const [ pizzaPrice, setPizzaPrice ] = useState(0)
   const [ chickenShow, setChickenShow ] = useState(false);
   const [ chickenIndex, setChickenIndex ] = useState(0);
   const [ chickenData, setChickenData ] = useState({})
 
   // calculate price state variable
-  const [ comboPrice, setComboPrice] = useState(comboData.price);
+  // const [ comboPrice, setComboPrice] = useState(0);
+  const [ toppingPrice, setToppingPrice ] = useState(0)
   const [ extraDipPrice, setExtraDipPrice ] = useState(0)
 
   // add to Combo Product
   const [ freeDip, setFreeDip ] = useState([]);
 
+  
+  const totalComboPrice = comboData.price + toppingPrice + extraDipPrice
   const newCombo = {
     name: comboData.name,
     quantity: comboCount,
@@ -73,7 +77,7 @@ const ComboProduct = (props) => {
       setSelectPizza(Array(combo.filter(top => top._id === params.combo)[0].product.filter(item => item.type === "pizza").length).fill(0))
       setComboData(combo.filter(top => top._id === params.combo)[0])
       setActive(Array(combo.filter(top => top._id === params.combo)[0].product.length).fill(false))
-      setComboPrice(combo.filter(top => top._id === params.combo)[0].price)
+      // setComboPrice(combo.filter(top => top._id === params.combo)[0].price)
       temp = combo.filter(top => top._id === params.combo)[0].product.filter(item => item.type === "other").length;
     })
     
@@ -164,13 +168,13 @@ const ComboProduct = (props) => {
   })
 
   const activeExtraDip = (index) => {
+    
     if(selectExtraDip[index]) {
       setSelectExtraDip(tempExtra => {
         const newArray = [...selectExtraDip];
         newArray[index] = false;
         return newArray;
       })
-      setComboPrice(comboPrice - dipData[index].price)
       
       
     } else {
@@ -179,12 +183,10 @@ const ComboProduct = (props) => {
         newArray[index] = true;
         return newArray;
       })
-      setComboPrice(comboPrice + dipData[index].price)
+      setExtraDipPrice(extraDipPrice + dipData[index].price)
     }
   }
   const addExtraToCombo = () => {
-    let tempPrice = comboPrice - comboData.price
-    setExtraDipPrice(tempPrice)
     
     let tempIndex = comboData.product.findIndex(item => item.type === "Extra Other")
     if(selectExtraDip.filter(item => item === true).length > 0) {
@@ -202,10 +204,10 @@ const ComboProduct = (props) => {
       }
     }
     let tempCombo = {...combo}
-    tempCombo = {...combo, "Extra Dip": temp , "price": (comboData.price + tempPrice).toFixed(2) }
+    tempCombo = {...combo, "Extra Dip": temp , "price": (totalComboPrice).toFixed(2) }
     setCombo(tempCombo)
   }
-  const pizzaHide = (item, total) => {
+  const pizzaHide = (item, total, priceTopping) => {
     setPizzaShow(false);
     document.body.style.overflow = "auto";
     setActive(temp => {
@@ -213,9 +215,10 @@ const ComboProduct = (props) => {
       newArray[index] = true;
       return newArray
     })
+    setToppingPrice(priceTopping)
 
     let temp = {...combo}
-    temp = {...temp, [pizzaTitle] : total}
+    temp = {...temp, [pizzaTitle] : total, "price" : (totalComboPrice + priceTopping).toFixed(2) }
     setCombo(temp)
 
     setSelectPizza(temp => {
@@ -257,7 +260,7 @@ const ComboProduct = (props) => {
               <button onClick={() => minus()}> <AiFillMinusCircle /> </button>
               <span>{comboCount}</span>
               <button onClick={() => plus()}> <AiFillPlusCircle /> </button>
-              <div className='count-price'>{"$ " + ((comboData.price + extraDipPrice) * comboCount).toFixed(2)}</div>
+              <div className='count-price'>{"$ " + ((totalComboPrice) * comboCount).toFixed(2)}</div>
             </div>
             <Button 
               value="Add to Cart"
@@ -322,16 +325,17 @@ const ComboProduct = (props) => {
         show={ExtraDipShow}
         onHide={() => {setExtraDipShow(false); addExtraToCombo();}}
         content={dipData}
-        price={comboPrice}
+        price={totalComboPrice}
         check={selectExtraDip}
         onSelect={ (index) => activeExtraDip(index) }
       />
       <PizzaCustomization
         show={pizzaShow}
-        onHide={(item, total) => pizzaHide(item, total)}
+        onHide={(item, total, priceTopping) => pizzaHide(item, total, priceTopping)}
         title={pizzaTitle}
         data={selectPizza[index]}
         status={active[index]}
+        price={totalComboPrice - toppingPrice}
       />
       <ChickenWingCustomization 
         show={chickenShow}

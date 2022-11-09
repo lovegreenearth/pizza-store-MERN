@@ -85,7 +85,7 @@ $cart-L-size: 450px;
       flex-direction: column;
       row-gap: 20px;
       overflow: auto;
-      height: 300px;
+      max-height: 300px;
       .cart-individual {
         background-color: white;
         text-align: left;

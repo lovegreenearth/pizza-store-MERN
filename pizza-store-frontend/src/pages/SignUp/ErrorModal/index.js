@@ -15,10 +15,12 @@ const ErrorModal = (props) => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">Free Dip</Modal.Title>
+        <Modal.Title id="contained-modal-title-vcenter">Error!</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        
+        <div>
+          {props.content}
+        </div>
       </Modal.Body>
       <Modal.Footer>
         {
