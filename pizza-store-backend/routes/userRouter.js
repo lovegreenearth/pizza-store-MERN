@@ -9,7 +9,7 @@ router.post("/register", async (req, res) => {
     let { email, password, passwordCheck, displayName } = req.body;
 
     // validate
-    console.log(req.body)
+    console.log("------", req.body)
     if (!email || !password || !passwordCheck)
       return res.status(400).json({ msg: "Not all fields have been entered." });
     if (password.length < 5)
@@ -31,7 +31,7 @@ router.post("/register", async (req, res) => {
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
-
+    
     const newUser = new User({
       email,
       password: passwordHash,
@@ -59,9 +59,9 @@ router.post("/login", async (req, res) => {
         .json({ msg: "No account with this email has been registered." });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
+    if (!isMatch) return res.status(400).json({ msg: "Your password is Wrong!" });
 
-    const token = jwt.sign({ id: user._id }, "pizza0-store");
+    const token = jwt.sign({ id: user._id }, "pizza_store_db");
     res.json({
       token,
       user: {

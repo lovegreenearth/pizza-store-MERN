@@ -39,8 +39,10 @@
   }
 }
 
-.modal-footer {
+#footer-part {
   justify-content: space-between;
+}
+.modal-footer {
   padding: 16px;
   .combo-price {
     font-size: 1.5rem;

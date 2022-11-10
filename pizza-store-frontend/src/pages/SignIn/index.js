@@ -3,7 +3,8 @@ import Button from "../../components/Button/button1";
 import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router';
+import SignInErrorModal from "./ErrorModal";
 
 class SignIn extends Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class SignIn extends Component {
 
 			this.state = {
 					email: "",
-					password: ""
+					password: "",
+					errorShow: false,
+					errorData: ""
 			}
 	}
 
@@ -24,16 +27,32 @@ class SignIn extends Component {
 		axios.post('/users/login', sendData)
     .then(res => res.data)
     .then(data => {
+			console.log("data----", data)
       if (data.token) {
-				console.log(data)
+				console.log("true--------", data)
 				localStorage.setItem('log', JSON.stringify(data));
 				this.props.onSuccess();
 				this.props.navigate("/")				
 		} else
 			{
+				console.log("false--------", data)
 				alert(data.msg);
 			}
     })
+		.catch(error => {
+			this.onErrorShow()
+			this.setState({errorData: error.response.data.msg})
+		})
+	}
+
+	onErrorShow = () => {
+		this.setState({errorShow: true})
+	}
+	onHide = () => {
+		this.setState({
+			modalShow: false,
+			errorShow: false
+		})
 	}
 
 	render() {
@@ -109,6 +128,11 @@ class SignIn extends Component {
 						</div>
 					</div>
 				</div>
+				<SignInErrorModal
+					show={this.state.errorShow}
+					onHide={this.onHide}
+					content={this.state.errorData}
+				/>
 			</div>
 		)
 	}
