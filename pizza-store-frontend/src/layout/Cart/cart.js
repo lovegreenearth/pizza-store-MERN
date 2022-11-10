@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react"
+import { React, useState } from "react"
 import { useSelector } from 'react-redux';
 import "./cart.scss"
 import Button from "../../components/Button/button1"
@@ -20,7 +20,6 @@ const Cart = () => {
   const [activeCart, setActiveCart] = useState(false);
   const [onShow, setOnShow] = useState(false)
   const items = useSelector((state) => state.items);
-  const [comboCart, setComboCart] = useState({})
   
   let navigate = useNavigate();
 

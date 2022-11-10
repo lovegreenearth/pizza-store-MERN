@@ -40,14 +40,14 @@ const ExtraDipModal = (props) => {
         </div>
         
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer id="footer-part">
         <div className='combo-price'>{"$ " + (props.price || 0).toFixed(2)}</div>
-        <div className='NextButton'>
-          <Button 
-            value="Next"
-            onClick={() => props.onHide()}
-          />
-        </div>
+          <div className='NextButton'>
+            <Button 
+              value="Next"
+              onClick={() => props.onHide()}
+            />
+          </div>
       </Modal.Footer>
     </Modal>
   );
