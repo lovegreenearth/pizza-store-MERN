@@ -33,3 +33,17 @@ export function addToCombo(addCombo) {
   }
 }
 
+export function tokenGenerate(token) {
+  return {
+    type: 'Token_To_Generate',
+    payload: token,
+  }
+}
+
+export function logOut(items) {
+  return {
+    type: 'REMOVE_TOKEN',
+    payload: items,
+  }
+}
+

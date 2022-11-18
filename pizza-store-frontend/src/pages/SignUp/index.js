@@ -71,18 +71,6 @@ class SignUp extends Component {
 			})
 			flag = 1;
 		}
-		// if (this.passwordRef.current.value && this.passwordRef.current.value.length < 5){
-		// 	this.setState({
-		// 		passwordAlert: "Password must be more than 6 letters"
-		// 	})
-		// 	flag = 1;
-		// }
-		// if (this.passwordRef.current.value !== this.confirmPwRef.current.value){
-		// 	this.setState({
-		// 		confirmPwAlert: "Please Confirm Correct Password"
-		// 	})
-		// 	flag = 1;
-		// }
 		if (flag === 0) {
 			const sendData = {
 				email: this.emailRef.current.value,
@@ -95,7 +83,6 @@ class SignUp extends Component {
 				.then(res => res.data)
 				.then(data => {
 				if (data.role) {
-					this.props.onSuccess();
 					this.onShow();
 				}
 				})
