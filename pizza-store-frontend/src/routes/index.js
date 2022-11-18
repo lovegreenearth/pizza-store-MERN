@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from '../pages/Home';
 import SeeAll from '../pages/SeeAll';
@@ -11,21 +11,18 @@ import CheckOut from '../pages/CheckOut';
 import Combo from '../pages/Combo';
 import ComboProduct from '../pages/ComboProduct';
 import FileUpload from '../pages/FileUpload';
+import { useSelector } from 'react-redux';
 
 const Routing = () => {
 
-	const [logged, setLogged] = useState(false);
-
-	const changeLogged = () => {
-		setLogged(true);
-	}
+	const logged = useSelector((state) => state.logged);
 
 	return(
 		<div>
 			<Routes>
 			<Route path="/" element={<Home />} />
-			<Route path='/signIn' element={<SignIn onSuccess={changeLogged} />} />
-			<Route path='/signup' element={<SignUp onSuccess={changeLogged} />} />
+			<Route path='/signIn' element={<SignIn />} />
+			<Route path='/signup' element={<SignUp/>} />
 			<Route path="/see-all" element={logged ? <SeeAll /> : <Navigate to="/signIn" />} />
 			<Route path="/customize" element={<Customization />} />
 			<Route path="/chickenWings" element={<ChickenWings />} />

@@ -1,146 +1,126 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Button from "../../components/Button/button1";
 import { CgFacebook } from "react-icons/cg";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import { useNavigate } from 'react-router';
 import SignInErrorModal from "./ErrorModal";
+import jwt from 'jwt-decode'
+import { useDispatch } from "react-redux";
+import { tokenGenerate } from "../../redux/actions";
 
-class SignIn extends Component {
-  constructor(props) {
-    super(props);
+const SignIn = (props) =>  {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [errorShow, setErrorShow] = useState(false);
+	const [errorData, setErrorData] = useState("")
 
-			this.state = {
-					email: "",
-					password: "",
-					errorShow: false,
-					errorData: ""
-			}
-	}
+	let navigate = useNavigate();
+	const dispatch = useDispatch();
 
-	onSignIn = () => {
+	const	onSignIn = () => {
 		const sendData = {
-			email: this.state.email,
-			password: this.state.password
+			email: email,
+			password: password
 		}
 
 		axios.post('/users/login', sendData)
     .then(res => res.data)
     .then(data => {
-			console.log("data----", data)
-      if (data.token) {
-				console.log("true--------", data)
-				localStorage.setItem('log', JSON.stringify(data));
-				this.props.onSuccess();
-				this.props.navigate("/")				
-		} else
-			{
-				console.log("false--------", data)
-				alert(data.msg);
-			}
+			const token = data.token;
+			const user = jwt(token)
+      localStorage.setItem('token', JSON.stringify(token));
+			navigate("/");
+			dispatch(tokenGenerate(user))
     })
 		.catch(error => {
-			this.onErrorShow()
-			this.setState({errorData: error.response.data.msg})
+			onErrorShow()
+			setErrorData(error.response.data.msg)
 		})
 	}
 
-	onErrorShow = () => {
-		this.setState({errorShow: true})
-	}
-	onHide = () => {
-		this.setState({
-			modalShow: false,
-			errorShow: false
-		})
+	const	onErrorShow = () => {
+		setErrorShow(true)
 	}
 
-	render() {
-		const { email, password } = this.state;
+	return (
+		<div className="signIn-container">
+			<header className="signIn-header">Sign In</header>
+			<div className="signIn-content">
+				<div className="email-container">
+					<div className="email">
+						<header className="email-header">Email</header>
 
-		return (
-			<div className="signIn-container">
-				<header className="signIn-header">Sign In</header>
-				<div className="signIn-content">
-					<div className="email-container">
-						<div className="email">
-							<header className="email-header">Email</header>
-
-							<div className="email-input">
-								<div>
-										<label>Email Address</label>
-								</div>
-								<div className="input">
-									<input type="email" name="Uname" id="Uname" value={email} onChange={(e) => this.setState({email: e.target.value})} />
-								</div>
+						<div className="email-input">
+							<div>
+									<label>Email Address</label>
 							</div>
-
-							<div className="password-input">
-								<div>
-									<label>Password</label>
-								</div>
-								<div className="input">
-									<input type="password" name="uPassword" id="uPassword" value={password} onChange={(e) => this.setState({password: e.target.value})} />
-								</div>
-							</div>
-
-							<div className="show-forgot-container">
-								<div className="forgot-password">
-									<a>
-											Forgot your password?
-									</a>
-								</div>
-							</div>
-
-							<div className="signIn-register-container">
-								<div className="signIn-button-container">
-										<Button   value="Sign In" onClick={this.onSignIn} />
-								</div>
-								<div className="register-comment">
-										Don't have an account?
-								</div>
-								<div className="goto-register">
-										<a href="/signup">Create one here.</a>
-								</div>
-								<div className="signIn-avatar"><CgFacebook size={30} /></div>
-								<div className="signIn-avatar"><FcGoogle size={30} /></div>
+							<div className="input">
+								<input type="email" name="Uname" id="Uname" value={email} onChange={(e) => setEmail(e.target.value)} />
 							</div>
 						</div>
-					</div>
 
-					<div className="easy-access-container">
-						<div className="easy-access">
-							<header className="easy-access-header">Easy Access</header>
-
-							<div className="signIn-facebook">
-								<button><CgFacebook size={30} /><span>Sign in with Facebook</span></button>
+						<div className="password-input">
+							<div>
+								<label>Password</label>
 							</div>
-
-							<div className="facebook-or-google">
-								<div className="border"></div>
-								<span>or</span>
-								<div className="border"></div>
+							<div className="input">
+								<input type="password" name="uPassword" id="uPassword" value={password} onChange={(e) => setPassword(e.target.value)} />
 							</div>
-
-							<div className="signIn-google">
-								<button><FcGoogle size={30} /><span>Sign in With Google</span></button>
+						</div>
+						<div className="show-forgot-container">
+							<div className="forgot-password">
+								<a>
+										Forgot your password?
+								</a>
 							</div>
+						</div>
+
+						<div className="signIn-register-container">
+							<div className="signIn-button-container">
+									<Button   value="Sign In" onClick={onSignIn} />
+							</div>
+							<div className="register-comment">
+									Don't have an account?
+							</div>
+							<div className="goto-register">
+									<a href="/signup">Create one here.</a>
+							</div>
+							<div className="signIn-avatar"><CgFacebook size={30} /></div>
+							<div className="signIn-avatar"><FcGoogle size={30} /></div>
 						</div>
 					</div>
 				</div>
-				<SignInErrorModal
-					show={this.state.errorShow}
-					onHide={this.onHide}
-					content={this.state.errorData}
-				/>
+
+				<div className="easy-access-container">
+					<div className="easy-access">
+						<header className="easy-access-header">Easy Access</header>
+
+						<div className="signIn-facebook">
+							<button><CgFacebook size={30} /><span>Sign in with Facebook</span></button>
+						</div>
+
+						<div className="facebook-or-google">
+							<div className="border"></div>
+							<span>or</span>
+							<div className="border"></div>
+						</div>
+
+						<div className="signIn-google">
+							<button><FcGoogle size={30} /><span>Sign in With Google</span></button>
+						</div>
+					</div>
+				</div>
 			</div>
-		)
-	}
+			<SignInErrorModal
+				show={errorShow}
+				onHide={() => setErrorShow(false)}
+				content={errorData}
+			/>
+		</div>
+	)
 }
 
-const Comp = (props) => {
-	const navigate = useNavigate()
-	return <SignIn navigate={navigate} {...props} />
-}
+export default SignIn
 
-export default Comp
+

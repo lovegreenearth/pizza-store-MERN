@@ -1,5 +1,7 @@
 const initialState = {
-  items: []
+  items: [],
+  token: {},
+  logged: false,
 }
 
 const reducer = (state, action) => {
@@ -21,6 +23,7 @@ const {payload} = action;
         );
       };
       return {
+        ...state,
         items:items,
     }
 
@@ -33,6 +36,7 @@ const {payload} = action;
         itemChicken = [...state.items, payload]
       } 
       return {
+        ...state,
         items: itemChicken,
     }
 
@@ -40,6 +44,7 @@ const {payload} = action;
       let item = state.items
       item.splice(action.payload.index, 1)
     return {
+      ...state,
       items: [...item],
     }
 
@@ -52,6 +57,7 @@ const {payload} = action;
         itemModal = [...state.items, payload]
       } 
     return {
+      ...state,
       items: [...itemModal],
     }
 
@@ -63,7 +69,24 @@ const {payload} = action;
         itemCombo = [...state.items, payload]
       } 
     return {
+      ...state,
       items: [...itemCombo]
+    }
+
+    case 'Token_To_Generate':
+      let temp = action.payload
+    return {
+      ...state,
+      token: temp,
+      logged: true
+    }
+
+    case 'REMOVE_TOKEN':
+      let tempToken = {}
+    return {
+      ...state,
+      token:tempToken,
+      logged: false
     }
      
     default: return state || initialState
